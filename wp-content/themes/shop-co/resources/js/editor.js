@@ -1,0 +1,1 @@
+window.shopCoEditor = window.shopCoEditor || {};
