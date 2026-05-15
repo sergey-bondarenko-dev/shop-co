@@ -1,0 +1,1 @@
+{"version":3,"file":"js/editor.js","mappings":";;;;AAAAA,MAAM,CAACC,YAAY,GAAGD,MAAM,CAACC,YAAY,IAAI,CAAC,CAAC,C","sources":["webpack://shop-co-theme/./resources/js/editor.js"],"sourcesContent":["window.shopCoEditor = window.shopCoEditor || {};\n"],"names":["window","shopCoEditor"],"sourceRoot":""}

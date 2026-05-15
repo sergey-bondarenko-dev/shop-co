@@ -9,7 +9,7 @@ SHELL := powershell.exe
 
 .DEFAULT_GOAL := help
 
-.PHONY: help init build up down restart ps logs shell wp composer install update lint-php format-php theme-install theme-build theme-watch theme-lint-js theme-lint-style theme-format db import-db export-db reset clean
+.PHONY: help init build up down restart ps logs shell wp composer install update lint-php format-php theme-install theme-clean theme-build theme-watch theme-lint-js theme-lint-style theme-format db import-db export-db reset clean
 
 help:
 	@echo "Available commands:"
@@ -28,6 +28,7 @@ help:
 	@echo "  make lint-php   Run PHP_CodeSniffer with WordPress standards"
 	@echo "  make format-php Auto-fix PHP coding standard issues"
 	@echo "  make theme-install  Install theme npm dependencies"
+	@echo "  make theme-clean    Remove built theme assets"
 	@echo "  make theme-build    Build theme assets"
 	@echo "  make theme-watch    Watch theme assets"
 	@echo "  make theme-lint-js     Lint theme JavaScript"
@@ -85,7 +86,10 @@ format-php:
 theme-install:
 	$(NPM) --prefix $(THEME_DIR) install
 
-theme-build:
+theme-clean:
+	Remove-Item -Recurse -Force $(THEME_DIR)/build -ErrorAction SilentlyContinue
+
+theme-build: theme-clean
 	$(NPM) --prefix $(THEME_DIR) run build
 
 theme-watch:

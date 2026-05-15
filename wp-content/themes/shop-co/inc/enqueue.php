@@ -13,14 +13,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Enqueue front-end theme assets.
  */
 function shop_co_scripts(): void {
-	$screen_asset_path = get_theme_file_path( 'public/css/screen.asset.php' );
+	$screen_asset_path = get_theme_file_path( 'build/css/screen.asset.php' );
 
 	if ( file_exists( $screen_asset_path ) ) {
 		$screen_asset = include $screen_asset_path;
 
 		wp_enqueue_style(
 			'shop-co-style',
-			get_theme_file_uri( 'public/css/screen.css' ),
+			get_theme_file_uri( 'build/css/screen.css' ),
 			$screen_asset['dependencies'] ?? array(),
 			$screen_asset['version'] ?? SHOP_CO_VERSION
 		);
@@ -33,14 +33,14 @@ function shop_co_scripts(): void {
 		);
 	}
 
-	$main_asset_path = get_theme_file_path( 'public/js/main.asset.php' );
+	$main_asset_path = get_theme_file_path( 'build/js/main.asset.php' );
 
 	if ( file_exists( $main_asset_path ) ) {
 		$main_asset = include $main_asset_path;
 
 		wp_enqueue_script(
 			'shop-co-main',
-			get_theme_file_uri( 'public/js/main.js' ),
+			get_theme_file_uri( 'build/js/main.js' ),
 			$main_asset['dependencies'] ?? array(),
 			$main_asset['version'] ?? SHOP_CO_VERSION,
 			true
@@ -57,15 +57,15 @@ add_action( 'wp_enqueue_scripts', 'shop_co_scripts' );
  * Enqueue block editor assets.
  */
 function shop_co_editor_assets(): void {
-	$editor_script_asset_path = get_theme_file_path( 'public/js/editor.asset.php' );
-	$editor_style_asset_path  = get_theme_file_path( 'public/css/editor.asset.php' );
+	$editor_script_asset_path = get_theme_file_path( 'build/js/editor.asset.php' );
+	$editor_style_asset_path  = get_theme_file_path( 'build/css/editor.asset.php' );
 
 	if ( file_exists( $editor_script_asset_path ) ) {
 		$editor_script_asset = include $editor_script_asset_path;
 
 		wp_enqueue_script(
 			'shop-co-editor',
-			get_theme_file_uri( 'public/js/editor.js' ),
+			get_theme_file_uri( 'build/js/editor.js' ),
 			$editor_script_asset['dependencies'] ?? array(),
 			$editor_script_asset['version'] ?? SHOP_CO_VERSION,
 			true
@@ -77,7 +77,7 @@ function shop_co_editor_assets(): void {
 
 		wp_enqueue_style(
 			'shop-co-editor',
-			get_theme_file_uri( 'public/css/editor.css' ),
+			get_theme_file_uri( 'build/css/editor.css' ),
 			$editor_style_asset['dependencies'] ?? array(),
 			$editor_style_asset['version'] ?? SHOP_CO_VERSION
 		);

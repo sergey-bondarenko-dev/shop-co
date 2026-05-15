@@ -4,6 +4,10 @@ const path = require( 'path' );
 
 module.exports = {
 	...defaultConfig,
+	output: {
+		...defaultConfig.output,
+		assetModuleFilename: 'fonts/[name][ext]',
+	},
 	entry: {
 		'js/main': path.resolve( process.cwd(), 'resources/js', 'main.js' ),
 		'js/editor': path.resolve( process.cwd(), 'resources/js', 'editor.js' ),

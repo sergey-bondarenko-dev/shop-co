@@ -1,1 +1,0 @@
-(()=>{const t=document.getElementById("site-navigation");t&&t.classList.add("is-ready")})();

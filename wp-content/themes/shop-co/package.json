@@ -4,8 +4,8 @@
 	"private": true,
 	"description": "Build tooling for the Shop Co classic WordPress theme.",
 	"scripts": {
-		"start": "wp-scripts start --webpack-src-dir=resources --output-path=public",
-		"build": "wp-scripts build --webpack-src-dir=resources --output-path=public",
+		"start": "wp-scripts start --webpack-src-dir=resources --output-path=build",
+		"build": "wp-scripts build --webpack-src-dir=resources --output-path=build",
 		"lint:js": "wp-scripts lint-js resources/js webpack.config.js",
 		"lint:style": "wp-scripts lint-style resources/**/*.scss",
 		"format": "wp-scripts format resources webpack.config.js package.json"
@@ -14,5 +14,8 @@
 		"@wordpress/scripts": "^30.0.0",
 		"path": "^0.12.7",
 		"webpack-remove-empty-scripts": "^1.0.4"
+	},
+	"dependencies": {
+		"@a1rth/css-normalize": "^1.2.4"
 	}
 }
