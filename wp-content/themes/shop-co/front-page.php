@@ -34,6 +34,22 @@ get_header();
 			<button class="site-button site-button--square" disabled>
 				<?php echo ShopCo_Icons::settings(); ?>
 			</button>
+
+			<?php echo ShopCo_UI::field(
+				'search',
+				'search',
+				'Search for products...',
+			); ?>
+
+			<div style="background-color: black; padding: 1rem;">
+				<?php echo ShopCo_UI::field(
+					'search',
+					'email',
+					'Enter your email address',
+					'',
+					'white'
+				); ?>
+			</div>
 		</div>
 
 		<?php
