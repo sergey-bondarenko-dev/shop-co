@@ -1,0 +1,63 @@
+@use './../helpers' as *;
+
+.site-range {
+  padding-block: 14px 28px;
+
+  &.noUi-target {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .noUi-connects {
+    height: 6px;
+    border-radius: var(--shop-co-border-radius);
+    background-color: var(--shop-co-color-gray-2);
+
+    .noUi-connect {
+      background-color: var(--shop-co-color-black);
+    }
+  }
+
+  &.noUi-horizontal {
+    height: 6px;
+  }
+
+  &.noUi-horizontal .noUi-handle {
+    top: 50%;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--shop-co-color-black);
+    box-shadow: none;
+    cursor: grab;
+    transform: translateY(-40%);
+
+    &::before,
+    &::after {
+      display: none;
+    }
+
+    &:active {
+      cursor: grabbing;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--shop-co-color-black);
+      outline-offset: 3px;
+    }
+  }
+
+  .noUi-tooltip {
+    bottom: auto;
+    top: calc(100% + 4px);
+    border: 0;
+    padding: 0;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+  }
+}
