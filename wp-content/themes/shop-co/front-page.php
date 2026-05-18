@@ -50,6 +50,15 @@ get_header();
 					'white'
 				); ?>
 			</div>
+
+			<div
+				class="site-range"
+				data-min="0"
+				data-max="500"
+				data-start="50, 450"
+				data-step="1"
+				data-prefix="$"
+			></div>
 		</div>
 
 		<?php
