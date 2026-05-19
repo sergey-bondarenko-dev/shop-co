@@ -1,0 +1,5 @@
+@media (width <= 767px) {
+  .hero__decor {
+    margin-top: -60px;
+  }
+}

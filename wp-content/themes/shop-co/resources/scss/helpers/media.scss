@@ -1,7 +1,9 @@
 $laptop: 1440px;
 $tablet: 1023px;
+$container: 1280px;
 $mobile: 767px;
 $mobile-s: 480px;
+$mobile-xs: 360px;
 
 @mixin laptop-above {
     @media (width > $laptop) {
@@ -11,6 +13,18 @@ $mobile-s: 480px;
 
 @mixin laptop {
     @media (width <= $laptop) {
+        @content;
+    }
+}
+
+@mixin container-above {
+    @media (width > $container) {
+        @content;
+    }
+}
+
+@mixin container-down {
+    @media (width <= $container) {
         @content;
     }
 }
@@ -47,6 +61,18 @@ $mobile-s: 480px;
 
 @mixin mobile-s {
     @media (width <= $mobile-s) {
+        @content;
+    }
+}
+
+@mixin mobile-xs-above {
+    @media (width > $mobile-xs) {
+        @content;
+    }
+}
+
+@mixin mobile-xs {
+    @media (width <= $mobile-xs) {
         @content;
     }
 }
