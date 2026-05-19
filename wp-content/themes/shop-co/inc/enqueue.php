@@ -33,6 +33,17 @@ function shop_co_scripts(): void {
 		);
 	}
 
+	$custom_css_path = get_theme_file_path( 'resources/css/custom-css.css' );
+
+	if ( file_exists( $custom_css_path ) ) {
+		wp_enqueue_style(
+			'shop-co-custom',
+			get_theme_file_uri( 'resources/css/custom-css.css' ),
+			array( 'shop-co-style' ),
+			filemtime( $custom_css_path )
+		);
+	}
+
 	$main_asset_path = get_theme_file_path( 'build/js/main.asset.php' );
 
 	if ( file_exists( $main_asset_path ) ) {
