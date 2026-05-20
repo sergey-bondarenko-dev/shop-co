@@ -1,0 +1,7 @@
+@use './../helpers' as *;
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: fluid(36, 24) fluid(20, 16);
+}

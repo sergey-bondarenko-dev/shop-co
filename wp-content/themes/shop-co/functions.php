@@ -16,3 +16,5 @@ require get_template_directory() . '/inc/woocommerce.php';
 require get_template_directory() . '/inc/class-icons.php';
 require get_template_directory() . '/inc/class-ui.php';
 require get_template_directory() . '/inc/class-assets.php';
+require get_template_directory() . '/inc/wc-template-functions.php';
+require get_template_directory() . '/inc/wc-template-hooks.php';
