@@ -47,3 +47,5 @@ remove_action(
     'woocommerce_template_loop_add_to_cart',
     10
 );
+
+add_filter( 'woocommerce_price_trim_zeros', '__return_true' );
