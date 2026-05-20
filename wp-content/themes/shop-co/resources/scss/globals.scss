@@ -22,9 +22,11 @@ h3, .h3 {
 h4, .h4 {
   font-weight: 700;
   font-size: fluid(32, 24);
+  font-family: var(--font-base);
 }
 
 h5, .h5 {
+  font-family: var(--font-base);
   font-weight: 700;
   font-size: fluid(20, 16);
 }
@@ -32,6 +34,7 @@ h5, .h5 {
 h6, .h6 {
   font-weight: 500;
   font-size: fluid(16, 14);
+  font-family: var(--font-base);
 }
 
 body {

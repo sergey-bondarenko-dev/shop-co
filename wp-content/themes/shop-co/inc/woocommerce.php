@@ -31,5 +31,7 @@ function shop_co_woocommerce_setup(): void {
 	add_theme_support( 'wc-product-gallery-zoom' );
 	add_theme_support( 'wc-product-gallery-lightbox' );
 	add_theme_support( 'wc-product-gallery-slider' );
+
+	add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 }
 add_action( 'after_setup_theme', 'shop_co_woocommerce_setup' );

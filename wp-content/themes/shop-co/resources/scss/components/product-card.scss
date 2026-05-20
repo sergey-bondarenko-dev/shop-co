@@ -1,0 +1,46 @@
+@use './../helpers' as *;
+
+.site-product-card {
+  &__link {
+    display: flex;
+    flex-direction: column;
+    row-gap: fluid(8, 4);
+  }
+
+  &__thumbnail-wrapper {
+    background-color: var(--shop-co-color-gray-1);
+    border-radius: var(--shop-co-border-radius);
+    overflow: hidden;
+    margin-bottom: fluid(8, 6);
+  }
+
+  &__title {
+  }
+
+  &__rating {
+    display: flex;
+    align-items: center;
+    column-gap: fluid(13, 11);
+
+    &-stars {
+      display: flex;
+      column-gap: fluid(5, 4);
+      overflow: hidden;
+
+      img {
+        --size: #{fluid(18.5, 15.5)};
+
+        width: var(--size);
+        height: var(--size);
+        clip-path: inset(0 calc(100% - var(--star-fill, 100%)) 0 0);
+      }
+    }
+
+    &-value {
+      font-size: fluid(14, 12);
+      line-height: 0;
+    }
+  }
+
+  
+}
