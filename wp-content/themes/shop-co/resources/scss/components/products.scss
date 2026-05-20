@@ -1,7 +1,25 @@
 @use './../helpers' as *;
 
 .products {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: fluid(36, 24) fluid(20, 16);
+  --products-columns: var(--products-desktop-columns, 4);
+
+	display: grid;
+	grid-template-columns: repeat(var(--products-columns), minmax(0, 1fr));
+	gap: fluid(36, 24) fluid(20, 16);
+
+  @include container-down {
+		--products-columns: var(--products-container-columns, 4);
+  }
+
+	@include tablet {
+		--products-columns: var(--products-tablet-columns, 3);
+	}
+
+  @include mobile {
+		--products-columns: var(--products-mobile-columns, 2);
+	}
+
+  @include mobile-xs {
+		--products-columns: var(--products-mobile-xs-columns, 1);
+	}
 }
