@@ -1,9 +1,9 @@
 $laptop: 1440px;
 $tablet: 1023px;
-$container: 1280px;
+$container: 1279px;
 $mobile: 767px;
 $mobile-s: 480px;
-$mobile-xs: 360px;
+$mobile-xs: 359px;
 
 @mixin laptop-above {
     @media (width > $laptop) {

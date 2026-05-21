@@ -1,5 +1,60 @@
 <?php
 
+/**
+ * Get newest published WooCommerce products.
+ *
+ * @return WC_Product[]
+ */
+function shop_co_get_new_products( int $limit = 8 ): array {
+    return wc_get_products(
+        array(
+            'status'  => 'publish',
+            'limit'   => $limit,
+            'orderby' => 'date',
+            'order'   => 'DESC',
+        )
+    );
+}
+
+/**
+ * Get top-selling published WooCommerce products.
+ *
+ * @return WC_Product[]
+ */
+function shop_co_get_top_selling_products( int $limit = 8 ): array {
+    return wc_get_products(
+        array(
+            'status'   => 'publish',
+            'limit'    => $limit,
+            'meta_key' => 'total_sales',
+            'orderby'  => 'meta_value_num',
+            'order'    => 'DESC',
+        )
+    );
+}
+
+/**
+ * Get products related to a product.
+ *
+ * @return WC_Product[]
+ */
+function shop_co_get_related_products( WC_Product $product, int $limit = 4 ): array {
+    $product_ids = wc_get_related_products( $product->get_id(), $limit );
+
+    if ( empty( $product_ids ) ) {
+        return array();
+    }
+
+    return wc_get_products(
+        array(
+            'status'  => 'publish',
+            'limit'   => $limit,
+            'include' => $product_ids,
+            'orderby' => 'include',
+        )
+    );
+}
+
 function shop_co_template_loop_product_link_open() {
     global $product;
 

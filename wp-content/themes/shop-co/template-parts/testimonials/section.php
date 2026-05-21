@@ -1,32 +1,14 @@
 <?php
 
-if ( ! function_exists( 'shop_co_get_testimonials' ) ) {
-	if ( current_user_can( 'activate_plugins' ) ) {
-		?>
-		<section class="section">
-			<div class="container">
-				<p><?php esc_html_e( 'Activate the Shop Co Core plugin to manage testimonials.', 'shop-co' ); ?></p>
-			</div>
-		</section>
-		<?php
-	}
-
+if ( ! shop_co_is_core_plugin_active() ) {
+	shop_co_admin_notice_section( __( 'Activate the Shop Co Core plugin to manage testimonials.', 'shop-co' ), 'activate_plugins' );
 	return;
 }
 
 $testimonials = shop_co_get_testimonials();
 
 if ( ! $testimonials->have_posts() ) {
-	if ( current_user_can( 'edit_posts' ) ) {
-		?>
-		<section class="section">
-			<div class="container">
-				<p><?php esc_html_e( 'No testimonials have been added yet.', 'shop-co' ); ?></p>
-			</div>
-		</section>
-		<?php
-	}
-
+	shop_co_admin_notice_section( __( 'No testimonials have been added yet.', 'shop-co' ) );
 	return;
 }
 
