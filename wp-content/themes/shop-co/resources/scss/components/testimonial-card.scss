@@ -1,0 +1,33 @@
+@use './../helpers' as *;
+
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  row-gap: fluid(12, 8);
+  border-radius: var(--shop-co-border-radius);
+  padding: fluid(28, 24) fluid(32, 24);
+  height: 100%;
+  background-color: var(--shop-co-color-white);
+  line-height: 22px;
+
+  &__rating {
+    margin-bottom: 4px;
+  }
+
+  &__name {
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+
+    &::after {
+      content: "";
+      width: 16px;
+      height: 16px;
+      background: url("../icons/mark.svg") center / contain no-repeat;
+    }
+  }
+
+  &__content {
+    font-size: fluid(16, 14);
+  }
+}

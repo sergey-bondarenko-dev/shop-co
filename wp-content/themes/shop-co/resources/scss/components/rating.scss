@@ -1,0 +1,26 @@
+@use './../helpers' as *;
+
+.site-rating {
+  display: flex;
+  align-items: center;
+  column-gap: fluid(13, 11);
+
+  &__stars {
+    display: flex;
+    column-gap: fluid(5, 4);
+    overflow: hidden;
+  }
+
+  &__star {
+    --size: #{fluid(18.5, 15.5)};
+
+    width: var(--size);
+    height: var(--size);
+    clip-path: inset(0 calc(100% - var(--star-fill, 100%)) 0 0);
+  }
+
+  &__value {
+    font-size: fluid(14, 12);
+    line-height: 0;
+  }
+}

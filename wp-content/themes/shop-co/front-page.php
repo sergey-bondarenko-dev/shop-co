@@ -74,6 +74,8 @@ get_header();
 		</div>
 	</div>
 
+	<?php shop_co_get_template_part( 'testimonials/section' ); ?>
+
 	<div class="container">
 		<?php
 		while ( have_posts() ) :

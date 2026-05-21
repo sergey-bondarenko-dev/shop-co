@@ -1,13 +1,14 @@
-# WooCommerce demo products
+# Demo data
 
-This folder contains a generated CSV import for local WooCommerce catalog testing.
+This folder contains generated demo imports for local Shop Co testing.
 
 ## Files
 
 - `woocommerce-demo-products.csv` - ready-to-import WooCommerce product CSV.
 - `generate-woocommerce-demo-products.php` - generator used to rebuild the CSV.
+- `testimonials.xml` - WordPress WXR import with demo testimonials.
 
-## What is included
+## WooCommerce products
 
 - 100 visible demo products.
 - Several variable products with color and size variations.
@@ -35,3 +36,16 @@ To regenerate the CSV:
 ```bash
 php demo-data/generate-woocommerce-demo-products.php
 ```
+
+## Testimonials
+
+In WordPress admin:
+
+1. Go to `Tools -> Import`.
+2. Install or run the `WordPress` importer.
+3. Make sure the `Shop Co Core` plugin is active.
+4. Upload `demo-data/testimonials.xml`.
+5. Assign imported posts to an existing user.
+6. Run the importer.
+
+The import creates published `testimonial` posts. The post title is the reviewer name, the post content is the testimonial text, and `menu_order` controls display order.

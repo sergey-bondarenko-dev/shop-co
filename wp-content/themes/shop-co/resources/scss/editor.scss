@@ -1,10 +1,2 @@
-@use "fonts";
-
-.editor-styles-wrapper {
-	color: var(--shop-co-color-text, #1d1d1f);
-	font-family: var(--shop-co-font-base, satoshi, system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", sans-serif);
-}
-
-.editor-styles-wrapper .wp-block {
-	max-width: var(--shop-co-content-width, 1180px);
-}
+@use "variables";
+@use "helpers" as *;
