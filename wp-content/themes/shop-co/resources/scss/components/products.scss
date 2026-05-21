@@ -23,3 +23,17 @@
 		--products-columns: var(--products-mobile-xs-columns, 1);
 	}
 }
+
+.products-section {
+	.section__body {
+		display: flex;
+		flex-direction: column;
+		gap: fluid(36, 24);
+
+		.site-button {
+			@include mobile-above {
+				align-self: center;
+			}
+		}
+	}
+}

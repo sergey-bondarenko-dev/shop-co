@@ -1,0 +1,7 @@
+@use './../helpers' as *;
+
+.products-slider {
+  & &__swiper {
+    overflow: visible;
+  }
+}

@@ -8,7 +8,7 @@
 get_header();
 ?>
 
-<main id="primary" class="site-main">
+<main id="primary" class="site-main section-list">
 
 	<div class="hero">
 		<div class="hero__inner container">
@@ -73,8 +73,11 @@ get_header();
 			</div>
 		</div>
 	</div>
-
+	
+	<?php shop_co_get_template_part( 'products/new-arrivals' ); ?>
+	<?php shop_co_get_template_part( 'products/top-selling' ); ?>
 	<?php shop_co_get_template_part( 'testimonials/section' ); ?>
+	
 
 	<div class="container">
 		<?php

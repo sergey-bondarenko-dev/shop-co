@@ -16,6 +16,27 @@ function shop_co_get_template_part( string $slug, array $args = array(), ?string
 	get_template_part( 'template-parts/' . ltrim( $slug, '/' ), $name, $args );
 }
 
+function shop_co_is_woocommerce_active(): bool {
+	return function_exists( 'wc_get_products' );
+}
+
+function shop_co_is_core_plugin_active(): bool {
+	return function_exists( 'shop_co_get_testimonials' );
+}
+
+function shop_co_admin_notice_section( string $message, string $capability = 'edit_posts' ): void {
+	if ( ! current_user_can( $capability ) ) {
+		return;
+	}
+	?>
+	<section class="section">
+		<div class="container">
+			<p><?php echo esc_html( $message ); ?></p>
+		</div>
+	</section>
+	<?php
+}
+
 /**
  * Print the post publish date.
  */
