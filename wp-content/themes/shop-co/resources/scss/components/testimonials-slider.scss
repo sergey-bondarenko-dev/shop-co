@@ -1,0 +1,34 @@
+@use './../helpers' as *;
+
+.testimonials-slider {
+  & &__swiper {
+    overflow: visible;
+  }
+
+  & &__slide {
+    height: auto;
+    transition-duration: var(--transition-duration);
+    filter: blur(2px);
+
+    @include tablet-above {
+      &.swiper-slide-active,
+      &.swiper-slide-active + .swiper-slide,
+      &.swiper-slide-active + .swiper-slide + .swiper-slide {
+        filter: none;
+      }
+    }
+
+    @include mobile-above {
+      &.swiper-slide-active,
+      &.swiper-slide-active + .swiper-slide {
+        filter: none;
+      }
+    }
+
+    @include mobile {
+      &.swiper-slide-active {
+        filter: none;
+      }
+    }
+  }
+}

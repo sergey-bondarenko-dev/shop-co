@@ -15,7 +15,7 @@ class ShopCo_UI
             "white",
         );
 
-        $svgIcon = ShopCo_Icons::getIcon($icon);
+        $svgIcon = ShopCo_Icons::get_icon($icon);
         $mode = in_array( $mode, $modes, true ) ? $mode : "";
         $label = $label ?: $placeholder;
         

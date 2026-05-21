@@ -10,6 +10,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Load a template part from the theme template-parts directory.
+ */
+function shop_co_get_template_part( string $slug, array $args = array(), ?string $name = null ): void {
+	get_template_part( 'template-parts/' . ltrim( $slug, '/' ), $name, $args );
+}
+
+/**
  * Print the post publish date.
  */
 function shop_co_posted_on(): void {

@@ -95,3 +95,44 @@ function shop_co_template_price( WC_Product $product, bool $show_discount = true
     </span>
     <?php
 }
+
+function shop_co_template_rating( float $rating, string $wrapper_class = '', bool $show_value = true ): void {
+    $rating = max( 0.0, min( 5.0, $rating ) );
+
+    if ( $rating <= 0.0 ) {
+        return;
+    }
+
+    $classes = array_filter(
+        array(
+            'site-rating',
+            $wrapper_class,
+        )
+    );
+    $stars_count = (int) ceil( $rating );
+    $star_icon   = ShopCo_Assets::asset( 'icons/star.svg' );
+    ?>
+    <span class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+        <span class="site-rating__stars">
+            <?php for ( $i = 0; $i < $stars_count; $i++ ) : ?>
+                <?php $star_fill = max( 0.0, min( 1.0, $rating - $i ) ) * 100; ?>
+
+                <img
+                    src="<?php echo esc_url( $star_icon ); ?>"
+                    class="site-rating__star"
+                    alt=""
+                    width="18.5"
+                    height="18.5"
+                    style="--star-fill: <?php echo esc_attr( (string) $star_fill ); ?>%;"
+                >
+            <?php endfor; ?>
+        </span>
+
+        <?php if ( $show_value ) : ?>
+            <span class="site-rating__value">
+                <?php echo esc_html( number_format_i18n( $rating, 1 ) ); ?>/<span class="opacity-60">5</span>
+            </span>
+        <?php endif; ?>
+    </span>
+    <?php
+}

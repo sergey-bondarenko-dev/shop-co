@@ -6,9 +6,10 @@ node_modules/
 wp-content/themes/shop-co/node_modules/
 build
 
-wp-content/plugins/woocommerce/
-wp-content/plugins/akismet
-wp-content/plugins/query-monitor
+wp-content/plugins/*
+!wp-content/plugins/.gitkeep
+!wp-content/plugins/shop-co-core/
+!wp-content/plugins/shop-co-core/**
 wp-content/uploads/*
 !wp-content/uploads/.gitkeep
 wp-content/cache/

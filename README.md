@@ -15,6 +15,7 @@ make init
 make build
 make up
 make install
+make wp ARGS='plugin activate shop-co-core'
 ```
 
 WordPress: http://localhost:8080
