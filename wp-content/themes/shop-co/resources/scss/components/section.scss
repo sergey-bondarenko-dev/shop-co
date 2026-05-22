@@ -6,6 +6,16 @@
   align-items: center;
   gap: fluid(55, 32);
 
+  &--box {
+    background-color: var(--shop-co-color-gray-2);
+    padding: fluid(70, 27) fluid(64, 24);
+    border-radius: var(--shop-co-border-radius-3);
+
+    @include mobile {
+      border-radius: var(--shop-co-border-radius);
+    }
+  }
+
   &__header {
     display: flex;
     justify-content: space-between;
@@ -20,5 +30,9 @@
   &__extra {
     display: flex;
     align-items: center;
+  }
+
+  &__body {
+    width: 100%;
   }
 }
