@@ -9,7 +9,7 @@ SHELL := powershell.exe
 
 .DEFAULT_GOAL := help
 
-.PHONY: help init build up down restart ps logs shell wp composer install update lint-php format-php theme-install theme-clean theme-build theme-watch theme-lint-js theme-lint-style theme-format db import-db export-db reset clean
+.PHONY: help init build up down restart ps logs shell wp composer install update sync-plugins lint-php format-php theme-install theme-clean theme-build theme-watch theme-lint-js theme-lint-style theme-format db import-db export-db reset clean
 
 help:
 	@echo "Available commands:"
@@ -25,6 +25,7 @@ help:
 	@echo "  make composer ARGS='install'    Run Composer"
 	@echo "  make install    Install Composer dependencies"
 	@echo "  make update     Update Composer dependencies"
+	@echo "  make sync-plugins  Sync third-party plugins into Docker volume"
 	@echo "  make lint-php   Run PHP_CodeSniffer with WordPress standards"
 	@echo "  make format-php Auto-fix PHP coding standard issues"
 	@echo "  make theme-install  Install theme npm dependencies"
@@ -76,6 +77,9 @@ install:
 
 update:
 	$(DOCKER_COMPOSE) exec -w $(PROJECT_DIR) $(WP_SERVICE) composer update
+
+sync-plugins:
+	$(DOCKER_COMPOSE) exec $(WP_SERVICE) bash -lc 'set -e; for plugin_dir in /var/www/project/wp-content/plugins/*; do [ -d $$plugin_dir ] || continue; plugin=$${plugin_dir##*/}; [ $$plugin = shop-co-core ] && continue; rm -rf /var/www/html/wp-content/plugins/$$plugin; cp -a $$plugin_dir /var/www/html/wp-content/plugins/$$plugin; done; echo Synced third-party plugins into Docker volume.'
 
 lint-php:
 	$(DOCKER_COMPOSE) exec -w $(PROJECT_DIR) $(WP_SERVICE) composer lint:php

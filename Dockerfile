@@ -1,6 +1,7 @@
 FROM wordpress:6-php8.3-apache
 
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
+COPY docker/php/conf.d/shop-co-performance.ini /usr/local/etc/php/conf.d/shop-co-performance.ini
 
 RUN set -eux; \
     apt-get update; \
