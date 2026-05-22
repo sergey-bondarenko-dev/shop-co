@@ -77,6 +77,7 @@ get_header();
 	<?php shop_co_get_template_part( 'products/new-arrivals' ); ?>
 	<?php shop_co_get_template_part( 'products/top-selling' ); ?>
 	<?php shop_co_get_template_part( 'testimonials/section' ); ?>
+	<?php shop_co_get_template_part( 'products/categories-section' ); ?>
 	
 
 	<div class="container">

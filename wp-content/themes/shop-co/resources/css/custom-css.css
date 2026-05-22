@@ -3,3 +3,54 @@
     margin-top: -60px;
   }
 }
+
+.categories-grid__link.casual img {
+  scale: -1 1;
+  object-position: -188px -137px;
+  width: 973px;
+  height: 619px;
+}
+
+.categories-grid__link.formal img {
+  object-position: 15px -151px;
+  width: 1306px;
+  height: 870px;
+}
+
+.categories-grid__link.party img {
+  object-position: 45px -165px;
+  width: 770px;
+  height: 616px;
+}
+
+.categories-grid__link.gym img {
+  object-position: 51px -150px;
+  width: 452px;
+  height: 677px;
+}
+
+@media (max-width: 1023px) {
+  .categories-grid__link.casual img {
+    object-position: -85px -85px;
+    width: 572px;
+    height: 383px;
+  }
+
+  .categories-grid__link.formal img {
+    object-position: -21px -87px;
+    width: 709px;
+    height: 472px;
+  }
+
+  .categories-grid__link.party img {
+    object-position: 9px -83px;
+    width: 389px;
+    height: 311px;
+  }
+
+  .categories-grid__link.gym img {
+    object-position: 45px -94px;
+    width: 285px;
+    height: 425px;
+  }
+}
