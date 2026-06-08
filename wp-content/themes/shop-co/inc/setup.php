@@ -48,8 +48,8 @@ function shop_co_setup(): void {
 
 	register_nav_menus(
 		array(
-			'primary' => esc_html__( 'Primary menu', 'shop-co' ),
-			'footer'  => esc_html__( 'Footer menu', 'shop-co' ),
+			'header_menu' => esc_html__( 'Header menu', 'shop-co' ),
+			'footer_menu' => esc_html__( 'Footer menu', 'shop-co' ),
 		)
 	);
 }
