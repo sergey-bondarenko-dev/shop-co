@@ -76,18 +76,8 @@ get_header();
 	
 	<?php shop_co_get_template_part( 'products/new-arrivals' ); ?>
 	<?php shop_co_get_template_part( 'products/top-selling' ); ?>
-	<?php shop_co_get_template_part( 'testimonials/section' ); ?>
 	<?php shop_co_get_template_part( 'products/categories-section' ); ?>
-	
-
-	<div class="container">
-		<?php
-		while ( have_posts() ) :
-			the_post();
-			get_template_part( 'template-parts/content', 'page' );
-		endwhile;
-		?>
-	</div>
+	<?php shop_co_get_template_part( 'testimonials/section' ); ?>
 </main>
 
 <?php

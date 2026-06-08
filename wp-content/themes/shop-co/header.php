@@ -42,7 +42,7 @@
 				<?php
 				wp_nav_menu(
 					array(
-						'theme_location' => 'primary',
+						'theme_location' => 'header_menu',
 						'menu_id'        => 'primary-menu',
 						'fallback_cb'    => false,
 					)

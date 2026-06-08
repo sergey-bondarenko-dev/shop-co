@@ -16,6 +16,18 @@ function shop_co_get_template_part( string $slug, array $args = array(), ?string
 	get_template_part( 'template-parts/' . ltrim( $slug, '/' ), $name, $args );
 }
 
+/**
+ * Print site logo with a text fallback.
+ */
+function shop_co_logo( string $class = '' ): void {
+	shop_co_get_template_part(
+		'global/logo',
+		array(
+			'class' => $class,
+		)
+	);
+}
+
 function shop_co_is_woocommerce_active(): bool {
 	return function_exists( 'wc_get_products' );
 }

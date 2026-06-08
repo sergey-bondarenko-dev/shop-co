@@ -1,0 +1,213 @@
+@use './../helpers' as *;
+
+.site-footer {
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: fluid(50, 32);
+    background-color: var(--shop-co-color-gray-2);
+  }
+
+  &__spacer {
+    height: var(--section-gap);
+  }
+
+  &__banner {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      // Slight overlap prevents a subpixel seam between footer and page background.
+      top: -1%;
+      height: 51%;
+      width: 100vw;
+      background-color: var(--shop-co-color-white);
+    }
+
+    &-inner {
+      display: flex;
+      gap: 2rem;
+      justify-content: space-between;
+      align-items: center;
+      padding: fluid(36, 32) fluid(64, 24);
+      background-color: var(--shop-co-color-black);
+      border-radius: var(--shop-co-border-radius);
+      color: var(--shop-co-color-white);
+      position: relative;
+      z-index: 1;
+
+      @include mobile {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
+    &-title {
+      font-weight: 900;
+      font-size: fluid(40, 32);
+      line-height: 1.1;
+
+      @include mobile-above {
+        max-width: 550px;
+      }
+    }
+
+    &-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex-shrink: 0;
+      width: 100%;
+
+      @include mobile-above {
+        max-width: 350px;
+      }
+    }
+
+    &-submit {
+      width: 100%;
+    }
+  }
+
+  &__body {
+    padding-block: fluid(88, 77);
+    padding-top: 0;
+    
+    &-top {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);
+      gap: fluid(80, 32);
+
+      @include tablet {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &-nav {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: fluid(56, 24);
+
+      @include mobile {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    &-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+
+      @include mobile {
+        flex-direction: column;
+        
+      }
+    }
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      gap: fluid(25, 14);
+
+      @include mobile-above {
+        max-width: 250px;
+      }
+    }
+  }
+
+  &__menu-title {
+    margin: 0 0 26px;
+    font-size: 16px;
+    line-height: 1.125;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  &__logo {
+    .custom-logo-link,
+    .site-logo__fallback {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .custom-logo {
+      display: block;
+      width: auto;
+      height: 24px;
+    }
+
+    .site-logo__fallback {
+      color: var(--shop-co-color-black);
+      font-size: 32px;
+      line-height: 1;
+      font-weight: 900;
+      text-decoration: none;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    a {
+      color: var(--shop-co-color-black);
+      font-size: 16px;
+      line-height: 1.19;
+      text-decoration: none;
+      opacity: 0.6;
+
+      @include hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__copyright {
+    font-size: 14px;
+  }
+
+  &__hr {
+    margin-block: fluid(50, 40) fluid(20, 16);
+  }
+
+  &__soc1als {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    &-link {
+      --size: 28px;
+
+      width: var(--size);
+      height: var(--size);
+      flex: 0 0 var(--size);
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--shop-co-color-white);
+      border-radius: 50%;
+
+      img {
+        transition-duration: var(--transition-duration);
+      }
+      
+      @include hover {
+        background-color: var(--shop-co-color-black);
+
+        img {
+          filter: invert(1);
+        }
+      }
+    }
+  }
+}
