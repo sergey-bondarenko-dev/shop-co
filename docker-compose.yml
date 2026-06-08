@@ -8,6 +8,17 @@ services:
         condition: service_healthy
     ports:
       - "${WORDPRESS_PORT:-8080}:80"
+    command: >
+      bash -lc 'set -e;
+      for plugin_dir in /var/www/project/wp-content/plugins/*; do
+        [ -d "$$plugin_dir" ] || continue;
+        plugin="$${plugin_dir##*/}";
+        [ "$$plugin" = "shop-co-core" ] && continue;
+        if [ ! -d "/var/www/html/wp-content/plugins/$$plugin" ]; then
+          cp -a "$$plugin_dir" "/var/www/html/wp-content/plugins/$$plugin";
+        fi;
+      done;
+      exec apache2-foreground'
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:-wordpress}
@@ -18,7 +29,8 @@ services:
     volumes:
       - wordpress_data:/var/www/html
       - ./wp-content/themes:/var/www/html/wp-content/themes
-      - ./wp-content/plugins:/var/www/html/wp-content/plugins
+      - wordpress_plugins:/var/www/html/wp-content/plugins
+      - ./wp-content/plugins/shop-co-core:/var/www/html/wp-content/plugins/shop-co-core
       - ./wp-content/uploads:/var/www/html/wp-content/uploads
       - ./:/var/www/project
 
@@ -51,4 +63,5 @@ services:
 
 volumes:
   wordpress_data:
+  wordpress_plugins:
   db_data:
