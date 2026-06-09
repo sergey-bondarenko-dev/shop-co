@@ -16,7 +16,20 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
-	<a class="screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'shop-co' ); ?></a>
+
+	<?php if ( shop_co_should_show_ads_banner() ) : ?>
+	<div class="ads-banner" id="ads-banner">
+		<div class="ads-banner__inner container">
+			Sign up and get 20% off to your first order. 
+			<a class="ads-banner__link" href="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) . '?action=register' ); ?>">
+				Sign Up Now
+			</a>
+			<button class="ads-banner__close site-close-button hidden-mobile" type="button">
+				<div class="screen-reader-text">Close Ads Banner</div>
+			</button>
+		</div>
+	</div>
+	<?php endif; ?>
 
 	<header id="masthead" class="site-header">
 		<div class="container site-header__inner">

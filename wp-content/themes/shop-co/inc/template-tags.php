@@ -36,6 +36,18 @@ function shop_co_is_core_plugin_active(): bool {
 	return function_exists( 'shop_co_get_testimonials' );
 }
 
+function shop_co_is_ads_banner_closed(): bool {
+	if ( ! isset( $_COOKIE['shop_co_ads_banner_closed'] ) ) {
+		return false;
+	}
+
+	return 'yes' === sanitize_text_field( wp_unslash( $_COOKIE['shop_co_ads_banner_closed'] ) );
+}
+
+function shop_co_should_show_ads_banner(): bool {
+	return ! is_user_logged_in() && ! shop_co_is_ads_banner_closed();
+}
+
 function shop_co_admin_notice_section( string $message, string $capability = 'edit_posts' ): void {
 	if ( ! current_user_can( $capability ) ) {
 		return;

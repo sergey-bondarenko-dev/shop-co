@@ -59,7 +59,7 @@ svg * {
 a {
   color: inherit;
 
-  &[class] {
+  &:where([class]) {
     text-decoration: none;
   }
 }
