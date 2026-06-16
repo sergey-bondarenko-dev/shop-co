@@ -1,3 +1,4 @@
+@use "bs";
 @use "@a1rth/css-normalize";
 @use "./helpers" as *;
 @use "fonts";
@@ -24,3 +25,5 @@
 @use "components/products-slider";
 @use "components/categories-grid";
 @use "components/ads-banner";
+@use "components/header";
+@use "components/navigation";

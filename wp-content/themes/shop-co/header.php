@@ -16,12 +16,17 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
+	<?php
+	$shop_co_cart_url = shop_co_get_woocommerce_page_url( 'cart' );
+	$shop_co_account_url = shop_co_get_woocommerce_page_url( 'myaccount', wp_login_url() );
+	$shop_co_register_url = add_query_arg( 'action', 'register', $shop_co_account_url );
+	?>
 
 	<?php if ( shop_co_should_show_ads_banner() ) : ?>
 	<div class="ads-banner" id="ads-banner">
 		<div class="ads-banner__inner container">
 			Sign up and get 20% off to your first order. 
-			<a class="ads-banner__link" href="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) . '?action=register' ); ?>">
+			<a class="ads-banner__link" href="<?php echo esc_url( $shop_co_register_url ); ?>">
 				Sign Up Now
 			</a>
 			<button class="ads-banner__close site-close-button hidden-mobile" type="button">
@@ -33,34 +38,93 @@
 
 	<header id="masthead" class="site-header">
 		<div class="container site-header__inner">
-			<div class="site-branding">
-				<?php the_custom_logo(); ?>
-				<div>
-					<?php if ( is_front_page() && is_home() ) : ?>
-						<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-					<?php else : ?>
-						<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-					<?php endif; ?>
-
+			<button class="site-header__burger-button site-button site-button--square site-button--white visible-tablet"
+				type="button"
+				data-bs-toggle="offcanvas"
+				data-bs-target="#offcanvas-header-navigation"
+				aria-controls="offcanvas-header-navigation">
+				<?php echo ShopCo_Icons::list(); ?>
+			</button>
+			<?php shop_co_logo( 'site-header__logo' ); ?>
+			<div class="offcanvas-xl offcanvas-start"
+				tabindex="-1" 
+				id="offcanvas-header-navigation" 
+				aria-labelledby="offcanvas-header-navigation-label"
+				>
+				<div class="offcanvas-header">
+					<div class="offcanvas-title" id="offcanvas-header-navigation-label">Navigation Menu</div>
+					<button
+						type="button" 
+						class="btn-close" 
+						data-bs-dismiss="offcanvas" 
+						data-bs-target="#offcanvas-header-navigation" 
+						aria-label="Close">
+					</button>
+				</div>
+				<div class="offcanvas-body">
 					<?php
-					$shop_co_description = get_bloginfo( 'description', 'display' );
-					if ( $shop_co_description || is_customize_preview() ) :
-						?>
-						<p class="site-description"><?php echo esc_html( $shop_co_description ); ?></p>
-					<?php endif; ?>
+								wp_nav_menu(
+									array(
+										'theme_location' => 'header_menu',
+										'depth'          => 2,
+										'container'      => 'nav',
+										'container_class' => 'site-header__navigation site-navigation',
+										'container_id'   => 'site-navigation',
+										'menu_class'     => 'site-navigation__list',
+										'fallback_cb'    => false,
+										'walker'         => new ShopCo_Header_Nav_Walker(),
+									)
+								);
+								?>
+					<!-- <nav class="site-header__navigation site-navigation" id="">
+						<ul class="site-navigation__list">
+							<li class="site-navigation__list-item">
+								<a href="#" class="site-navigation__link">Shop</a>
+							</li>
+							<li class="site-navigation__list-item">
+								<a href="#" class="site-navigation__link">On Sale</a>
+							</li>
+							<li class="site-navigation__list-item">
+								<a href="#" class="site-navigation__link">New Arrivals</a>
+							</li>
+							<li class="site-navigation__list-item">
+								<a href="#" class="site-navigation__link">Brands</a>
+							</li>
+						</ul>
+					</nav> -->
 				</div>
 			</div>
-
-			<nav id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Primary menu', 'shop-co' ); ?>">
-				<?php
-				wp_nav_menu(
-					array(
-						'theme_location' => 'header_menu',
-						'menu_id'        => 'primary-menu',
-						'fallback_cb'    => false,
-					)
-				);
-				?>
-			</nav>
+			<div class="site-header__search-wrapper collapse" id="search-field">
+				<?php echo ShopCo_UI::field(
+					'search',
+					'search',
+					'Search for products...',
+					'',
+					'',
+					'site-header__search',
+					'',
+					'query_search',
+				); ?>
+			</div>
+			<div class="site-header__actions">
+				<button class="site-button site-button--square site-button--white visible-mobile"
+					type="button"
+					data-bs-toggle="collapse" 
+					data-bs-target="#search-field" 
+					aria-expanded="false" 
+					aria-controls="search-field">
+					<?php echo ShopCo_Icons::search(); ?>
+				</button>
+				<a href="<?php echo esc_url( $shop_co_cart_url ); ?>" 
+					class="site-button site-button--square site-button--white"
+					aria-label="<?php esc_attr_e( 'Cart', 'shop-co' ); ?>">
+					<?php echo ShopCo_Icons::cart(); ?>
+				</a>
+				<a href="<?php echo esc_url( $shop_co_account_url ); ?>" 
+					class="site-button site-button--square site-button--white"
+					aria-label="<?php esc_attr_e( 'My account', 'shop-co' ); ?>">
+					<?php echo ShopCo_Icons::user(); ?>
+				</a>
+			</div>
 		</div>
 	</header>
