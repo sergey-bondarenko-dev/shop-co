@@ -33,7 +33,7 @@
     }
 }
 
-.hidden-table {
+.hidden-tablet {
     @include tablet {
         display: none !important;
     }

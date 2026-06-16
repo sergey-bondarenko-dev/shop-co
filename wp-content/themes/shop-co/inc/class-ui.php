@@ -10,6 +10,9 @@ class ShopCo_UI
         string $placeholder = "", 
         string $label = "",
         string $mode = "",
+        string $classes = "",
+        string $id = "",
+        string $name = "",
     ) {
         $modes = array(
             "white",
@@ -19,10 +22,12 @@ class ShopCo_UI
         $mode = in_array( $mode, $modes, true ) ? $mode : "";
         $label = $label ?: $placeholder;
         
-        $classes = "site-field" . ($mode ? " site-field--$mode" : "");
+        $classes .= ($classes ? " " : "") . "site-field" . ($mode ? " site-field--$mode" : "");
+        $id_attrs = $id ? "id='" . esc_attr($id) . "'" : "";
+        $name_attr = $name ? "name='" . esc_attr($name) . "'" : "";
 
-        return "<label class=\"$classes\">
-                    <input type=\"$type\" class=\"site-field__input\" placeholder=\"$placeholder\">
+        return "<label class=\"$classes\" $id_attrs>
+                    <input type=\"$type\" class=\"site-field__input\" placeholder=\"$placeholder\" $name_attr>
                     <span class=\"site-field__icon opacity-40\">
                         $svgIcon
                     </span>

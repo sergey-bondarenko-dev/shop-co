@@ -1,0 +1,16 @@
+@import "./helpers/media";
+@import "bootstrap/scss/functions";
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: $mobile-xs + 1px,
+    md: $mobile-s + 1px,
+    lg: $mobile + 1px,
+    xl: $tablet + 1px,
+    xxl: $container + 1px
+);
+
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";

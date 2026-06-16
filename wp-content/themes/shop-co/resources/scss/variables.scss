@@ -33,6 +33,8 @@
 	--transition-duration: .2s;
 	--transition-duration-longer: .2s;
 
+	--z-index-header: 100;
+
 	@include mobile-xs {
 		--container-padding-x: 8px;
 	}
