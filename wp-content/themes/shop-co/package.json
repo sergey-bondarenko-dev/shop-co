@@ -17,6 +17,7 @@
 	},
 	"dependencies": {
 		"@a1rth/css-normalize": "^1.2.4",
+		"fslightbox": "^3.7.5",
 		"nouislider": "^15.8.1",
 		"swiper": "^12.1.4"
 	}

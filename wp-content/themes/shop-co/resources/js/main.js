@@ -6,6 +6,7 @@ const SITE_HEADER_SELECTOR = '.site-header';
 const NO_UI_SLIDER_SELECTOR = '.site-range';
 const TESTIMONIALS_SLIDER_SELECTOR = '.testimonials-slider';
 const PRODUCTS_SLIDER_SELECTOR = '.products-slider';
+const PRODUCT_GALLERY_SELECTOR = '.site-product-gallery';
 const ADS_BANNER_SELECTOR = '.ads-banner';
 
 if ( document.querySelector( NAVIGATION_SELECTOR ) ) {
@@ -35,6 +36,12 @@ if ( document.querySelector( TESTIMONIALS_SLIDER_SELECTOR ) ) {
 if ( document.querySelector( PRODUCTS_SLIDER_SELECTOR ) ) {
 	import( './modules/productSlider' ).then( ( { ProductSlider } ) => {
 		ProductSlider.init( PRODUCTS_SLIDER_SELECTOR );
+	} );
+}
+
+if ( document.querySelector( PRODUCT_GALLERY_SELECTOR ) ) {
+	import( './modules/productGallery' ).then( ( { ProductGallery } ) => {
+		ProductGallery.init( PRODUCT_GALLERY_SELECTOR );
 	} );
 }
 

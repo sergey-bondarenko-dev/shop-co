@@ -1,0 +1,17 @@
+@use '../helpers' as *;
+
+.product {
+  &__body {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: fluid(40, 20);
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+
+    .onsale {
+      display: none;
+    }
+  }
+}
