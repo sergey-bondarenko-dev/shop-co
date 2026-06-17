@@ -127,4 +127,8 @@
 				</a>
 			</div>
 		</div>
+		
 	</header>
+	<?php if (! is_front_page() ): ?>
+		<hr class="site-border container" style="margin-block: 0;">
+	<?php endif; ?>

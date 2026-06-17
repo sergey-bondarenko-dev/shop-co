@@ -49,3 +49,8 @@ remove_action(
 );
 
 add_filter( 'woocommerce_price_trim_zeros', '__return_true' );
+
+add_filter(
+    'woocommerce_breadcrumb_defaults',
+    'shop_co_woocommerce_breadcrumb_defaults'
+);

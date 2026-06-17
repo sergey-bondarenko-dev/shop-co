@@ -68,3 +68,7 @@
 .section-margin-top {
     margin-top: var(--section-gap);
 }
+
+.site-link {
+    @include site-link;
+}

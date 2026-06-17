@@ -191,3 +191,16 @@ function shop_co_template_rating( float $rating, string $wrapper_class = '', boo
     </span>
     <?php
 }
+
+function shop_co_woocommerce_breadcrumb_defaults( array $defaults ): array {
+    $arrow_right_svg = ShopCo_Icons::arrow_right();
+
+    $defaults['delimiter'] = '<span class="breadcrumbs__separator opacity-60">' . $arrow_right_svg . '</span>';
+    $defaults['wrap_before'] = '<nav class="breadcrumbs woocommerce-breadcrumb" aria-label="Breadcrumbs">';
+    $defaults['wrap_after'] = '</nav>';
+    $defaults['before'] = '<span class="breadcrumbs__item">';
+    $defaults['after'] = '</span>';
+    $defaults['home'] = 'Home';
+
+    return $defaults;
+}
