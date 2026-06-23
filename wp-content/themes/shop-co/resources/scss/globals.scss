@@ -38,6 +38,10 @@ h6, .h6 {
   font-family: var(--font-base);
 }
 
+html {
+  scrollbar-gutter: unset;
+}
+
 body {
   font-weight: 400;
   font-size: var(--font-size-base);

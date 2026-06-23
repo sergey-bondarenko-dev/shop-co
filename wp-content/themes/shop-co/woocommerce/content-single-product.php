@@ -23,9 +23,9 @@ if ( post_password_required() ) {
 	return;
 }
 ?>
-<div id="product-<?php the_ID(); ?>" <?php wc_product_class( '', $product ); ?>>
+<div id="product-<?php the_ID(); ?>" <?php wc_product_class( 'site-single-product', $product ); ?>>
 
-	<div class="product__body">
+	<div class="site-single-product__body">
 		<?php
 		/**
 		 * Hook: woocommerce_before_single_product_summary.

@@ -204,3 +204,107 @@ function shop_co_woocommerce_breadcrumb_defaults( array $defaults ): array {
 
     return $defaults;
 }
+
+add_action( 'woocommerce_before_quantity_input_field', 'shop_co_woocommerce_before_quantity_input_field_action' );
+
+function shop_co_woocommerce_before_quantity_input_field_action(): void {
+    ?>
+    <button type="button" class="quantity__button quantity__button--minus">
+        <?php echo ShopCo_Icons::minus(); ?>
+    </button>
+    <?php
+}
+
+add_action( 'woocommerce_after_quantity_input_field', 'shop_co_woocommerce_after_quantity_input_field_action' );
+
+function shop_co_woocommerce_after_quantity_input_field_action(): void {
+    ?>
+    <button type="button" class="quantity__button quantity__button--plus">
+        <?php echo ShopCo_Icons::plus(); ?>
+    </button>
+    <?php
+}
+
+/**
+ * @param array{
+ *  options: array<int, string>, 
+ *  attribute: string, 
+ *  product: WC_Product
+ * } $args
+ */
+function shop_co_wc_radio_buttons_variation_attribute_options( $args = array() ) {
+    $options = $args['options'] ?? null;
+    $attribute = $args['attribute'] ?? null;
+    $product = $args['product'] ?? null;
+
+    if (!$options || !$attribute || !$product) {
+        return;
+    }
+
+    $name = 'attribute_' . sanitize_title( $attribute );
+    $field_name = 'shop_co_' . $name;
+    $is_color_attribute = in_array( sanitize_title( $attribute ), array( 'pa_color', 'color' ), true );
+    
+    ?>
+
+    <div class="site-variations__options<?php echo $is_color_attribute ? ' site-variations__options--color' : ''; ?>">
+        <?php foreach ($options as $option): ?>
+            <?php $id = sanitize_title( $field_name . '_' . $option ); ?>
+            <?php
+            $option_label = apply_filters( 'woocommerce_variation_option_name', $option, null, $attribute, $product );
+            $color_value  = $is_color_attribute ? shop_co_wc_get_variation_color_value( $option ) : '';
+            ?>
+            <label
+                class="site-variations__option<?php echo $is_color_attribute ? ' site-variations__option--color' : ''; ?>"
+                for="<?php echo esc_attr( $id ); ?>"
+                <?php echo $is_color_attribute ? 'aria-label="' . esc_attr( $option_label ) . '"' : ''; ?>
+                <?php echo $color_value ? 'style="--site-variation-color: ' . esc_attr( $color_value ) . ';"' : ''; ?>
+            >
+                <?php if ( $is_color_attribute ) : ?>
+                    <span class="site-variations__swatch" aria-hidden="true"></span>
+                    <span class="screen-reader-text"><?php echo esc_html( $option_label ); ?></span>
+                <?php else : ?>
+                    <span class="opacity-60"><?php echo esc_html( $option_label ); ?></span>
+                <?php endif; ?>
+                <input type="radio" 
+                    id="<?php echo esc_attr( $id ); ?>" 
+                    name="<?php echo esc_attr( $field_name ); ?>" 
+                    data-attribute-name="<?php echo esc_attr( $name ); ?>"
+                    value="<?php echo esc_attr( $option ); ?>">
+            </label>
+        <?php endforeach; ?>
+    </div>
+
+    <?php
+}
+
+function shop_co_wc_get_variation_color_value( string $option ): string {
+    $colors = array(
+        'black' => '#000000',
+        'white' => '#ffffff',
+        'red' => '#ff3333',
+        'green' => '#01ab31',
+        'blue' => '#2f80ed',
+        'navy' => '#1f2a44',
+        'yellow' => '#ffc633',
+        'orange' => '#f2994a',
+        'purple' => '#9b51e0',
+        'pink' => '#eb5757',
+        'gray' => '#828282',
+        'grey' => '#828282',
+        'brown' => '#8b5e3c',
+        'beige' => '#d7c4a3',
+    );
+
+    $key = sanitize_title( $option );
+
+    if ( isset( $colors[ $key ] ) ) {
+        return $colors[ $key ];
+    }
+
+    if ( preg_match( '/^#[0-9a-f]{3}([0-9a-f]{3})?$/i', $option ) ) {
+        return $option;
+    }
+
+    return $key;
+}

@@ -72,3 +72,7 @@
 .site-link {
     @include site-link;
 }
+
+.d-flex {
+    display: flex;
+}
