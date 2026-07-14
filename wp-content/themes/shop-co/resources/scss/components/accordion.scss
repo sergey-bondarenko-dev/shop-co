@@ -1,0 +1,14 @@
+@use '../helpers' as *;
+
+.site-accordion {
+  --bs-accordion-border-color: var(--shop-co-color-gray-2);
+  --bs-accordion-active-bg: var(--shop-co-color-black);
+  --bs-accordion-active-color: var(--shop-co-color-white);
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.25);
+  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m2 5 6 6 6-6'/%3E%3C/svg%3E");
+
+  .accordion-button {
+    font-size: fluid(20, 16);
+    font-weight: 500;
+  }
+}

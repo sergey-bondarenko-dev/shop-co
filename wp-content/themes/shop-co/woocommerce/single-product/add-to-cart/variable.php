@@ -14,9 +14,9 @@ defined( 'ABSPATH' ) || exit;
 global $product;
 
 /** @var array<string, array<int, string>> $attributes */
-$attributes ??= [];
+$attributes ??= array();
 /** @var array $available_variations */
-$available_variations ??= [];
+$available_variations ??= array();
 
 $attribute_keys  = array_keys( $attributes );
 $variations_json = wp_json_encode( $available_variations );

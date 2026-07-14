@@ -110,7 +110,7 @@ class ShopCo_Header_Nav_Walker extends Walker_Nav_Menu {
 					__( 'Open %s submenu', 'shop-co' ),
 					$item->title
 				),
-				'data-bs-offset' => "[-50, 10]",
+				'data-bs-offset' => '[-50, 10]',
 			);
 
 			$arrow_down_svg = ShopCo_Icons::arrow_down();
@@ -177,8 +177,8 @@ function shop_co_add_header_menu_shop_categories( array $items, stdClass $args )
 		return $items;
 	}
 
-	$shop_item->classes   = array_unique( array_merge( (array) $shop_item->classes, array( 'menu-item-has-children' ) ) );
-	$shop_item->current   = ! empty( $shop_item->current );
+	$shop_item->classes               = array_unique( array_merge( (array) $shop_item->classes, array( 'menu-item-has-children' ) ) );
+	$shop_item->current               = ! empty( $shop_item->current );
 	$shop_item->current_item_ancestor = ! empty( $shop_item->current_item_ancestor );
 
 	foreach ( $categories as $category ) {

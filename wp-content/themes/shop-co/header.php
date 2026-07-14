@@ -17,8 +17,8 @@
 <?php wp_body_open(); ?>
 <div id="page" class="site">
 	<?php
-	$shop_co_cart_url = shop_co_get_woocommerce_page_url( 'cart' );
-	$shop_co_account_url = shop_co_get_woocommerce_page_url( 'myaccount', wp_login_url() );
+	$shop_co_cart_url     = shop_co_get_woocommerce_page_url( 'cart' );
+	$shop_co_account_url  = shop_co_get_woocommerce_page_url( 'myaccount', wp_login_url() );
 	$shop_co_register_url = add_query_arg( 'action', 'register', $shop_co_account_url );
 	?>
 
@@ -65,14 +65,14 @@
 					<?php
 								wp_nav_menu(
 									array(
-										'theme_location' => 'header_menu',
-										'depth'          => 2,
-										'container'      => 'nav',
+										'theme_location'  => 'header_menu',
+										'depth'           => 2,
+										'container'       => 'nav',
 										'container_class' => 'site-header__navigation site-navigation',
-										'container_id'   => 'site-navigation',
-										'menu_class'     => 'site-navigation__list',
-										'fallback_cb'    => false,
-										'walker'         => new ShopCo_Header_Nav_Walker(),
+										'container_id'    => 'site-navigation',
+										'menu_class'      => 'site-navigation__list',
+										'fallback_cb'     => false,
+										'walker'          => new ShopCo_Header_Nav_Walker(),
 									)
 								);
 								?>
@@ -95,7 +95,8 @@
 				</div>
 			</div>
 			<div class="site-header__search-wrapper collapse" id="search-field">
-				<?php echo ShopCo_UI::field(
+				<?php
+				echo ShopCo_UI::field(
 					'search',
 					'search',
 					'Search for products...',
@@ -104,7 +105,8 @@
 					'site-header__search',
 					'',
 					'query_search',
-				); ?>
+				);
+				?>
 			</div>
 			<div class="site-header__actions">
 				<button class="site-button site-button--square site-button--white visible-mobile"
@@ -129,6 +131,6 @@
 		</div>
 		
 	</header>
-	<?php if (! is_front_page() ): ?>
+	<?php if ( ! is_front_page() ) : ?>
 		<hr class="site-border container" style="margin-block: 0;">
 	<?php endif; ?>

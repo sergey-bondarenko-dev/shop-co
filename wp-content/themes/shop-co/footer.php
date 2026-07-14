@@ -15,13 +15,15 @@
 							STAY UPTO DATE ABOUT OUR LATEST OFFERS
 						</div>
 						<form action="#" class="site-footer__banner-form">
-							<?php echo ShopCo_UI::field(
+							<?php
+							echo ShopCo_UI::field(
 								'mail',
 								'email',
 								'Enter your email address',
 								'',
 								'white',
-							); ?>
+							);
+							?>
 							<button type="submit" class="site-footer__banner-submit site-button site-button--white">
 								Subscribe to Newsletter
 							</button>

@@ -1,5 +1,7 @@
 import "bootstrap/js/dist/offcanvas";
 import "bootstrap/js/dist/collapse";
+import "bootstrap/js/dist/modal";
+import { ReviewManager } from "./modules/ReviewManager";
 
 const NAVIGATION_SELECTOR = '#site-navigation';
 const SITE_HEADER_SELECTOR = '.site-header';
@@ -9,6 +11,13 @@ const PRODUCTS_SLIDER_SELECTOR = '.products-slider';
 const PRODUCT_GALLERY_SELECTOR = '.site-product-gallery';
 const PRODUCT_VARIATIONS_SELECTOR = '.variations_form';
 const ADS_BANNER_SELECTOR = '.ads-banner';
+
+const isSingleProductPage = document.body.classList.contains('single-product');
+const hasReviewList = document.getElementById('comment-list');
+
+if (isSingleProductPage && hasReviewList) {
+	new ReviewManager().init();
+}
 
 if ( document.querySelector( NAVIGATION_SELECTOR ) ) {
 	import( './modules/navigationDropdowns' ).then( ( { NavigationDropdowns } ) => {

@@ -123,8 +123,7 @@ function shop_co_entry_footer(): void {
 	);
 }
 
-function shop_co_product_rating_html( WC_Product $product, string $wrapper_class = '' ): void
-{
+function shop_co_product_rating_html( WC_Product $product, string $wrapper_class = '' ): void {
 	$average_rating = (float) $product->get_average_rating();
 
 	if ( $average_rating <= 0.0 && shop_co_use_demo_data() ) {

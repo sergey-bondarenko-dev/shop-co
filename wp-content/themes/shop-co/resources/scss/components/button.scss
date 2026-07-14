@@ -3,6 +3,7 @@
 .site-button {
   --shop-co-button-padding: 15px;
   --shop-co-background-color-hover: var(--shop-co-color-black-opacity-80);
+  --shop-co-color-hover: var(--shop-co-color-white);
 
   display: inline-flex;
   align-items: center;
@@ -21,6 +22,7 @@
   @include hover {
     cursor: pointer;
     background-color: var(--shop-co-background-color-hover);
+    color: var(--shop-co-color-hover);
   }
 
   &:active {
@@ -34,8 +36,17 @@
 
   &--white {
     --shop-co-background-color-hover: var(--shop-co-color-gray-1);
+    --shop-co-color-hover: var(--shop-co-color-black);
 
     background-color: var(--shop-co-color-white);
+    color: var(--shop-co-color-black);
+  }
+
+  &--gray {
+    --shop-co-background-color-hover: var(--shop-co-color-black);
+    --shop-co-color-hover: var(--shop-co-color-white);
+
+    background-color: var(--shop-co-color-gray-2);
     color: var(--shop-co-color-black);
   }
 
