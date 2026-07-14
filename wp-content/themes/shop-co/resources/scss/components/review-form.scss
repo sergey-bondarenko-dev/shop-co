@@ -1,0 +1,209 @@
+@use "./../helpers" as *;
+
+.site-review-form {
+	background-color: var(--shop-co-color-white);
+
+	.comment-reply-title {
+		display: block;
+		margin-bottom: fluid(20, 16);
+		font-family: var(--font-accent);
+		font-size: fluid(24, 20);
+		font-weight: 700;
+		line-height: 1.2;
+	}
+
+	&__form,
+	.comment-form {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: fluid(18, 14) fluid(20, 16);
+
+		@include mobile {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	p,
+	.comment-form-rating {
+		margin: 0;
+	}
+
+	label {
+		display: inline-flex;
+		gap: 4px;
+		margin-bottom: 8px;
+		font-size: fluid(15, 14);
+		font-weight: 500;
+		line-height: 1.35;
+		color: var(--shop-co-color-black);
+	}
+
+	.required {
+		color: var(--shop-co-color-red);
+	}
+
+	.comment-form-rating,
+	.comment-form-comment,
+	.form-submit,
+	.must-log-in,
+	.logged-in-as {
+		grid-column: 1 / -1;
+	}
+
+	.comment-form-rating {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		padding: 12px;
+		border-radius: var(--shop-co-border-radius);
+		background-color: var(--shop-co-color-gray-2);
+
+		@include mobile {
+			align-items: stretch;
+			flex-direction: column;
+		}
+	}
+
+	#comment-form-rating-label {
+		flex-shrink: 0;
+		align-items: center;
+		margin-bottom: 0;
+		padding: 0 6px;
+		min-height: 28px;
+	}
+
+	input:not([type="submit"]),
+	textarea,
+	select {
+		width: 100%;
+		min-height: 52px;
+		padding: 14px 18px;
+		border: 1px solid transparent;
+		border-radius: var(--shop-co-border-radius);
+		background-color: var(--shop-co-color-gray-2);
+		color: var(--shop-co-color-black);
+		font: inherit;
+		transition-duration: var(--transition-duration);
+
+		&:is(textarea) {
+			min-height: 140px;
+			resize: vertical;
+		}
+
+		&:is(select) {
+			max-width: 260px;
+			padding-right: 42px;
+			border-radius: var(--shop-co-border-radius-2);
+			appearance: none;
+			background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+			background-repeat: no-repeat;
+			background-position: right 18px center;
+			background-size: 14px 10px;
+
+			@include mobile {
+				max-width: none;
+			}
+		}
+
+		&::placeholder {
+			color: var(--shop-co-color-black-opacity-80);
+		}
+
+		&:focus {
+			border-color: var(--shop-co-color-black);
+			background-color: var(--shop-co-color-white);
+			outline: none;
+		}
+
+		&:user-invalid {
+			border-color: var(--shop-co-color-red);
+		}
+	}
+
+	.form-submit {
+		display: flex;
+		justify-content: flex-end;
+
+		@include mobile {
+			justify-content: stretch;
+		}
+	}
+
+	.form-submit .site-button {
+		min-width: fluid(180, 150);
+
+		@include mobile {
+			width: 100%;
+		}
+	}
+
+	.must-log-in,
+	.logged-in-as {
+		padding: 14px 18px;
+		border-radius: var(--shop-co-border-radius);
+		background-color: var(--shop-co-color-gray-2);
+		color: var(--shop-co-color-black-opacity-80);
+
+		a {
+			color: var(--shop-co-color-black);
+			font-weight: 500;
+		}
+	}
+
+	p.stars {
+		span {
+			display: flex;
+		}
+
+		a {
+			position: relative;
+			display: block;
+			flex: 0 0 28px;
+			width: 28px;
+			height: 28px;
+			overflow: hidden;
+			color: transparent;
+			font-size: 0;
+			text-decoration: none;
+
+			&::before {
+				content: '';
+				position: absolute;
+				inset: 2px;
+				background-color: var(--shop-co-color-black-opacity-10);
+				mask: url("../../resources/icons/star.svg") center / contain no-repeat;
+				transition: background-color var(--transition-duration);
+			}
+		}
+
+		&:hover a::before {
+			background-color: var(--shop-co-color-gold);
+		}
+
+		a:hover ~ a::before {
+			background-color: var(--shop-co-color-black-opacity-10);
+		}
+
+		&.selected a::before {
+			background-color: var(--shop-co-color-gold);
+		}
+
+		&.selected a.active ~ a::before {
+			background-color: var(--shop-co-color-black-opacity-10);
+		}
+
+		a:focus-visible {
+			border-radius: 4px;
+			outline: 2px solid var(--shop-co-color-black);
+			outline-offset: 2px;
+		}
+	}
+}
+
+.woocommerce-verification-required {
+	margin-top: fluid(32, 24);
+	padding: fluid(20, 16);
+	border-radius: var(--shop-co-border-radius);
+	background-color: var(--shop-co-color-gray-2);
+	color: var(--shop-co-color-black-opacity-80);
+}

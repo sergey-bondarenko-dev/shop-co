@@ -8,9 +8,26 @@
 if ( post_password_required() ) {
 	return;
 }
+
+$comments_number = get_comments_number();
+
 ?>
 
-<div id="comments" class="comments-area">
+<div id="comments" class="comments-area site-comments">
+	<div class="site-comments__header">
+		<h2 class="site-comments__title h4">
+			<?php echo __( 'All Reviews', 'shop-co' ); ?>
+			<span>(<?php echo $comments_number; ?>)</span> 
+		</h2>
+		<div class="site-comments__actions">
+			<select name="comments-sort" id="comments-sort">
+				<option value="latest"><?php _e( 'Latest', 'shop-co' ); ?></option>
+			</select>
+			<button class="site-button" type="button">
+				<?php _e( 'Write a Review', 'shop-co' ); ?>
+			</button>
+		</div>
+	</div>
 	<?php if ( have_comments() ) : ?>
 		<h2 class="comments-title">
 			<?php

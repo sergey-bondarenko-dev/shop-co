@@ -38,6 +38,10 @@ h6, .h6 {
   font-family: var(--font-base);
 }
 
+html {
+  scrollbar-gutter: unset;
+}
+
 body {
   font-weight: 400;
   font-size: var(--font-size-base);
@@ -45,6 +49,12 @@ body {
   color: var(--shop-co-color-black);
   background-color: var(--shop-co-color-white);
   line-height: 1.375;
+
+  &:not(.home) {
+    .site-main {
+      padding-block: fluid(24, 20);
+    }
+  }
 }
 
 a,

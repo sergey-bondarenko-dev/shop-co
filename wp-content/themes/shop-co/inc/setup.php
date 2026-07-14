@@ -84,7 +84,6 @@ function shop_co_widgets_init(): void {
 }
 add_action( 'widgets_init', 'shop_co_widgets_init' );
 
-function shop_co_use_demo_data(): bool
-{
+function shop_co_use_demo_data(): bool {
 	return defined( 'SHOP_CO_USE_DEMO_DATA' ) && SHOP_CO_USE_DEMO_DATA;
 }

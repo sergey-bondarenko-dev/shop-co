@@ -7,6 +7,10 @@
 	grid-template-columns: repeat(var(--products-columns), minmax(0, 1fr));
 	gap: fluid(36, 24) fluid(20, 16);
 
+	&:has(.products) {
+		grid-template-columns: 1fr;
+	}
+
   @include container-down {
 		--products-columns: var(--products-container-columns, 4);
   }

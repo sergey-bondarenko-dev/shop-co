@@ -10,6 +10,7 @@ wp-content/plugins/*
 !wp-content/plugins/.gitkeep
 !wp-content/plugins/shop-co-core/
 !wp-content/plugins/shop-co-core/**
+wp-content/plugins/shop-co-core/vendor/
 wp-content/uploads/*
 !wp-content/uploads/.gitkeep
 wp-content/cache/

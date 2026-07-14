@@ -1,0 +1,122 @@
+@use '../helpers' as *;
+
+.site-single-product {
+  &__body {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: fluid(40, 20);
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+
+    .onsale {
+      display: none;
+    }
+  }
+
+  &__rating {
+    --site-rating-star-size: #{fluid(25, 17)};
+    --site-rating-value-font-size: #{fluid(16, 14)};
+  }
+
+  &__price {
+    --site-price-discount-font-size: #{fluid(16, 14)};
+
+    font-size: fluid(32, 24);
+  }
+
+  & .cart-actions {
+    display: flex;
+    gap: fluid(20, 12);
+
+    @include mobile {
+      flex-wrap: wrap;
+    }
+  }
+
+  & .cart {
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: fluid(16, 12) fluid(20, 16);
+      border-radius: var(--shop-co-border-radius-2);
+      background-color: var(--shop-co-color-gray-2);
+      overflow: hidden;
+      width: fluid(170, 110);
+
+      &:has(.input-text:user-invalid) {
+        border: 1px solid var(--shop-co-color-red);
+      }
+
+      &__button {
+        --size: 24px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--size);
+        height: var(--size);
+        border: none;
+        background-color: transparent;
+        padding: 0;
+
+        @include mobile-s {
+          --size: 14px;
+        }
+      }
+
+      .input-text {
+        -moz-appearance: textfield;
+        border: none;
+        background-color: transparent;
+        appearance: none;
+        padding: 0;
+        text-align: center;
+        min-width: 24px;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          appearance: none;
+          margin: 0;
+        }
+      }
+    }
+
+    .single_add_to_cart_button {
+      flex: 1;
+
+      @include mobile {
+        font-size: 14px;
+        min-width: auto;
+      }
+    }
+  }
+
+  .entry-title {
+    margin: 0;
+  }
+
+  .summary {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .product_meta {
+    display: grid;
+  }
+
+  .stock.in-stock {
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+
+  .single_variation_wrap {
+    .stock.in-stock {
+      margin-bottom: 24px;
+    }
+  }
+}

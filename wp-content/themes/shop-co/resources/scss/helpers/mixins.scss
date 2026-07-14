@@ -1,4 +1,5 @@
 @use 'functions' as *;
+@use 'media' as *;
 
 @mixin fluid-text($max, $min) {
     font-size: fluid($max, $min);
@@ -86,5 +87,14 @@
         border: 1px solid var(--shop-co-color-black-opacity-10) !important;
     } @else {
         border: 1px solid var(--shop-co-color-black-opacity-10);
+    }
+}
+
+@mixin site-link {
+    text-decoration: none;
+    opacity: 0.6;
+
+    @include hover {
+        opacity: 1;
     }
 }

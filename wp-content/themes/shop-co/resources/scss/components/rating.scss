@@ -1,6 +1,9 @@
 @use './../helpers' as *;
 
 .site-rating {
+  --site-rating-star-size: #{fluid(18.5, 15.5)};
+  --site-rating-value-font-size: #{fluid(14, 12)};
+
   display: flex;
   align-items: center;
   column-gap: fluid(13, 11);
@@ -12,7 +15,7 @@
   }
 
   &__star {
-    --size: #{fluid(18.5, 15.5)};
+    --size: var(--site-rating-star-size);
 
     width: var(--size);
     height: var(--size);
@@ -20,7 +23,7 @@
   }
 
   &__value {
-    font-size: fluid(14, 12);
+    font-size: var(--site-rating-value-font-size);
     line-height: 0;
   }
 }

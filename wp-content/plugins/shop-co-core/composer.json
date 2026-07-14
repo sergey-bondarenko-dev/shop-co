@@ -1,0 +1,9 @@
+{
+    "name": "portfolio/shop-co-core",
+    "description": "Core content structures for the Shop Co site.",
+    "type": "wordpress-plugin",
+    "license": "proprietary",
+    "require": {
+        "htmlburger/carbon-fields": "^3.6"
+    }
+}

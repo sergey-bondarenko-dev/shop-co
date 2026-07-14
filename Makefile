@@ -2,6 +2,7 @@ DOCKER_COMPOSE ?= docker compose
 WP_SERVICE ?= wordpress
 PROJECT_DIR ?= /var/www/project
 THEME_DIR ?= wp-content/themes/shop-co
+CORE_PLUGIN_DIR ?= wp-content/plugins/shop-co-core
 NPM ?= npm.cmd
 
 SHELL := powershell.exe
@@ -74,9 +75,11 @@ composer:
 
 install:
 	$(DOCKER_COMPOSE) exec -w $(PROJECT_DIR) $(WP_SERVICE) composer install
+	$(DOCKER_COMPOSE) exec -w $(PROJECT_DIR)/$(CORE_PLUGIN_DIR) $(WP_SERVICE) composer install
 
 update:
 	$(DOCKER_COMPOSE) exec -w $(PROJECT_DIR) $(WP_SERVICE) composer update
+	$(DOCKER_COMPOSE) exec -w $(PROJECT_DIR)/$(CORE_PLUGIN_DIR) $(WP_SERVICE) composer update
 
 sync-plugins:
 	$(DOCKER_COMPOSE) exec $(WP_SERVICE) bash -lc 'set -e; for plugin_dir in /var/www/project/wp-content/plugins/*; do [ -d $$plugin_dir ] || continue; plugin=$${plugin_dir##*/}; [ $$plugin = shop-co-core ] && continue; rm -rf /var/www/html/wp-content/plugins/$$plugin; cp -a $$plugin_dir /var/www/html/wp-content/plugins/$$plugin; done; echo Synced third-party plugins into Docker volume.'

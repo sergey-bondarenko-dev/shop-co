@@ -68,3 +68,15 @@
 .section-margin-top {
     margin-top: var(--section-gap);
 }
+
+.site-link {
+    @include site-link;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.align-self-center {
+    align-self: center;
+}

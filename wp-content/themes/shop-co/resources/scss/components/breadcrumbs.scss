@@ -1,0 +1,23 @@
+@use '../helpers' as *;
+
+.breadcrumbs {
+  margin-bottom: fluid(24, 20);
+
+  &__item {
+    a {
+      @include site-link;
+    }
+  }
+  
+  &__separator {
+    --size: #{fluid(16, 14)};
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--size);
+    height: var(--size);
+    margin-top: 4px;
+    margin-inline: 4px fluid(12, 6);
+  }
+}
