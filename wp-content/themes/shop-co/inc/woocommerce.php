@@ -66,3 +66,49 @@ function shop_co_add_header_cart_count_fragment( array $fragments ): array {
 	return $fragments;
 }
 add_filter( 'woocommerce_add_to_cart_fragments', 'shop_co_add_header_cart_count_fragment' );
+
+/**
+ * Check whether SelectWoo can be safely removed from a checkout endpoint.
+ */
+function shop_co_should_remove_checkout_selectwoo(): bool {
+	return is_checkout() && ! is_checkout_pay_page();
+}
+
+/**
+ * Remove SelectWoo assets from checkout and order-received pages.
+ */
+function shop_co_remove_checkout_selectwoo_assets(): void {
+	if ( ! shop_co_should_remove_checkout_selectwoo() ) {
+		return;
+	}
+
+	wp_dequeue_style( 'select2' );
+	wp_deregister_style( 'select2' );
+	wp_dequeue_script( 'selectWoo' );
+	wp_deregister_script( 'selectWoo' );
+}
+add_action( 'wp_enqueue_scripts', 'shop_co_remove_checkout_selectwoo_assets', 9999 );
+
+/**
+ * Prevent SelectWoo from being printed if it is enqueued again later.
+ */
+function shop_co_remove_checkout_selectwoo_script_tag( string $tag, string $handle ): string {
+	if ( shop_co_should_remove_checkout_selectwoo() && 'selectWoo' === $handle ) {
+		return '';
+	}
+
+	return $tag;
+}
+add_filter( 'script_loader_tag', 'shop_co_remove_checkout_selectwoo_script_tag', 9999, 2 );
+
+/**
+ * Prevent Select2 styles from being printed if they are enqueued again later.
+ */
+function shop_co_remove_checkout_select2_style_tag( string $html, string $handle ): string {
+	if ( shop_co_should_remove_checkout_selectwoo() && 'select2' === $handle ) {
+		return '';
+	}
+
+	return $html;
+}
+add_filter( 'style_loader_tag', 'shop_co_remove_checkout_select2_style_tag', 9999, 2 );

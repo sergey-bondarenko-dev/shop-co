@@ -357,3 +357,10 @@ function shop_co_woocommerce_review_display_comment_text() {
 	comment_text();
 	echo '</div>';
 }
+
+/**
+ * Apply the theme button component to the checkout submit button.
+ */
+function shop_co_woocommerce_order_button_html( string $button_html ): string {
+	return str_replace( 'class="button alt', 'class="site-button button alt', $button_html );
+}

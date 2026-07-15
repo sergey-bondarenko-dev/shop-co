@@ -62,3 +62,5 @@ remove_filter( 'woocommerce_review_before', 'woocommerce_review_display_gravatar
 remove_filter( 'woocommerce_review_comment_text', 'woocommerce_review_display_comment_text', 10 );
 
 add_filter( 'woocommerce_review_comment_text', 'shop_co_woocommerce_review_display_comment_text', 10 );
+
+add_filter( 'woocommerce_order_button_html', 'shop_co_woocommerce_order_button_html' );
