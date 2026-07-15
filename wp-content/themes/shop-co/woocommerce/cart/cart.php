@@ -63,7 +63,6 @@ do_action( 'woocommerce_before_cart' ); ?>
 								?>
 							</div>
 							<div class="shopco-cart-item-details">
-								
 
 								<div class="top">
 									<span class="product-name" data-title="<?php esc_attr_e( 'Product', 'woocommerce' ); ?>">
@@ -91,20 +90,16 @@ do_action( 'woocommerce_before_cart' ); ?>
 										?>)
 									</span>
 								</div>
-								
+
 								<?php
 								// Backorder notification.
 								if ( $_product->backorders_require_notification() && $_product->is_on_backorder( $cart_item['quantity'] ) ) {
 									echo wp_kses_post( apply_filters( 'woocommerce_cart_item_backorder_notification', '<p class="backorder_notification">' . esc_html__( 'Available on backorder', 'woocommerce' ) . '</p>', $product_id ) );
 								}
 
-								$cart_item_attributes = shop_co_get_cart_item_attributes( $cart_item );
-
-								if ( $cart_item_attributes ) {
-									echo wc_get_template_html( 'cart/cart-item-data.php', array( 'item_data' => $cart_item_attributes ) ); // PHPCS: XSS ok.
-								}
+								echo wc_get_formatted_cart_item_data( $cart_item ); // PHPCS: XSS ok.
 								?>
-								
+
 								<div class="bottom">
 									<div class="product-subtotal" data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>">
 										<?php
@@ -140,7 +135,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 								<div class="product-remove">
 									<?php
 										echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-											'woocommerce_cart_item_remove_link shopco-cart-remove-link',
+											'woocommerce_cart_item_remove_link',
 											sprintf(
 												'<a role="button" href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">%s</a>',
 												esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
@@ -162,14 +157,11 @@ do_action( 'woocommerce_before_cart' ); ?>
 				?>
 
 				<?php do_action( 'woocommerce_cart_contents' ); ?>
-
-				
-
 				<?php do_action( 'woocommerce_after_cart_contents' ); ?>
 			</ul>
 		</div>
-		<div class="actions" hidden>
-			<button type="submit" class="button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" name="update_cart" value="<?php esc_attr_e( 'Update cart', 'woocommerce' ); ?>"><?php esc_html_e( 'Update cart', 'woocommerce' ); ?></button>
+		<div class="actions">
+			<button type="submit" class="button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" name="update_cart" value="<?php esc_attr_e( 'Update cart', 'woocommerce' ); ?>" hidden><?php esc_html_e( 'Update cart', 'woocommerce' ); ?></button>
 
 			<?php do_action( 'woocommerce_cart_actions' ); ?>
 

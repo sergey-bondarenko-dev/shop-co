@@ -134,15 +134,12 @@ document.addEventListener('submit', async (event) => {
 		return;
 	}
 
-	if (productForm.dataset.shopcoNativeSubmit === 'true') {
-		delete productForm.dataset.shopcoNativeSubmit;
-		return;
-	}
-
 	const submitButton = productForm.querySelector('.single_add_to_cart_button');
 	const cartFragmentsParams = window.wc_cart_fragments_params;
+	const supportsAjax = productForm.classList.contains('variations_form') ||
+		Number(submitButton?.value) > 0;
 
-	if (!submitButton || !cartFragmentsParams || !window.jQuery) {
+	if (!submitButton || !supportsAjax || !cartFragmentsParams || !window.jQuery) {
 		return;
 	}
 
@@ -208,9 +205,7 @@ document.addEventListener('submit', async (event) => {
 			Offcanvas.getOrCreateInstance(miniCartElement).show();
 		}
 	} catch {
-		submitButton.disabled = false;
-		productForm.dataset.shopcoNativeSubmit = 'true';
-		productForm.requestSubmit(submitButton);
+		window.location.reload();
 	} finally {
 		delete productForm.dataset.shopcoAddingToCart;
 		submitButton.disabled = false;
@@ -226,16 +221,20 @@ document.addEventListener('submit', async (event) => {
 		return;
 	}
 
-	event.preventDefault();
+	if (couponForm.dataset.shopcoNativeSubmit === 'true') {
+		delete couponForm.dataset.shopcoNativeSubmit;
+		return;
+	}
 
 	const couponInput = couponForm.querySelector('#coupon_code');
 	const submitButton = couponForm.querySelector('[name="apply_coupon"]');
 	const cartParams = window.wc_cart_params;
 
 	if (!couponInput || !submitButton || !cartParams || !window.jQuery) {
-		couponForm.submit();
 		return;
 	}
+
+	event.preventDefault();
 
 	const couponCode = couponInput.value.trim();
 	const endpoint = cartParams.wc_ajax_url.replace(
@@ -296,7 +295,9 @@ document.addEventListener('submit', async (event) => {
 		window.jQuery(document.body).trigger('applied_coupon', [couponCode]);
 		window.jQuery(document).trigger('wc_update_cart', [true]);
 	} catch {
-		couponForm.submit();
+		submitButton.disabled = false;
+		couponForm.dataset.shopcoNativeSubmit = 'true';
+		couponForm.requestSubmit(submitButton);
 	} finally {
 		submitButton.disabled = false;
 	}

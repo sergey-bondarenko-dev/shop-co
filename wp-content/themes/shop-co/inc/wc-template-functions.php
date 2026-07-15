@@ -226,59 +226,6 @@ function shop_co_woocommerce_after_quantity_input_field_action(): void {
 }
 
 /**
- * Get the size and color selected for a cart item.
- *
- * @param array<string, mixed> $cart_item Cart item data.
- * @return array<int, array{key: string, display: string}>
- */
-function shop_co_get_cart_item_attributes( array $cart_item ): array {
-	$product = $cart_item['data'] ?? null;
-
-	if ( ! $product instanceof WC_Product ) {
-		return array();
-	}
-
-	$variation_attributes = is_array( $cart_item['variation'] ?? null ) ? $cart_item['variation'] : array();
-	$product_attributes   = $product->get_attributes();
-	$default_attributes   = $product->get_default_attributes();
-	$item_data            = array();
-
-	foreach ( array( 'size', 'color' ) as $attribute ) {
-		$taxonomy = 'pa_' . $attribute;
-		$value    = $variation_attributes[ 'attribute_' . $taxonomy ]
-			?? $variation_attributes[ 'attribute_' . $attribute ]
-			?? null;
-
-		if ( null === $value && is_string( $product_attributes[ $taxonomy ] ?? null ) ) {
-			$value = $product_attributes[ $taxonomy ];
-		}
-
-		$value ??= $default_attributes[ $taxonomy ] ?? $default_attributes[ $attribute ] ?? null;
-
-		if ( ! is_string( $value ) || '' === $value ) {
-			continue;
-		}
-
-		$display_value = $value;
-
-		if ( taxonomy_exists( $taxonomy ) ) {
-			$term = get_term_by( 'slug', $value, $taxonomy );
-
-			if ( $term instanceof WP_Term ) {
-				$display_value = $term->name;
-			}
-		}
-
-		$item_data[] = array(
-			'key'     => wc_attribute_label( $taxonomy, $product ),
-			'display' => $display_value,
-		);
-	}
-
-	return $item_data;
-}
-
-/**
  * @param array{
  *  options: array<int, string>,
  *  attribute: string,
