@@ -23,11 +23,11 @@ class ShopCo_UI {
 		$label   = $label ?: $placeholder;
 
 		$classes  .= ( $classes ? ' ' : '' ) . 'site-field' . ( $mode ? " site-field--$mode" : '' );
-		$id_attrs  = $id ? "id='" . esc_attr( $id ) . "'" : '';
+		$id_attr   = $id ? "id='" . esc_attr( $id ) . "'" : '';
 		$name_attr = $name ? "name='" . esc_attr( $name ) . "'" : '';
 
-		return "<label class=\"$classes\" $id_attrs>
-                    <input type=\"$type\" class=\"site-field__input\" placeholder=\"$placeholder\" $name_attr>
+		return "<label class=\"$classes\">
+                    <input type=\"$type\" class=\"site-field__input\" placeholder=\"$placeholder\" $id_attr $name_attr>
                     <span class=\"site-field__icon opacity-40\">
                         $svgIcon
                     </span>

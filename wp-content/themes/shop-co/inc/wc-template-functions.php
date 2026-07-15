@@ -209,7 +209,7 @@ add_action( 'woocommerce_before_quantity_input_field', 'shop_co_woocommerce_befo
 
 function shop_co_woocommerce_before_quantity_input_field_action(): void {
 	?>
-	<button type="button" class="quantity__button quantity__button--minus">
+	<button type="button" class="quantity__button quantity__button--minus" aria-label="<?php esc_attr_e( 'Decrease quantity', 'woocommerce' ); ?>">
 		<?php echo ShopCo_Icons::minus(); ?>
 	</button>
 	<?php
@@ -219,7 +219,7 @@ add_action( 'woocommerce_after_quantity_input_field', 'shop_co_woocommerce_after
 
 function shop_co_woocommerce_after_quantity_input_field_action(): void {
 	?>
-	<button type="button" class="quantity__button quantity__button--plus">
+	<button type="button" class="quantity__button quantity__button--plus" aria-label="<?php esc_attr_e( 'Increase quantity', 'woocommerce' ); ?>">
 		<?php echo ShopCo_Icons::plus(); ?>
 	</button>
 	<?php
