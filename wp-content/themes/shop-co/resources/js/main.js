@@ -1,4 +1,4 @@
-import "bootstrap/js/dist/offcanvas";
+import Offcanvas from "bootstrap/js/dist/offcanvas";
 import "bootstrap/js/dist/collapse";
 import "bootstrap/js/dist/modal";
 import { ReviewManager } from "./modules/ReviewManager";
@@ -125,6 +125,98 @@ document.addEventListener('change', (event) => {
 		updateButton.disabled = false;
 		updateButton.click();
 	}, CART_UPDATE_DELAY);
+});
+
+document.addEventListener('submit', async (event) => {
+	const productForm = event.target.closest?.('.site-single-product form.cart');
+
+	if (!productForm) {
+		return;
+	}
+
+	if (productForm.dataset.shopcoNativeSubmit === 'true') {
+		delete productForm.dataset.shopcoNativeSubmit;
+		return;
+	}
+
+	const submitButton = productForm.querySelector('.single_add_to_cart_button');
+	const cartFragmentsParams = window.wc_cart_fragments_params;
+
+	if (!submitButton || !cartFragmentsParams || !window.jQuery) {
+		return;
+	}
+
+	event.preventDefault();
+
+	if (
+		submitButton.disabled ||
+		submitButton.classList.contains('disabled') ||
+		productForm.dataset.shopcoAddingToCart === 'true'
+	) {
+		return;
+	}
+
+	const formData = new FormData(productForm);
+	const variationId = Number(formData.get('variation_id')) || 0;
+	const productId = variationId ||
+		Number(formData.get('product_id')) ||
+		Number(submitButton.value);
+
+	if (!productId) {
+		return;
+	}
+
+	formData.set('product_id', String(productId));
+	productForm.dataset.shopcoAddingToCart = 'true';
+	submitButton.disabled = true;
+	submitButton.classList.add('loading');
+	submitButton.setAttribute('aria-busy', 'true');
+
+	try {
+		const response = await fetch(
+			cartFragmentsParams.wc_ajax_url.replace('%%endpoint%%', 'add_to_cart'),
+			{
+				method: 'POST',
+				body: formData,
+			}
+		);
+
+		if (!response.ok) {
+			throw new Error('Unable to add the product to the cart.');
+		}
+
+		const responseData = await response.json();
+
+		if (responseData.error && responseData.product_url) {
+			window.location.href = responseData.product_url;
+			return;
+		}
+
+		if (!responseData.fragments) {
+			throw new Error('Cart fragments are missing.');
+		}
+
+		window.jQuery(document.body).trigger('added_to_cart', [
+			responseData.fragments,
+			responseData.cart_hash,
+			false,
+		]);
+
+		const miniCartElement = document.getElementById('site-mini-cart');
+
+		if (miniCartElement) {
+			Offcanvas.getOrCreateInstance(miniCartElement).show();
+		}
+	} catch {
+		submitButton.disabled = false;
+		productForm.dataset.shopcoNativeSubmit = 'true';
+		productForm.requestSubmit(submitButton);
+	} finally {
+		delete productForm.dataset.shopcoAddingToCart;
+		submitButton.disabled = false;
+		submitButton.classList.remove('loading');
+		submitButton.removeAttribute('aria-busy');
+	}
 });
 
 document.addEventListener('submit', async (event) => {

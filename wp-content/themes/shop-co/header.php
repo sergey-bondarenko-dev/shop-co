@@ -17,7 +17,6 @@
 <?php wp_body_open(); ?>
 <div id="page" class="site">
 	<?php
-	$shop_co_cart_url     = shop_co_get_woocommerce_page_url( 'cart' );
 	$shop_co_account_url  = shop_co_get_woocommerce_page_url( 'myaccount', wp_login_url() );
 	$shop_co_register_url = add_query_arg( 'action', 'register', $shop_co_account_url );
 	?>
@@ -117,16 +116,44 @@
 					aria-controls="search-field">
 					<?php echo ShopCo_Icons::search(); ?>
 				</button>
-				<a href="<?php echo esc_url( $shop_co_cart_url ); ?>" 
-					class="site-button site-button--square site-button--white"
-					aria-label="<?php esc_attr_e( 'Cart', 'shop-co' ); ?>">
+				<button
+					type="button"
+					class="site-header-cart__button site-button site-button--square site-button--white"
+					data-bs-toggle="offcanvas"
+					data-bs-target="#site-mini-cart"
+					aria-controls="site-mini-cart"
+					aria-label="<?php esc_attr_e( 'Open cart', 'shop-co' ); ?>">
 					<?php echo ShopCo_Icons::cart(); ?>
-				</a>
+					<?php echo shop_co_get_header_cart_count_html(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				</button>
 				<a href="<?php echo esc_url( $shop_co_account_url ); ?>" 
 					class="site-button site-button--square site-button--white"
 					aria-label="<?php esc_attr_e( 'My account', 'shop-co' ); ?>">
 					<?php echo ShopCo_Icons::user(); ?>
 				</a>
+			</div>
+		</div>
+
+		<div
+			class="site-mini-cart offcanvas offcanvas-end"
+			tabindex="-1"
+			id="site-mini-cart"
+			aria-labelledby="site-mini-cart-label">
+			<div class="offcanvas-header">
+				<h2 class="offcanvas-title h4" id="site-mini-cart-label">
+					<?php esc_html_e( 'Your cart', 'shop-co' ); ?>
+				</h2>
+				<button
+					type="button"
+					class="btn-close"
+					data-bs-dismiss="offcanvas"
+					aria-label="<?php esc_attr_e( 'Close', 'shop-co' ); ?>">
+				</button>
+			</div>
+			<div class="offcanvas-body">
+				<div class="widget_shopping_cart_content">
+					<?php woocommerce_mini_cart(); ?>
+				</div>
 			</div>
 		</div>
 		
