@@ -29,6 +29,7 @@
 @use "components/navigation";
 @use "components/breadcrumbs";
 @use "components/wc-product";
+@use "components/wc-quantity";
 @use "components/wc-product-gallery";
 @use "components/wc-variations";
 @use "components/wc-product-attributes";
@@ -37,3 +38,5 @@
 @use "components/comments";
 @use "components/select";
 @use "components/review-form";
+@use "components/wc-cart";
+@use "components/wc-notices";
