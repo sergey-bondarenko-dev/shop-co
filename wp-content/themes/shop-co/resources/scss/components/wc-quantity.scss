@@ -40,6 +40,8 @@
     padding: 0;
     text-align: center;
     min-width: 24px;
+    min-height: auto;
+    border-radius: 0;
 
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {

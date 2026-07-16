@@ -14,6 +14,8 @@
 @use "components/footer";
 @use "components/pays";
 @use "components/close-button";
+@use "components/wc-globals";
+@use "components/wc-fields";
 
 @use "components/hero";
 @use "components/product-card";
@@ -41,5 +43,6 @@
 @use "components/wc-cart";
 @use "components/wc-checkout";
 @use "components/wc-order-received";
+@use "components/wc-account";
 @use "components/wc-mini-cart";
 @use "components/wc-notices";

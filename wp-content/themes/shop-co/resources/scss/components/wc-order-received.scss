@@ -1,6 +1,6 @@
 @use "../helpers" as *;
 
-.woocommerce-order-received {
+:is(.woocommerce-order-received, .woocommerce-account:has(.woocommerce-order-details)) {
 	--shop-co-order-gap: #{fluid(32, 20)};
 	--shop-co-order-padding: #{fluid(24, 16)};
 
@@ -277,4 +277,8 @@
 			text-decoration: none;
 		}
 	}
+}
+
+.woocommerce-order-details {
+	margin-bottom: fluid(32, 24);
 }

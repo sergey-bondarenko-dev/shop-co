@@ -3,6 +3,8 @@
 .woocommerce-checkout {
 	--shop-co-checkout-gap: #{fluid(32, 20)};
 	--shop-co-checkout-padding: #{fluid(24, 16)};
+	--wc-field-padding-x: 18px;
+	--wc-field-radius: var(--shop-co-border-radius);
 
 	.entry-header {
 		margin-bottom: fluid(32, 24);
@@ -106,10 +108,6 @@
 	}
 
 	.form-row {
-		float: none;
-		width: 100%;
-		margin: 0;
-		padding: 0;
 
 		&.form-row-wide,
 		&[id="billing_company_field"],
@@ -117,64 +115,6 @@
 		&[id="order_comments_field"] {
 			grid-column: 1 / -1;
 		}
-
-		label {
-			display: block;
-			margin-bottom: 7px;
-			font-size: 14px;
-			font-weight: 500;
-		}
-
-		.required {
-			color: var(--shop-co-color-red);
-			text-decoration: none;
-		}
-
-		.optional {
-			opacity: 0.6;
-		}
-	}
-
-	:is(input.input-text, textarea, select) {
-		width: 100%;
-		min-height: 50px;
-		padding: 13px 18px;
-		border: 1px solid transparent;
-		border-radius: var(--shop-co-border-radius);
-		outline: none;
-		background-color: var(--shop-co-color-gray-2);
-		color: var(--shop-co-color-black);
-
-		&::placeholder {
-			color: color-mix(in srgb, var(--shop-co-color-black) 45%, transparent);
-		}
-
-		&:focus {
-			border-color: var(--shop-co-color-black);
-			background-color: var(--shop-co-color-white);
-		}
-	}
-
-	textarea {
-		min-height: 120px;
-		resize: vertical;
-	}
-
-	select {
-		padding-right: 42px;
-		appearance: none;
-		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23111111' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
-		background-repeat: no-repeat;
-		background-position: right 16px center;
-		background-size: 14px 10px;
-	}
-
-	.woocommerce-invalid :is(.input-text, select) {
-		border-color: var(--shop-co-color-red);
-	}
-
-	.woocommerce-validated :is(.input-text, select) {
-		border-color: var(--shop-co-color-green);
 	}
 
 	[id="ship-to-different-address"] {
