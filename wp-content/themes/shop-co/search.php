@@ -32,9 +32,10 @@ get_header();
 			<?php
 			the_posts_pagination(
 				array(
+					'end_size'  => 1,
 					'mid_size'  => 1,
-					'prev_text' => esc_html__( 'Previous', 'shop-co' ),
-					'next_text' => esc_html__( 'Next', 'shop-co' ),
+					'prev_text' => shop_co_get_pagination_previous_text(),
+					'next_text' => shop_co_get_pagination_next_text(),
 				)
 			);
 			?>

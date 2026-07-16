@@ -205,6 +205,19 @@ function shop_co_woocommerce_breadcrumb_defaults( array $defaults ): array {
 	return $defaults;
 }
 
+/**
+ * Use the theme pagination labels in WooCommerce product archives.
+ */
+function shop_co_woocommerce_pagination_args( array $args ): array {
+	$args['prev_text'] = shop_co_get_pagination_previous_text();
+	$args['next_text'] = shop_co_get_pagination_next_text();
+	$args['end_size']  = 1;
+	$args['mid_size']  = 1;
+
+	return $args;
+}
+add_filter( 'woocommerce_pagination_args', 'shop_co_woocommerce_pagination_args' );
+
 add_action( 'woocommerce_before_quantity_input_field', 'shop_co_woocommerce_before_quantity_input_field_action' );
 
 function shop_co_woocommerce_before_quantity_input_field_action(): void {
