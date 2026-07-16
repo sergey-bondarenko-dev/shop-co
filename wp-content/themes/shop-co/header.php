@@ -94,18 +94,30 @@
 				</div>
 			</div>
 			<div class="site-header__search-wrapper collapse" id="search-field">
-				<?php
-				echo ShopCo_UI::field(
-					'search',
-					'search',
-					'Search for products...',
-					'',
-					'',
-					'site-header__search',
-					'',
-					'query_search',
-				);
-				?>
+				<form
+					role="search"
+					method="get"
+					class="site-header__search site-field"
+					action="<?php echo esc_url( home_url( '/' ) ); ?>">
+					<label class="screen-reader-text" for="header-search">
+						<?php esc_html_e( 'Search for:', 'shop-co' ); ?>
+					</label>
+					<input
+						type="search"
+						class="site-field__input"
+						id="header-search"
+						name="s"
+						value="<?php echo esc_attr( get_search_query() ); ?>"
+						placeholder="<?php echo esc_attr_x( 'Search for products...', 'placeholder', 'shop-co' ); ?>"
+					/>
+					<input type="hidden" name="post_type" value="product">
+					<button
+						type="submit"
+						class="site-header__search-submit site-field__icon"
+						aria-label="<?php esc_attr_e( 'Search', 'shop-co' ); ?>">
+						<?php echo ShopCo_Icons::search(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					</button>
+				</form>
 			</div>
 			<div class="site-header__actions">
 				<button class="site-button site-button--square site-button--white visible-mobile"
