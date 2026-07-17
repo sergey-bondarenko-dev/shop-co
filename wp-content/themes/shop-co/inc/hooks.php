@@ -49,3 +49,11 @@ function shop_co_product_review_redirect( string $location, WP_Comment $comment 
 
 	return $redirect_url . '#reviews';
 }
+
+add_filter('body_class', function ($classes) {
+    if (is_shop() || is_product_taxonomy()) {
+        $classes[] = 'shopco-catalog-page';
+    }
+
+    return $classes;
+});

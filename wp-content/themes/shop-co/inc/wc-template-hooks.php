@@ -62,3 +62,20 @@ remove_filter( 'woocommerce_review_before', 'woocommerce_review_display_gravatar
 remove_filter( 'woocommerce_review_comment_text', 'woocommerce_review_display_comment_text', 10 );
 
 add_filter( 'woocommerce_review_comment_text', 'shop_co_woocommerce_review_display_comment_text', 10 );
+
+remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
+
+remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description' );
+remove_action( 'woocommerce_archive_description', 'woocommerce_product_archive_description' );
+add_action( 'woocommerce_archive_description', 'woocommerce_result_count', 20 );
+add_action( 'woocommerce_before_shop_loop', 'woocommerce_taxonomy_archive_description' );
+add_action( 'woocommerce_before_shop_loop', 'woocommerce_product_archive_description' );
+
+remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+add_action( 'woocommerce_archive_description', function () {
+    woocommerce_catalog_ordering( [
+        'useLabel' => true,
+    ] );
+}, 30 );
+
+remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );

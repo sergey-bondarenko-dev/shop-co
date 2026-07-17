@@ -11,11 +11,28 @@ defined( 'ABSPATH' ) || exit;
 
 get_header( 'shop' );
 
+?>
+
+<div class="container">
+	<?php woocommerce_breadcrumb(); ?>
+</div>
+
+<?php
+
+$shop_co_catalog_layout_classes = array( 'shop-catalog-layout', 'container' );
+
+if ( is_active_sidebar( 'shop-filters' ) ) {
+	$shop_co_catalog_layout_classes[] = 'shop-catalog-layout--with-sidebar';
+}
+?>
+<div class="<?php echo esc_attr( implode( ' ', $shop_co_catalog_layout_classes ) ); ?>">
+	<div class="shop-catalog-layout__content">
+	<?php
+
 /**
  * Hook: woocommerce_before_main_content.
  *
  * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
- * @hooked woocommerce_breadcrumb - 20
  * @hooked WC_Structured_Data::generate_website_data() - 30
  */
 do_action( 'woocommerce_before_main_content' );
@@ -35,8 +52,6 @@ if ( woocommerce_product_loop() ) {
 	 * Hook: woocommerce_before_shop_loop.
 	 *
 	 * @hooked woocommerce_output_all_notices - 10
-	 * @hooked woocommerce_result_count - 20
-	 * @hooked woocommerce_catalog_ordering - 30
 	 */
 	do_action( 'woocommerce_before_shop_loop' );
 
@@ -78,6 +93,9 @@ if ( woocommerce_product_loop() ) {
  * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
  */
 do_action( 'woocommerce_after_main_content' );
+	?>
+	</div>
+	<?php
 
 /**
  * Hook: woocommerce_sidebar.
@@ -85,5 +103,8 @@ do_action( 'woocommerce_after_main_content' );
  * @hooked woocommerce_get_sidebar - 10
  */
 do_action( 'woocommerce_sidebar' );
+?>
+</div>
+<?php
 
 get_footer( 'shop' );
