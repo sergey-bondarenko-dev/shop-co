@@ -81,6 +81,18 @@ function shop_co_widgets_init(): void {
 			'after_title'   => '</h2>',
 		)
 	);
+
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Catalog filters', 'shop-co' ),
+			'id'            => 'shop-filters',
+			'description'   => esc_html__( 'Add WooCommerce catalog filters here.', 'shop-co' ),
+			'before_widget' => '<section id="%1$s" class="catalog-sidebar__widget widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="catalog-sidebar__title widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
 }
 add_action( 'widgets_init', 'shop_co_widgets_init' );
 

@@ -33,6 +33,14 @@ function shop_co_scripts(): void {
 		);
 	}
 
+	if ( function_exists( 'shop_co_wc_get_filter_color_styles' ) ) {
+		$filter_color_styles = shop_co_wc_get_filter_color_styles();
+
+		if ( $filter_color_styles ) {
+			wp_add_inline_style( 'shop-co-style', $filter_color_styles );
+		}
+	}
+
 	$custom_css_path = get_theme_file_path( 'resources/css/custom-css.css' );
 
 	if ( file_exists( $custom_css_path ) ) {
