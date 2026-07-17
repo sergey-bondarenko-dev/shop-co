@@ -1,0 +1,166 @@
+@use "../helpers" as *;
+
+.woocommerce,
+.woocommerce-page {
+
+	.form-row {
+		float: none;
+		width: 100%;
+		margin: 0 0 var(--wc-form-row-margin-bottom, 0);
+		padding: 0;
+	}
+
+	.form-row label:not(.woocommerce-form__label-for-checkbox) {
+		display: block;
+		margin-bottom: var(--wc-field-label-margin, 7px);
+		font-size: var(--wc-field-label-size, 14px);
+		font-weight: var(--wc-field-label-weight, 500);
+	}
+
+	.required {
+		color: var(--shop-co-color-red);
+		text-decoration: none;
+	}
+
+	.optional {
+		opacity: 0.6;
+	}
+
+	:is(input.input-text, textarea, select) {
+		width: 100%;
+		min-height: var(--wc-field-height, 50px);
+		padding: var(--wc-field-padding-y, 13px) var(--wc-field-padding-x, 16px);
+		border: 1px solid transparent;
+		border-radius: var(--wc-field-radius, var(--shop-co-border-radius-field));
+		outline: none;
+		background-color: var(--wc-field-background, var(--shop-co-color-gray-2));
+		color: var(--shop-co-color-black);
+
+		&::placeholder {
+			color: color-mix(in srgb, var(--shop-co-color-black) 45%, transparent);
+		}
+
+		&:focus {
+			border-color: var(--shop-co-color-black);
+			background-color: var(--wc-field-focus-background, var(--shop-co-color-white));
+		}
+	}
+
+	textarea {
+		min-height: 120px;
+		resize: vertical;
+	}
+
+	select {
+		padding-right: calc(var(--wc-field-padding-x, 16px) + 26px);
+		appearance: none;
+		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23111111' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+		background-repeat: no-repeat;
+		background-position: right var(--wc-field-padding-x, 16px) center;
+		background-size: 14px 10px;
+	}
+
+	.woocommerce-invalid :is(.input-text, select) {
+		border-color: var(--shop-co-color-red);
+	}
+
+	.woocommerce-validated :is(.input-text, select) {
+		border-color: var(--shop-co-color-green);
+	}
+
+	.select2-container {
+		width: 100% !important;
+	}
+
+	.select2-dropdown {
+		border-color: #ccc;
+	}
+
+	.select2-selection--single {
+		display: flex;
+		align-items: center;
+		height: var(--wc-field-height, 50px);
+		border: 1px solid transparent;
+		border-radius: var(--wc-field-radius, var(--shop-co-border-radius-field));
+		background-color: var(--wc-field-background, var(--shop-co-color-gray-2));
+
+		.select2-selection__rendered {
+			padding: 0 calc(var(--wc-field-padding-x, 16px) + 26px) 0 var(--wc-field-padding-x, 16px);
+			color: var(--shop-co-color-black);
+			line-height: var(--wc-field-height, 50px);
+		}
+	}
+
+	.select2-selection__arrow {
+		top: 50%;
+		right: calc(var(--wc-field-padding-x, 16px) - 4px);
+		translate: 0 -50%;
+	}
+
+	.select2-container--open .select2-selection--single {
+		border-color: #ccc;
+	}
+
+	.password-input {
+		position: relative;
+		display: block;
+		width: 100%;
+
+		:is(input[type="password"], input[type="text"]) {
+			display: block;
+			padding-right: calc(var(--wc-field-padding-x, 16px) + 44px);
+		}
+
+		input::-ms-reveal {
+			display: none;
+		}
+	}
+
+	.show-password-input {
+		position: absolute;
+		top: 50%;
+		right: 8px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		min-width: 40px;
+		min-height: 40px;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		border-radius: 50%;
+		outline: none;
+		background-color: transparent;
+		color: var(--shop-co-color-black);
+		cursor: pointer;
+		translate: 0 -50%;
+
+		&::before {
+			content: "";
+			width: 22px;
+			height: 22px;
+			background-color: currentcolor;
+			mask: url(../../resources/icons/eye.svg) center / contain no-repeat;
+		}
+
+		&.display-password::before {
+			mask-image: url(../../resources/icons/eye-off.svg);
+		}
+
+		@include hover {
+			background-color: var(--shop-co-color-black-opacity-10);
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--shop-co-color-black);
+			outline-offset: 2px;
+		}
+	}
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+	border-color: var(--shop-co-color-gray-1);
+	border-radius: var(--shop-co-border-radius);
+}

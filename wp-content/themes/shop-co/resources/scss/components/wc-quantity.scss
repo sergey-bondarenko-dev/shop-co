@@ -1,0 +1,52 @@
+@use '../helpers' as *;
+
+// Native WooCommerce quantity input with the theme's controls and appearance.
+.quantity:has(input.qty) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: fluid(16, 12) fluid(20, 16);
+  border-radius: var(--shop-co-border-radius-2);
+  background-color: var(--shop-co-color-gray-2);
+  overflow: hidden;
+  width: fluid(170, 110);
+
+  &:has(.input-text:user-invalid) {
+    border: 1px solid var(--shop-co-color-red);
+  }
+
+  .quantity__button {
+    --size: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--size);
+    height: var(--size);
+    border: none;
+    background-color: transparent;
+    padding: 0;
+
+    @include mobile-s {
+      --size: 14px;
+    }
+  }
+
+  .input-text {
+    -moz-appearance: textfield;
+    border: none;
+    background-color: transparent;
+    appearance: none;
+    padding: 0;
+    text-align: center;
+    min-width: 24px;
+    min-height: auto;
+    border-radius: 0;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      appearance: none;
+      margin: 0;
+    }
+  }
+}

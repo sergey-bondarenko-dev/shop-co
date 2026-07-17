@@ -1,0 +1,92 @@
+@use '../helpers' as *;
+
+.woocommerce-notices-wrapper {
+  display: grid;
+  gap: 12px;
+  margin-bottom: fluid(24, 16);
+
+  &:empty {
+    display: none;
+  }
+
+  > :is(.woocommerce-message, .woocommerce-info, .woocommerce-error) {
+    margin-bottom: 0;
+  }
+}
+
+:is(.woocommerce-message, .woocommerce-info, .woocommerce-error) {
+  --shop-co-notice-color: var(--shop-co-color-black);
+
+  position: relative;
+  min-height: 56px;
+  margin: 0 0 fluid(24, 16);
+  padding: fluid(18, 14) fluid(20, 16) fluid(18, 14) fluid(48, 42);
+  border: 1px solid color-mix(in srgb, var(--shop-co-notice-color) 28%, transparent);
+  border-radius: var(--shop-co-border-radius-3);
+  background-color: color-mix(in srgb, var(--shop-co-notice-color) 8%, var(--shop-co-color-white));
+  color: var(--shop-co-color-black);
+  font-size: fluid(16, 14);
+  line-height: 1.4;
+  list-style: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: fluid(23, 19);
+    left: fluid(20, 16);
+    width: 12px;
+    height: 12px;
+    border: 3px solid var(--shop-co-color-white);
+    border-radius: 50%;
+    background-color: var(--shop-co-notice-color);
+    box-shadow: 0 0 0 2px var(--shop-co-notice-color);
+  }
+
+  a:not(.button) {
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .button,
+  .wc-forward {
+    float: right;
+    margin: -8px -8px -8px 16px;
+    padding: 9px 18px;
+    border: 0;
+    border-radius: var(--shop-co-border-radius-2);
+    background-color: var(--shop-co-color-black);
+    color: var(--shop-co-color-white);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+
+    @include hover {
+      background-color: var(--shop-co-color-black-opacity-80);
+      color: var(--shop-co-color-white);
+    }
+
+    @include mobile-s {
+      float: none;
+      margin: 12px 0 0;
+      display: flex;
+      width: fit-content;
+    }
+  }
+}
+
+.woocommerce-message {
+  --shop-co-notice-color: var(--shop-co-color-green);
+}
+
+.woocommerce-error {
+  --shop-co-notice-color: var(--shop-co-color-red);
+
+  li + li {
+    margin-top: 6px;
+  }
+}
+
+.woocommerce-info {
+  --shop-co-notice-color: var(--shop-co-color-black);
+}

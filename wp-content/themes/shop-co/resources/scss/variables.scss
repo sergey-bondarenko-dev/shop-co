@@ -18,6 +18,7 @@
 	--shop-co-border-radius: 20px;
 	--shop-co-border-radius-2: 62px;
 	--shop-co-border-radius-3: 40px;
+	--shop-co-border-radius-field: 26px;
 
   // sizes
   --shop-co-icon-size: 24px;
@@ -38,4 +39,6 @@
 	@include mobile-xs {
 		--container-padding-x: 8px;
 	}
+
+	--wc-form-color-background: var(--shop-co-color-gray);
 }

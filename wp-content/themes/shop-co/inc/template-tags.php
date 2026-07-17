@@ -64,6 +64,28 @@ function shop_co_should_show_ads_banner(): bool {
 	return ! is_user_logged_in() && ! shop_co_is_ads_banner_closed();
 }
 
+/**
+ * Return the previous-page pagination label.
+ */
+function shop_co_get_pagination_previous_text(): string {
+	return sprintf(
+		'<span class="site-pagination__icon" aria-hidden="true">%1$s</span><span class="site-pagination__label">%2$s</span>',
+		ShopCo_Icons::arrow_left(),
+		esc_html__( 'Previous', 'shop-co' )
+	);
+}
+
+/**
+ * Return the next-page pagination label.
+ */
+function shop_co_get_pagination_next_text(): string {
+	return sprintf(
+		'<span class="site-pagination__label">%1$s</span><span class="site-pagination__icon" aria-hidden="true">%2$s</span>',
+		esc_html__( 'Next', 'shop-co' ),
+		ShopCo_Icons::arrow_right()
+	);
+}
+
 function shop_co_admin_notice_section( string $message, string $capability = 'edit_posts' ): void {
 	if ( ! current_user_can( $capability ) ) {
 		return;

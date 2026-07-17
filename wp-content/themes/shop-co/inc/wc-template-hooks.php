@@ -79,3 +79,4 @@ add_action( 'woocommerce_archive_description', function () {
 }, 30 );
 
 remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
+add_filter( 'woocommerce_order_button_html', 'shop_co_woocommerce_order_button_html' );

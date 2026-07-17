@@ -29,7 +29,7 @@
 
   &__input {
     width: 100%;
-    padding: var(--shop-co-field-padding-y) 0 var(--shop-co-field-padding-y)
+    padding: var(--shop-co-field-padding-y) 6px var(--shop-co-field-padding-y)
       calc(var(--shop-co-field-icon-gap) + var(--shop-co-field-padding-x) + var(--shop-co-icon-size));
     background: var(--shop-co-field-background);
     border: none;

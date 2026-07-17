@@ -43,6 +43,25 @@
       margin-block: 8px;
     }
 
+    &-submit {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      opacity: 0.4;
+      pointer-events: auto;
+
+      @include hover {
+        cursor: pointer;
+        opacity: 1;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--shop-co-color-black);
+        outline-offset: 3px;
+        opacity: 1;
+      }
+    }
+
     &-wrapper {
       display: contents;
       

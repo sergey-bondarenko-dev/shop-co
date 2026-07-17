@@ -1,0 +1,115 @@
+@use "../helpers" as *;
+
+:is(.navigation.pagination, .woocommerce-pagination) {
+	--pagination-control-size: 36px;
+
+	position: relative;
+	min-height: calc(var(--pagination-control-size) + 21px);
+	padding-top: 20px;
+	border-top: 1px solid var(--shop-co-color-black-opacity-10);
+
+	> :is(.nav-links, ul.page-numbers) {
+		position: relative;
+		display: flex;
+		min-height: var(--pagination-control-size);
+		margin: 0;
+		padding: 0 110px;
+		align-items: center;
+		justify-content: center;
+		gap: 4px;
+		list-style: none;
+		flex-wrap: wrap;
+
+		@include mobile-s {
+			padding-inline: 40px;
+		}
+	}
+
+	li {
+		display: contents;
+	}
+
+	.page-numbers:not(ul) {
+		display: inline-flex;
+		min-width: var(--pagination-control-size);
+		height: var(--pagination-control-size);
+		padding-inline: 8px;
+		align-items: center;
+		justify-content: center;
+		border-radius: 8px;
+		color: color-mix(in srgb, var(--shop-co-color-black) 60%, transparent);
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 1;
+		text-decoration: none;
+		transition:
+			background-color var(--transition-duration),
+			color var(--transition-duration),
+			border-color var(--transition-duration);
+
+		&.current {
+			background-color: var(--shop-co-color-gray-2);
+			color: var(--shop-co-color-black);
+		}
+
+		&.dots {
+			min-width: 28px;
+			padding-inline: 4px;
+		}
+	}
+
+	a.page-numbers:not(.prev, .next) {
+
+		@include hover {
+			background-color: var(--shop-co-color-gray-2);
+			color: var(--shop-co-color-black);
+		}
+	}
+
+	.page-numbers:is(.prev, .next) {
+		position: absolute;
+		top: 0;
+		min-width: auto;
+		padding-inline: 12px;
+		gap: 8px;
+		border: 1px solid var(--shop-co-color-black-opacity-10);
+		background-color: var(--shop-co-color-white);
+		color: var(--shop-co-color-black);
+
+		@include hover {
+			border-color: color-mix(in srgb, var(--shop-co-color-black) 30%, transparent);
+			background-color: var(--shop-co-color-gray-2);
+		}
+	}
+
+	.page-numbers.prev {
+		left: 0;
+	}
+
+	.page-numbers.next {
+		right: 0;
+	}
+
+	@include mobile-s {
+
+		.site-pagination__label {
+			display: none;
+		}
+
+		.page-numbers:is(.prev, .next) {
+			width: var(--pagination-control-size);
+			padding: 0;
+		}
+	}
+}
+
+.site-pagination__icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	svg {
+		width: 16px;
+		height: 14px;
+	}
+}

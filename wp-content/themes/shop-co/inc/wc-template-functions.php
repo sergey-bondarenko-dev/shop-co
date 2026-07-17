@@ -193,9 +193,9 @@ function shop_co_template_rating( float $rating, string $wrapper_class = '', boo
 }
 
 function shop_co_woocommerce_breadcrumb_defaults( array $defaults ): array {
-	$arrow_right_svg = ShopCo_Icons::arrow_right();
+	$chevron_right_svg = ShopCo_Icons::chevron_right();
 
-	$defaults['delimiter']   = '<span class="breadcrumbs__separator opacity-60">' . $arrow_right_svg . '</span>';
+	$defaults['delimiter']   = '<span class="breadcrumbs__separator opacity-60">' . $chevron_right_svg . '</span>';
 	$defaults['wrap_before'] = '<nav class="breadcrumbs woocommerce-breadcrumb" aria-label="Breadcrumbs">';
 	$defaults['wrap_after']  = '</nav>';
 	$defaults['before']      = '<span class="breadcrumbs__item">';
@@ -205,11 +205,24 @@ function shop_co_woocommerce_breadcrumb_defaults( array $defaults ): array {
 	return $defaults;
 }
 
+/**
+ * Use the theme pagination labels in WooCommerce product archives.
+ */
+function shop_co_woocommerce_pagination_args( array $args ): array {
+	$args['prev_text'] = shop_co_get_pagination_previous_text();
+	$args['next_text'] = shop_co_get_pagination_next_text();
+	$args['end_size']  = 1;
+	$args['mid_size']  = 1;
+
+	return $args;
+}
+add_filter( 'woocommerce_pagination_args', 'shop_co_woocommerce_pagination_args' );
+
 add_action( 'woocommerce_before_quantity_input_field', 'shop_co_woocommerce_before_quantity_input_field_action' );
 
 function shop_co_woocommerce_before_quantity_input_field_action(): void {
 	?>
-	<button type="button" class="quantity__button quantity__button--minus">
+	<button type="button" class="quantity__button quantity__button--minus" aria-label="<?php esc_attr_e( 'Decrease quantity', 'woocommerce' ); ?>">
 		<?php echo ShopCo_Icons::minus(); ?>
 	</button>
 	<?php
@@ -219,7 +232,7 @@ add_action( 'woocommerce_after_quantity_input_field', 'shop_co_woocommerce_after
 
 function shop_co_woocommerce_after_quantity_input_field_action(): void {
 	?>
-	<button type="button" class="quantity__button quantity__button--plus">
+	<button type="button" class="quantity__button quantity__button--plus" aria-label="<?php esc_attr_e( 'Increase quantity', 'woocommerce' ); ?>">
 		<?php echo ShopCo_Icons::plus(); ?>
 	</button>
 	<?php
@@ -356,4 +369,11 @@ function shop_co_woocommerce_review_display_comment_text() {
 	echo '<div class="testimonial-card__content opacity-60">';
 	comment_text();
 	echo '</div>';
+}
+
+/**
+ * Apply the theme button component to the checkout submit button.
+ */
+function shop_co_woocommerce_order_button_html( string $button_html ): string {
+	return str_replace( 'class="button alt', 'class="site-button button alt', $button_html );
 }
