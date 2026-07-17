@@ -291,23 +291,37 @@ function shop_co_wc_radio_buttons_variation_attribute_options( $args = array() )
 	<?php
 }
 
-function shop_co_wc_get_variation_color_value( string $option ): string {
-	$colors = array(
-		'black'  => '#000000',
-		'white'  => '#ffffff',
-		'red'    => '#ff3333',
-		'green'  => '#01ab31',
-		'blue'   => '#2f80ed',
-		'navy'   => '#1f2a44',
-		'yellow' => '#ffc633',
-		'orange' => '#f2994a',
-		'purple' => '#9b51e0',
-		'pink'   => '#eb5757',
-		'gray'   => '#828282',
-		'grey'   => '#828282',
-		'brown'  => '#8b5e3c',
-		'beige'  => '#d7c4a3',
+/**
+ * Get the color palette shared by product variations and catalog filters.
+ *
+ * @return array<string, string>
+ */
+function shop_co_wc_get_variation_colors(): array {
+	return apply_filters(
+		'shop_co_wc_variation_colors',
+		array(
+			'black'    => '#000000',
+			'white'    => '#ffffff',
+			'red'      => '#ff3333',
+			'green'    => '#01ab31',
+			'blue'     => '#2f80ed',
+			'navy'     => '#1f2a44',
+			'yellow'   => '#ffc633',
+			'orange'   => '#f2994a',
+			'purple'   => '#9b51e0',
+			'pink'     => '#eb5757',
+			'gray'     => '#828282',
+			'grey'     => '#828282',
+			'brown'    => '#8b5e3c',
+			'beige'    => '#d7c4a3',
+			'burgundy' => '#800020',
+			'olive'    => '#808000',
+		)
 	);
+}
+
+function shop_co_wc_get_variation_color_value( string $option ): string {
+	$colors = shop_co_wc_get_variation_colors();
 
 	$key = sanitize_title( $option );
 
@@ -320,6 +334,50 @@ function shop_co_wc_get_variation_color_value( string $option ): string {
 	}
 
 	return $key;
+}
+
+/**
+ * Build color rules for Filter Everything swatches.
+ */
+function shop_co_wc_get_filter_color_styles(): string {
+	$styles = array();
+
+	foreach ( shop_co_wc_get_variation_colors() as $slug => $color ) {
+		$slug  = sanitize_title( $slug );
+		$color = sanitize_hex_color( $color );
+
+		if ( ! $slug || ! $color ) {
+			continue;
+		}
+
+		$styles[] = sprintf(
+			'.wpc-filter-pa_color input[data-wpc-e-name="pa_color"][data-wpc-slug="%1$s"] + label .wpc-term-swatch{--shop-co-filter-color:%2$s}',
+			$slug,
+			$color
+		);
+	}
+
+	return implode( '', $styles );
+}
+
+/**
+ * Render the mobile catalog filters button.
+ */
+function shop_co_woocommerce_catalog_filters_button(): void {
+	if ( ! ( is_shop() || is_product_taxonomy() ) || ! is_active_sidebar( 'shop-filters' ) ) {
+		return;
+	}
+	?>
+	<button
+		type="button"
+		class="catalog-filters-toggle site-button site-button--gray site-button--square visible-tablet"
+		data-bs-toggle="offcanvas"
+		data-bs-target="#catalog-filters-offcanvas"
+		aria-controls="catalog-filters-offcanvas"
+		aria-label="<?php esc_attr_e( 'Open catalog filters', 'shop-co' ); ?>">
+		<?php echo ShopCo_Icons::settings(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	</button>
+	<?php
 }
 
 /**

@@ -1,7 +1,7 @@
 @use '../helpers' as *;
 
 .breadcrumbs {
-  margin-block: fluid(24, 20);
+  margin-bottom: fluid(24, 20);
 
   &__item {
     a {
