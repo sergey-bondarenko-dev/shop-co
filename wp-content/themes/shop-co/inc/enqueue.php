@@ -10,6 +10,35 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Enqueue a compiled theme stylesheet with the main stylesheet as a dependency.
+ *
+ * @param string $handle Stylesheet handle.
+ * @param string $entry  Build entry name without extension.
+ */
+function shop_co_enqueue_built_style( string $handle, string $entry ): void {
+	$asset_path = get_theme_file_path( "build/css/{$entry}.asset.php" );
+
+	if ( ! file_exists( $asset_path ) ) {
+		return;
+	}
+
+	$asset        = include $asset_path;
+	$dependencies = array_unique(
+		array_merge(
+			array( 'shop-co-style' ),
+			$asset['dependencies'] ?? array()
+		)
+	);
+
+	wp_enqueue_style(
+		$handle,
+		get_theme_file_uri( "build/css/{$entry}.css" ),
+		$dependencies,
+		$asset['version'] ?? SHOP_CO_VERSION
+	);
+}
+
+/**
  * Enqueue front-end theme assets.
  */
 function shop_co_scripts(): void {
@@ -31,6 +60,28 @@ function shop_co_scripts(): void {
 			array(),
 			SHOP_CO_VERSION
 		);
+	}
+
+	if ( shop_co_is_woocommerce_active() ) {
+		if ( is_shop() || is_product_taxonomy() ) {
+			shop_co_enqueue_built_style( 'shop-co-catalog', 'catalog' );
+		}
+
+		if ( is_product() ) {
+			shop_co_enqueue_built_style( 'shop-co-product', 'product' );
+		}
+
+		if ( is_cart() ) {
+			shop_co_enqueue_built_style( 'shop-co-cart', 'cart' );
+		}
+
+		if ( is_checkout() ) {
+			shop_co_enqueue_built_style( 'shop-co-checkout', 'checkout' );
+		}
+
+		if ( is_account_page() ) {
+			shop_co_enqueue_built_style( 'shop-co-account', 'account' );
+		}
 	}
 
 	if ( function_exists( 'shop_co_wc_get_filter_color_styles' ) ) {
