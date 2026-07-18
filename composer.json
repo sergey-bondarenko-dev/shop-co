@@ -18,7 +18,12 @@
     "wp-coding-standards/wpcs": "^3.0"
   },
   "scripts": {
-    "lint:php": "@php -d sys_temp_dir=. vendor/bin/phpcs",
+    "lint:php": [
+      "@lint:php:theme",
+      "@lint:php:core"
+    ],
+    "lint:php:theme": "@php -d sys_temp_dir=. vendor/bin/phpcs --standard=phpcs.xml.dist",
+    "lint:php:core": "@php -d sys_temp_dir=. vendor/bin/phpcs --standard=wp-content/plugins/shop-co-core/phpcs.xml.dist",
     "format:php": "@php -d sys_temp_dir=. vendor/bin/phpcbf"
   },
   "extra": {

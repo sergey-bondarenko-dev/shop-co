@@ -72,7 +72,7 @@ function shop_co_get_woocommerce_page_url( string $page, string $fallback_url = 
  * @return bool Whether the plugin API is available.
  */
 function shop_co_is_core_plugin_active(): bool {
-	return function_exists( 'shop_co_get_testimonials' );
+	return function_exists( 'shop_co_core_get_testimonials' );
 }
 
 /**

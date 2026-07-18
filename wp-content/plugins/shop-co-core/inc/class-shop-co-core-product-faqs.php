@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Registers product FAQ fields and exposes their values.
  */
-class ShopCo_Product_FAQs {
+class Shop_Co_Core_Product_FAQs {
 	public const META_KEY = 'shop_co_product_faqs';
 
 	/**
@@ -89,16 +89,4 @@ class ShopCo_Product_FAQs {
 
 		return array_values( $items );
 	}
-}
-
-ShopCo_Product_FAQs::init();
-
-/**
- * Get FAQ entries for a WooCommerce product.
- *
- * @param int $product_id Product ID.
- * @return array<int, array<string, mixed>>
- */
-function shop_co_core_get_product_faqs( int $product_id ): array {
-	return ShopCo_Product_FAQs::get_items( $product_id );
 }

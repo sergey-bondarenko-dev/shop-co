@@ -13,7 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require __DIR__ . '/inc/class-testimonials.php';
+require __DIR__ . '/inc/class-shop-co-core-testimonials.php';
+require __DIR__ . '/inc/testimonial-functions.php';
+
+Shop_Co_Core_Testimonials::init();
 
 $shop_co_core_autoloader = __DIR__ . '/vendor/autoload.php';
 
@@ -27,7 +30,10 @@ if ( is_readable( $shop_co_core_autoloader ) ) {
 		}
 	);
 
-	require __DIR__ . '/inc/class-product-faqs.php';
+	require __DIR__ . '/inc/class-shop-co-core-product-faqs.php';
+	require __DIR__ . '/inc/product-faq-functions.php';
+
+	Shop_Co_Core_Product_FAQs::init();
 } else {
 	add_action(
 		'admin_notices',

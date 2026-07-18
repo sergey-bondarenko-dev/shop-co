@@ -9,15 +9,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class ShopCo_Testimonials {
+/**
+ * Registers and manages testimonial content.
+ */
+class Shop_Co_Core_Testimonials {
 	public const POST_TYPE = 'testimonial';
 
+	/**
+	 * Register plugin hooks.
+	 */
 	public static function init(): void {
 		add_action( 'init', array( __CLASS__, 'register_post_type' ) );
 		add_action( 'admin_notices', array( __CLASS__, 'admin_notice' ) );
 		add_filter( 'enter_title_here', array( __CLASS__, 'enter_title_here' ), 10, 2 );
 	}
 
+	/**
+	 * Register the testimonial post type.
+	 */
 	public static function register_post_type(): void {
 		register_post_type(
 			self::POST_TYPE,
@@ -35,6 +44,12 @@ class ShopCo_Testimonials {
 		);
 	}
 
+	/**
+	 * Get testimonial posts.
+	 *
+	 * @param int $limit Maximum number of testimonials.
+	 * @return WP_Query Testimonial query.
+	 */
 	public static function get_items( int $limit = 10 ): WP_Query {
 		return new WP_Query(
 			array(
@@ -50,6 +65,9 @@ class ShopCo_Testimonials {
 		);
 	}
 
+	/**
+	 * Display a testimonial editor notice.
+	 */
 	public static function admin_notice(): void {
 		$screen = get_current_screen();
 
@@ -63,6 +81,13 @@ class ShopCo_Testimonials {
 		<?php
 	}
 
+	/**
+	 * Customize the testimonial title placeholder.
+	 *
+	 * @param string  $text Default placeholder text.
+	 * @param WP_Post $post Current post.
+	 * @return string Placeholder text.
+	 */
 	public static function enter_title_here( string $text, WP_Post $post ): string {
 		if ( self::POST_TYPE !== $post->post_type ) {
 			return $text;
@@ -71,10 +96,3 @@ class ShopCo_Testimonials {
 		return esc_html__( 'Reviewer name', 'shop-co-core' );
 	}
 }
-
-ShopCo_Testimonials::init();
-
-function shop_co_get_testimonials( int $limit = 10 ): WP_Query {
-	return ShopCo_Testimonials::get_items( $limit );
-}
-

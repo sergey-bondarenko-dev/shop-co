@@ -10,7 +10,7 @@ if ( ! shop_co_is_core_plugin_active() ) {
 	return;
 }
 
-$shop_co_testimonials = shop_co_get_testimonials();
+$shop_co_testimonials = shop_co_core_get_testimonials();
 
 if ( ! $shop_co_testimonials->have_posts() ) {
 	shop_co_admin_notice_section( __( 'No testimonials have been added yet.', 'shop-co' ) );
