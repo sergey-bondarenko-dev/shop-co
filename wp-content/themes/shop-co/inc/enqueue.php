@@ -36,6 +36,7 @@ function shop_co_enqueue_built_style( string $handle, string $entry ): void {
 		$dependencies,
 		$asset['version'] ?? SHOP_CO_VERSION
 	);
+	wp_style_add_data( $handle, 'rtl', 'replace' );
 }
 
 /**
@@ -53,6 +54,7 @@ function shop_co_scripts(): void {
 			$screen_asset['dependencies'] ?? array(),
 			$screen_asset['version'] ?? SHOP_CO_VERSION
 		);
+		wp_style_add_data( 'shop-co-style', 'rtl', 'replace' );
 	} else {
 		wp_enqueue_style(
 			'shop-co-style',
@@ -151,6 +153,7 @@ function shop_co_editor_assets(): void {
 			$editor_style_asset['dependencies'] ?? array(),
 			$editor_style_asset['version'] ?? SHOP_CO_VERSION
 		);
+		wp_style_add_data( 'shop-co-editor', 'rtl', 'replace' );
 	}
 }
 add_action( 'enqueue_block_editor_assets', 'shop_co_editor_assets' );

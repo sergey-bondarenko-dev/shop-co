@@ -60,7 +60,7 @@ $shop_co_comment_options = array(
 			<div class="site-comments__actions">
 				<select class="site-select" name="comments-sort" id="comments-sort">
 					<option <?php echo 'newest' === $shop_co_reviews_order ? 'selected' : ''; ?> value="newest"><?php esc_html_e( 'Newest', 'shop-co' ); ?></option>
-					<option <?php echo 'oldest' === $shop_co_reviews_order ? 'selected' : ''; ?> value="oldest"><?php esc_html_e( 'Latest', 'shop-co' ); ?></option>
+					<option <?php echo 'oldest' === $shop_co_reviews_order ? 'selected' : ''; ?> value="oldest"><?php esc_html_e( 'Oldest', 'shop-co' ); ?></option>
 				</select>
 				<button class="site-button" type="button" data-bs-toggle="modal" data-bs-target="#review-modal">
 					<?php esc_html_e( 'Write a Review', 'shop-co' ); ?>

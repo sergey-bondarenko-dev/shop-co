@@ -62,6 +62,7 @@ export class ReviewManager {
 
 		url.pathname = url.pathname.replace( /\/comment-page-\d+\/?$/, '/' );
 		url.searchParams.delete( 'reviews_order' );
+		url.searchParams.delete( 'cpage' );
 
 		return url;
 	}
@@ -120,11 +121,7 @@ export class ReviewManager {
 		currentPage++;
 
 		const url = this.getBaseCommentsUrl();
-		const pathname = url.pathname.endsWith( '/' )
-			? url.pathname.slice( 0, -1 )
-			: url.pathname;
-
-		url.pathname = `${ pathname }/comment-page-${ currentPage }/`;
+		url.searchParams.set( 'cpage', String( currentPage ) );
 		url.searchParams.set( 'reviews_order', this.getSorting() );
 
 		this.fetch( url.href, ( dom ) => {

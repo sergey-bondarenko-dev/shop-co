@@ -11,7 +11,7 @@
   ],
   "require": {
     "composer/installers": "^2.3",
-    "wpackagist-plugin/woocommerce": "^9.0"
+    "wpackagist-plugin/woocommerce": "~10.7.0"
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^1.0",

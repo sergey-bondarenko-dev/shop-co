@@ -15,7 +15,12 @@ make init
 make build
 make up
 make install
+make sync-plugins
+make theme-install
+make theme-build
+make wp ARGS='plugin activate woocommerce'
 make wp ARGS='plugin activate shop-co-core'
+make wp ARGS='theme activate shop-co'
 ```
 
 WordPress: http://localhost:8080
