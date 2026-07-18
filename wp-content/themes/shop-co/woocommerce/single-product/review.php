@@ -17,7 +17,11 @@ if ( ! isset( $comment ) || ! is_a( $comment, WP_Comment::class ) ) {
 	return;
 }
 
-/** @var WP_Comment $comment */
+/**
+ * Current product review comment.
+ *
+ * @var WP_Comment $comment
+ */
 
 ?>
 <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
@@ -61,7 +65,7 @@ if ( ! isset( $comment ) || ! is_a( $comment, WP_Comment::class ) ) {
 				datetime="<?php echo esc_attr( get_comment_date( 'c' ) ); ?>">
 				
 				<b>
-					<?php _e( 'Posted on', 'shop-co' ); ?>
+					<?php esc_html_e( 'Posted on', 'shop-co' ); ?>
 					<?php echo esc_html( get_comment_date( 'd.m.Y H:i:s' ) ); ?>
 				</b>
 			</time>

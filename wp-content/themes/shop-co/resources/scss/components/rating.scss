@@ -1,29 +1,29 @@
-@use './../helpers' as *;
+@use "./../helpers" as *;
 
 .site-rating {
-  --site-rating-star-size: #{fluid(18.5, 15.5)};
-  --site-rating-value-font-size: #{fluid(14, 12)};
+	--site-rating-star-size: #{fluid(18.5, 15.5)};
+	--site-rating-value-font-size: #{fluid(14, 12)};
 
-  display: flex;
-  align-items: center;
-  column-gap: fluid(13, 11);
+	display: flex;
+	align-items: center;
+	column-gap: fluid(13, 11);
 
-  &__stars {
-    display: flex;
-    column-gap: fluid(5, 4);
-    overflow: hidden;
-  }
+	&__stars {
+		display: flex;
+		column-gap: fluid(5, 4);
+		overflow: hidden;
+	}
 
-  &__star {
-    --size: var(--site-rating-star-size);
+	&__star {
+		--size: var(--site-rating-star-size);
 
-    width: var(--size);
-    height: var(--size);
-    clip-path: inset(0 calc(100% - var(--star-fill, 100%)) 0 0);
-  }
+		width: var(--size);
+		height: var(--size);
+		clip-path: inset(0 calc(100% - var(--star-fill, 100%)) 0 0);
+	}
 
-  &__value {
-    font-size: var(--site-rating-value-font-size);
-    line-height: 0;
-  }
+	&__value {
+		font-size: var(--site-rating-value-font-size);
+		line-height: 0;
+	}
 }

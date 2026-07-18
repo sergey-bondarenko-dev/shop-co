@@ -1,31 +1,36 @@
 <?php
-
 /**
- * @var array $args
+ * Product slider section template.
+ *
+ * @package Shop_Co
  */
 
-/** @var string $title */
-$title = $args['title'] ?? '';
-/** @var WC_Product[] $products */
-$products = $args['products'] ?? array();
+/**
+ * Template arguments passed to the product slider.
+ *
+ * @var array $args Template arguments.
+ */
 
-$products = array_filter(
-	$products,
+$shop_co_title    = $args['title'] ?? '';
+$shop_co_products = $args['products'] ?? array();
+
+$shop_co_products = array_filter(
+	$shop_co_products,
 	static fn ( $product ): bool => $product instanceof WC_Product
 );
 
-if ( empty( $products ) ) {
+if ( empty( $shop_co_products ) ) {
 	return;
 }
 
-$product_ids = array_map(
+$shop_co_product_ids = array_map(
 	static fn ( WC_Product $product ): int => $product->get_id(),
-	$products
+	$shop_co_products
 );
 
-_prime_post_caches( $product_ids );
+_prime_post_caches( $shop_co_product_ids );
 
-$add_slide_classes = static function ( array $classes ): array {
+$shop_co_add_slide_classes = static function ( array $classes ): array {
 	$classes[] = 'products-slider__slide';
 	$classes[] = 'swiper-slide';
 
@@ -33,25 +38,25 @@ $add_slide_classes = static function ( array $classes ): array {
 };
 
 wc_set_loop_prop( 'name', 'products-slider' );
-add_filter( 'post_class', $add_slide_classes );
+add_filter( 'post_class', $shop_co_add_slide_classes );
 
 ?>
 
 <section class="section products-section overflow-hidden">
 	<div class="section__header container">
 		<h2 class="section__title text-center">
-			<?php echo esc_html( $title ); ?>
+			<?php echo esc_html( $shop_co_title ); ?>
 		</h2>
 	</div>
 	<div class="section__body container">
 		<div class="products-slider">
 			<div class="products-slider__swiper swiper">
 				<ul class="products-slider__wrapper swiper-wrapper">
-					<?php foreach ( $products as $product ) : ?>
+					<?php foreach ( $shop_co_products as $shop_co_product ) : ?>
 						<?php
-						$post_object = get_post( $product->get_id() );
+						$shop_co_post_object = get_post( $shop_co_product->get_id() );
 
-						setup_postdata( $GLOBALS['post'] = $post_object ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited, Squiz.PHP.DisallowMultipleAssignments.Found
+						setup_postdata( $GLOBALS['post'] = $shop_co_post_object ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited, Squiz.PHP.DisallowMultipleAssignments.Found
 
 						wc_get_template_part( 'content', 'product' );
 						?>
@@ -69,4 +74,4 @@ add_filter( 'post_class', $add_slide_classes );
 
 wp_reset_postdata();
 wc_reset_loop();
-remove_filter( 'post_class', $add_slide_classes );
+remove_filter( 'post_class', $shop_co_add_slide_classes );

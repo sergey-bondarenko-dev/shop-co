@@ -1,44 +1,46 @@
 @use "./../helpers" as *;
 
 .site-field {
-  --shop-co-field-padding-x: 14px;
-  --shop-co-field-padding-y: 12px;
-  --shop-co-field-icon-gap: 14px;
-  --shop-co-field-background: var(--shop-co-color-gray-2);
+	--shop-co-field-padding-x: 14px;
+	--shop-co-field-padding-y: 12px;
+	--shop-co-field-icon-gap: 14px;
+	--shop-co-field-background: var(--shop-co-color-gray-2);
 
-  position: relative;
+	position: relative;
 
-  &--white {
-    --shop-co-field-background: var(--shop-co-color-white);
-  }
+	&--white {
+		--shop-co-field-background: var(--shop-co-color-white);
+	}
 
-  &__icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 50%;
-    left: var(--shop-co-field-padding-x);
-    translate: 0 -50%;
-    width: var(--shop-co-icon-size);
-    height: var(--shop-co-icon-size);
-    pointer-events: none;
-    color: var(--shop-co-color-black);
-    transition-duration: var(--transition-duration);
-  }
+	&__icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		top: 50%;
+		left: var(--shop-co-field-padding-x);
+		translate: 0 -50%;
+		width: var(--shop-co-icon-size);
+		height: var(--shop-co-icon-size);
+		pointer-events: none;
+		color: var(--shop-co-color-black);
+		transition-duration: var(--transition-duration);
+	}
 
-  &__input {
-    width: 100%;
-    padding: var(--shop-co-field-padding-y) 6px var(--shop-co-field-padding-y)
-      calc(var(--shop-co-field-icon-gap) + var(--shop-co-field-padding-x) + var(--shop-co-icon-size));
-    background: var(--shop-co-field-background);
-    border: none;
-    border-radius: var(--shop-co-border-radius-2);
+	&__input {
+		width: 100%;
+		padding:
+			var(--shop-co-field-padding-y) 6px var(--shop-co-field-padding-y)
+			calc(var(--shop-co-field-icon-gap) + var(--shop-co-field-padding-x) + var(--shop-co-icon-size));
+		background: var(--shop-co-field-background);
+		border: none;
+		border-radius: var(--shop-co-border-radius-2);
 
-    &:focus {
-      & + .site-field__icon {
-        opacity: 1;
-      }
-    }
-  }
+		&:focus {
+
+			+ .site-field__icon {
+				opacity: 1;
+			}
+		}
+	}
 }

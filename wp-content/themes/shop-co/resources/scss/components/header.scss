@@ -1,111 +1,112 @@
-@use '../helpers' as *;
+@use "../helpers" as *;
 
 .site-header {
-  padding-block: fluid(24, 20);
-  position: sticky;
-  top: 0;
-  z-index: var(--z-index-header);
-  background-color: var(--shop-co-color-white);
-  transition: box-shadow var(--transition-duration);
+	padding-block: fluid(24, 20);
+	position: sticky;
+	top: 0;
+	z-index: var(--z-index-header);
+	background-color: var(--shop-co-color-white);
+	transition: box-shadow var(--transition-duration);
 
-  &.is-scrolled {
-    box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
-  }
+	&.is-scrolled {
+		box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
+	}
 
-  &__inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: fluid(40, 8);
+	&__inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: fluid(40, 8);
 
-    @include mobile {
-      justify-content: flex-start;
-    }
-  }
+		@include mobile {
+			justify-content: flex-start;
+		}
+	}
 
-  &__navigation {
-    max-width: 500px;
+	&__navigation {
+		max-width: 500px;
 
-    @include container-down {
-      max-width: 360px;
-    }
+		@include container-down {
+			max-width: 360px;
+		}
 
-    @include tablet {
-      max-width: 100%;
-    }
-  }
+		@include tablet {
+			max-width: 100%;
+		}
+	}
 
-  &__search {
-    flex: 1;
+	&__search {
+		flex: 1;
 
-    @include mobile {
-      width: 100%;
-      margin-block: 8px;
-    }
+		@include mobile {
+			width: 100%;
+			margin-block: 8px;
+		}
 
-    &-submit {
-      padding: 0;
-      border: 0;
-      background: transparent;
-      opacity: 0.4;
-      pointer-events: auto;
+		&-submit {
+			padding: 0;
+			border: 0;
+			background: transparent;
+			opacity: 0.4;
+			pointer-events: auto;
 
-      @include hover {
-        cursor: pointer;
-        opacity: 1;
-      }
+			@include hover {
+				cursor: pointer;
+				opacity: 1;
+			}
 
-      &:focus-visible {
-        outline: 2px solid var(--shop-co-color-black);
-        outline-offset: 3px;
-        opacity: 1;
-      }
-    }
+			&:focus-visible {
+				outline: 2px solid var(--shop-co-color-black);
+				outline-offset: 3px;
+				opacity: 1;
+			}
+		}
 
-    &-wrapper {
-      display: contents;
-      
-      @include mobile-above {
-        &.collapse {
-          display: contents;
-        }
-      }
+		&-wrapper {
+			display: contents;
 
-      @include mobile {
-        display: block;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background-color: var(--shop-co-color-white);
-        padding: 0 var(--container-padding-x);
+			@include mobile-above {
 
-        &.show {
-          display: block;
-        }
-      }
-    }
-  }
+				&.collapse {
+					display: contents;
+				}
+			}
 
-  &__burger-button {
-    --size: 36px;
-  }
+			@include mobile {
+				display: block;
+				position: absolute;
+				top: 100%;
+				left: 0;
+				right: 0;
+				background-color: var(--shop-co-color-white);
+				padding: 0 var(--container-padding-x);
 
-  &__actions {
-    display: flex;
-    gap: 8px;
+				&.show {
+					display: block;
+				}
+			}
+		}
+	}
 
-    @include mobile {
-      gap: 4px;
-      margin-left: auto;
-    }
+	&__burger-button {
+		--size: 36px;
+	}
 
-    .site-button {
-      --size: 36px;
+	&__actions {
+		display: flex;
+		gap: 8px;
 
-      @include mobile {
-        --size: 32px;
-      }
-    }
-  }
+		@include mobile {
+			gap: 4px;
+			margin-left: auto;
+		}
+
+		.site-button {
+			--size: 36px;
+
+			@include mobile {
+				--size: 32px;
+			}
+		}
+	}
 }

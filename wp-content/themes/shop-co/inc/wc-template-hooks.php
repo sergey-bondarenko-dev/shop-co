@@ -1,4 +1,9 @@
 <?php
+/**
+ * WooCommerce hook registrations.
+ *
+ * @package Shop_Co
+ */
 
 remove_action(
 	'woocommerce_before_shop_loop_item',
@@ -72,15 +77,23 @@ add_action( 'woocommerce_before_shop_loop', 'woocommerce_taxonomy_archive_descri
 add_action( 'woocommerce_before_shop_loop', 'woocommerce_product_archive_description' );
 
 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
-add_action( 'woocommerce_archive_description', function () { ?>
+add_action(
+	'woocommerce_archive_description',
+	function () { ?>
 	<div class="hidden-tablet">
-		<?php woocommerce_catalog_ordering( [
-			'useLabel' => true,
-		] ); ?>
+		<?php
+		woocommerce_catalog_ordering(
+			array(
+				'useLabel' => true,
+			)
+		);
+		?>
 	</div>
-    
-	<?php
-}, 30 );
+	
+		<?php
+	},
+	30
+);
 add_action( 'woocommerce_archive_description', 'shop_co_woocommerce_catalog_filters_button', 40 );
 
 remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );

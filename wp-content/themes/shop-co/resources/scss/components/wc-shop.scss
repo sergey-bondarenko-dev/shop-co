@@ -154,9 +154,7 @@
 	.woocommerce-result-count {
 		opacity: 0.6;
 	}
-}
 
-.shopco-catalog-page {
 	.wpc-filter-link {
 		text-transform: capitalize;
 	}
@@ -181,6 +179,13 @@
 	}
 
 	.wpc-filters-range-wrapper {
+		gap: 8px;
+
+		.wpc-filters-range-column {
+			margin: 0;
+			width: 100%;
+		}
+
 		input.wpc-filters-range-min,
 		input.wpc-filters-range-max {
 			border-radius: var(--shop-co-border-radius-field);
@@ -203,63 +208,9 @@
 		}
 	}
 
-	.wpc-filters-main-wrap .wpc-filters-labels li.wpc-term-item label {
-		border-radius: var(--shop-co-border-radius-field);
-		border: none;
-		background-color: var(--shop-co-color-gray);
-		padding: 10px 20px;
-		transition-duration: var(--transition-duration);
-
-		.wpc-filter-link {
-			transition-duration: var(--transition-duration);
-		}
-
-		.wpc-term-count {
-			opacity: 0.7;
-		}
-
-		@include hover {
-			@include active-cheap();
-		}
-	}
-
-	.wpc-filters-main-wrap .wpc-filters-labels li.wpc-term-item.wpc-term-selected label,
-	.wpc-filters-main-wrap .wpc-filters-labels li.wpc-term-item.wpc-term-selected label:active {
-		@include active-cheap();
-	}
-
-	.wpc-filters-main-wrap .wpc-filters-labels li.wpc-term-item label span.wpc-filter-label-wrapper {
-		padding: 0;
-		font-size: 14px;
-		transition-duration: var(--transition-duration);
-
-		.wpc-term-count {
-			transition-duration: var(--transition-duration);
-
-			& > * {
-				transition-duration: var(--transition-duration);
-			}
-		}
-	}
-
-	.wpc-filters-section {
-		margin-bottom: 0;
-		padding-block: 24px;
-
-		&::before {
-			content: '';
-			height: 1px;
-			width: 100%;
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			background-color: var(--shop-co-color-black-opacity-10);
-		}
-	}
-
 	.wpc-filter-pa_color {
-		input[type=checkbox],
+
+		input[type="checkbox"],
 		.wpc-term-count {
 			display: none !important;
 		}
@@ -307,11 +258,70 @@
 		}
 	}
 
+	.wpc-filters-main-wrap .wpc-filters-labels li.wpc-term-item label {
+		border-radius: var(--shop-co-border-radius-field);
+		border: none;
+		background-color: var(--shop-co-color-gray);
+		padding: 10px 20px;
+		transition-duration: var(--transition-duration);
+
+		.wpc-filter-link {
+			transition-duration: var(--transition-duration);
+		}
+
+		.wpc-term-count {
+			opacity: 0.7;
+		}
+
+		@include hover {
+
+			@include active-cheap();
+		}
+	}
+
+	.wpc-filters-main-wrap .wpc-filters-labels li.wpc-term-item.wpc-term-selected label,
+	.wpc-filters-main-wrap .wpc-filters-labels li.wpc-term-item.wpc-term-selected label:active {
+
+		@include active-cheap();
+	}
+
+	.wpc-filters-main-wrap .wpc-filters-labels li.wpc-term-item label span.wpc-filter-label-wrapper {
+		padding: 0;
+		font-size: 14px;
+		transition-duration: var(--transition-duration);
+
+		.wpc-term-count {
+			transition-duration: var(--transition-duration);
+
+			> * {
+				transition-duration: var(--transition-duration);
+			}
+		}
+	}
+
+	.wpc-filters-section {
+		margin-bottom: 0;
+		padding-block: 24px;
+
+		&::before {
+			content: "";
+			height: 1px;
+			width: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			background-color: var(--shop-co-color-black-opacity-10);
+		}
+	}
+
 	li.wpc-term-item label:focus-within {
+
 		@include focus-visible;
 	}
 
 	.wpc-filter-header .wpc-filter-title button:focus-visible {
+
 		@include focus-visible;
 	}
 
@@ -320,13 +330,16 @@
 	}
 
 	.wpc-filter-collapsible {
+
 		&:not(.wpc-opened) {
+
 			.wpc-filter-title {
 				margin-bottom: 0;
 			}
 		}
 
 		&.wpc-opened {
+
 			.wpc-filter-selected-values {
 				display: none;
 			}
@@ -339,15 +352,6 @@
 
 	.wpc-filter-collapsible.wpc-opened .wpc-filter-title .wpc-open-icon {
 		top: 10px;
-	}
-
-	.wpc-filters-range-wrapper {
-		gap: 8px;
-
-		.wpc-filters-range-column {
-			margin: 0;
-			width: 100%;
-		}
 	}
 
 	.wpc-filters-range-inputs {

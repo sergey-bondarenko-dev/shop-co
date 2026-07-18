@@ -1,42 +1,43 @@
-@use './../helpers' as *;
+@use "./../helpers" as *;
 
 .testimonial-card {
-  display: flex;
-  flex-direction: column;
-  row-gap: fluid(12, 8);
-  border-radius: var(--shop-co-border-radius);
-  padding: fluid(28, 24) fluid(32, 24);
-  height: 100%;
-  background-color: var(--shop-co-color-white);
-  line-height: 22px;
+	display: flex;
+	flex-direction: column;
+	row-gap: fluid(12, 8);
+	border-radius: var(--shop-co-border-radius);
+	padding: fluid(28, 24) fluid(32, 24);
+	height: 100%;
+	background-color: var(--shop-co-color-white);
+	line-height: 22px;
 
-  &__rating {
-    --site-rating-star-size: #{fluid(22.58, 19.19)};
+	&__rating {
+		--site-rating-star-size: #{fluid(22.58, 19.19)};
 
-    margin-bottom: 4px;
-  }
+		margin-bottom: 4px;
+	}
 
-  &__name {
-    display: flex;
-    align-items: center;
-    column-gap: 4px;
-    margin-bottom: 0;
+	&__name {
+		display: flex;
+		align-items: center;
+		column-gap: 4px;
+		margin-bottom: 0;
 
-    &.is-verified {
-      &::after {
-        content: "";
-        width: 16px;
-        height: 16px;
-        background: url("../icons/mark.svg") center / contain no-repeat;
-      }
-    } 
-  }
+		&.is-verified {
 
-  &__content {
-    font-size: fluid(16, 14);
-  }
+			&::after {
+				content: "";
+				width: 16px;
+				height: 16px;
+				background: url(../icons/mark.svg) center / contain no-repeat;
+			}
+		}
+	}
 
-  &__time {
-    margin-top: fluid(12, 8);
-  }
+	&__content {
+		font-size: fluid(16, 14);
+	}
+
+	&__time {
+		margin-top: fluid(12, 8);
+	}
 }

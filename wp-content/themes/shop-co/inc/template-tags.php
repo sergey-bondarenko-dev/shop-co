@@ -11,6 +11,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Load a template part from the theme template-parts directory.
+ *
+ * @param string      $slug Template part slug.
+ * @param array       $args Variables passed to the template part.
+ * @param string|null $name Optional specialized template name.
  */
 function shop_co_get_template_part( string $slug, array $args = array(), ?string $name = null ): void {
 	get_template_part( 'template-parts/' . ltrim( $slug, '/' ), $name, $args );
@@ -18,20 +22,34 @@ function shop_co_get_template_part( string $slug, array $args = array(), ?string
 
 /**
  * Print site logo with a text fallback.
+ *
+ * @param string $classes Additional logo CSS classes.
  */
-function shop_co_logo( string $class = '' ): void {
+function shop_co_logo( string $classes = '' ): void {
 	shop_co_get_template_part(
 		'global/logo',
 		array(
-			'class' => $class,
+			'class' => $classes,
 		)
 	);
 }
 
+/**
+ * Determine whether WooCommerce is active.
+ *
+ * @return bool Whether WooCommerce functions are available.
+ */
 function shop_co_is_woocommerce_active(): bool {
 	return function_exists( 'wc_get_products' );
 }
 
+/**
+ * Return a WooCommerce page URL with a fallback.
+ *
+ * @param string $page         WooCommerce page key.
+ * @param string $fallback_url URL used when the WooCommerce page is unavailable.
+ * @return string Resolved page URL.
+ */
 function shop_co_get_woocommerce_page_url( string $page, string $fallback_url = '' ): string {
 	if ( 'cart' === $page && function_exists( 'wc_get_cart_url' ) ) {
 		return wc_get_cart_url();
@@ -45,13 +63,23 @@ function shop_co_get_woocommerce_page_url( string $page, string $fallback_url = 
 		}
 	}
 
-	return $fallback_url ?: home_url( '/' );
+	return $fallback_url ? $fallback_url : home_url( '/' );
 }
 
+/**
+ * Determine whether the theme core plugin is active.
+ *
+ * @return bool Whether the plugin API is available.
+ */
 function shop_co_is_core_plugin_active(): bool {
 	return function_exists( 'shop_co_get_testimonials' );
 }
 
+/**
+ * Determine whether the visitor closed the advertisement banner.
+ *
+ * @return bool Whether the banner is closed.
+ */
 function shop_co_is_ads_banner_closed(): bool {
 	if ( ! isset( $_COOKIE['shop_co_ads_banner_closed'] ) ) {
 		return false;
@@ -60,6 +88,11 @@ function shop_co_is_ads_banner_closed(): bool {
 	return 'yes' === sanitize_text_field( wp_unslash( $_COOKIE['shop_co_ads_banner_closed'] ) );
 }
 
+/**
+ * Determine whether the advertisement banner should be shown.
+ *
+ * @return bool Whether the banner should be displayed.
+ */
 function shop_co_should_show_ads_banner(): bool {
 	return ! is_user_logged_in() && ! shop_co_is_ads_banner_closed();
 }
@@ -70,7 +103,7 @@ function shop_co_should_show_ads_banner(): bool {
 function shop_co_get_pagination_previous_text(): string {
 	return sprintf(
 		'<span class="site-pagination__icon" aria-hidden="true">%1$s</span><span class="site-pagination__label">%2$s</span>',
-		ShopCo_Icons::arrow_left(),
+		shop_co_get_icon( 'arrow_left' ),
 		esc_html__( 'Previous', 'shop-co' )
 	);
 }
@@ -82,10 +115,16 @@ function shop_co_get_pagination_next_text(): string {
 	return sprintf(
 		'<span class="site-pagination__label">%1$s</span><span class="site-pagination__icon" aria-hidden="true">%2$s</span>',
 		esc_html__( 'Next', 'shop-co' ),
-		ShopCo_Icons::arrow_right()
+		shop_co_get_icon( 'arrow_right' )
 	);
 }
 
+/**
+ * Print a capability-gated administrative notice section.
+ *
+ * @param string $message    Notice message.
+ * @param string $capability Capability required to view the notice.
+ */
 function shop_co_admin_notice_section( string $message, string $capability = 'edit_posts' ): void {
 	if ( ! current_user_can( $capability ) ) {
 		return;
@@ -145,6 +184,12 @@ function shop_co_entry_footer(): void {
 	);
 }
 
+/**
+ * Print product rating markup.
+ *
+ * @param WC_Product $product       Product object.
+ * @param string     $wrapper_class Additional wrapper CSS class.
+ */
 function shop_co_product_rating_html( WC_Product $product, string $wrapper_class = '' ): void {
 	$average_rating = (float) $product->get_average_rating();
 

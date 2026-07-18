@@ -1,7 +1,8 @@
-@use './../helpers' as *;
+@use "./../helpers" as *;
 
 .products-slider {
-  & &__swiper {
-    overflow: visible;
-  }
+
+	& &__swiper {
+		overflow: visible;
+	}
 }

@@ -1,19 +1,17 @@
-@use './../helpers' as *;
+@use "./../helpers" as *;
 
 .site-product-card {
-  &__link {
-    display: flex;
-    flex-direction: column;
-    row-gap: fluid(8, 4);
-  }
 
-  &__thumbnail-wrapper {
-    background-color: var(--shop-co-color-gray-1);
-    border-radius: var(--shop-co-border-radius);
-    overflow: hidden;
-    margin-bottom: fluid(8, 6);
-  }
+	&__link {
+		display: flex;
+		flex-direction: column;
+		row-gap: fluid(8, 4);
+	}
 
-  &__title {
-  }
+	&__thumbnail-wrapper {
+		background-color: var(--shop-co-color-gray-1);
+		border-radius: var(--shop-co-border-radius);
+		overflow: hidden;
+		margin-bottom: fluid(8, 6);
+	}
 }

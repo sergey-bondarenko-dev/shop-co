@@ -19,7 +19,9 @@ export class NavigationDropdowns {
 
 	static initHoverDropdowns( navigation ) {
 		const hoverMedia = window.matchMedia( HOVER_MEDIA_QUERY );
-		const dropdownItems = navigation.querySelectorAll( DROPDOWN_ITEM_SELECTOR );
+		const dropdownItems = navigation.querySelectorAll(
+			DROPDOWN_ITEM_SELECTOR
+		);
 
 		dropdownItems.forEach( ( item ) => {
 			const toggle = item.querySelector( DROPDOWN_TOGGLE_SELECTOR );
@@ -44,7 +46,7 @@ export class NavigationDropdowns {
 			window.clearTimeout( hideTimer );
 			dropdown.show();
 
-			if ( document.activeElement === toggle ) {
+			if ( toggle.ownerDocument.activeElement === toggle ) {
 				toggle.blur();
 			}
 		} );

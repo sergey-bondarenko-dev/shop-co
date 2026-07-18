@@ -42,7 +42,7 @@ get_header();
 		<?php else : ?>
 			<section class="site-search__empty">
 				<span class="site-search__empty-icon" aria-hidden="true">
-					<?php echo ShopCo_Icons::search(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php echo shop_co_get_icon( 'search' ); ?>
 				</span>
 				<h2><?php esc_html_e( 'Nothing found', 'shop-co' ); ?></h2>
 				<p><?php esc_html_e( 'Try changing your search query or using fewer words.', 'shop-co' ); ?></p>

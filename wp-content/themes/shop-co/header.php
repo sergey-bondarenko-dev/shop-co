@@ -42,7 +42,7 @@
 				data-bs-toggle="offcanvas"
 				data-bs-target="#offcanvas-header-navigation"
 				aria-controls="offcanvas-header-navigation">
-				<?php echo ShopCo_Icons::list(); ?>
+				<?php echo shop_co_get_icon( 'list' ); ?>
 			</button>
 			<?php shop_co_logo( 'site-header__logo' ); ?>
 			<div class="offcanvas-xl offcanvas-start"
@@ -62,35 +62,19 @@
 				</div>
 				<div class="offcanvas-body">
 					<?php
-								wp_nav_menu(
-									array(
-										'theme_location'  => 'header_menu',
-										'depth'           => 2,
-										'container'       => 'nav',
-										'container_class' => 'site-header__navigation site-navigation',
-										'container_id'    => 'site-navigation',
-										'menu_class'      => 'site-navigation__list',
-										'fallback_cb'     => false,
-										'walker'          => new ShopCo_Header_Nav_Walker(),
-									)
-								);
-								?>
-					<!-- <nav class="site-header__navigation site-navigation" id="">
-						<ul class="site-navigation__list">
-							<li class="site-navigation__list-item">
-								<a href="#" class="site-navigation__link">Shop</a>
-							</li>
-							<li class="site-navigation__list-item">
-								<a href="#" class="site-navigation__link">On Sale</a>
-							</li>
-							<li class="site-navigation__list-item">
-								<a href="#" class="site-navigation__link">New Arrivals</a>
-							</li>
-							<li class="site-navigation__list-item">
-								<a href="#" class="site-navigation__link">Brands</a>
-							</li>
-						</ul>
-					</nav> -->
+					wp_nav_menu(
+						array(
+							'theme_location'  => 'header_menu',
+							'depth'           => 2,
+							'container'       => 'nav',
+							'container_class' => 'site-header__navigation site-navigation',
+							'container_id'    => 'site-navigation',
+							'menu_class'      => 'site-navigation__list',
+							'fallback_cb'     => false,
+							'walker'          => new Shop_Co_Header_Nav_Walker(),
+						)
+					);
+					?>
 				</div>
 			</div>
 			<div class="site-header__search-wrapper collapse" id="search-field">
@@ -115,7 +99,7 @@
 						type="submit"
 						class="site-header__search-submit site-field__icon"
 						aria-label="<?php esc_attr_e( 'Search', 'shop-co' ); ?>">
-						<?php echo ShopCo_Icons::search(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<?php echo shop_co_get_icon( 'search' ); ?>
 					</button>
 				</form>
 			</div>
@@ -126,7 +110,7 @@
 					data-bs-target="#search-field" 
 					aria-expanded="false" 
 					aria-controls="search-field">
-					<?php echo ShopCo_Icons::search(); ?>
+					<?php echo shop_co_get_icon( 'search' ); ?>
 				</button>
 				<button
 					type="button"
@@ -135,13 +119,13 @@
 					data-bs-target="#site-mini-cart"
 					aria-controls="site-mini-cart"
 					aria-label="<?php esc_attr_e( 'Open cart', 'shop-co' ); ?>">
-					<?php echo ShopCo_Icons::cart(); ?>
+					<?php echo shop_co_get_icon( 'cart' ); ?>
 					<?php echo shop_co_get_header_cart_count_html(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</button>
 				<a href="<?php echo esc_url( $shop_co_account_url ); ?>" 
 					class="site-button site-button--square site-button--white"
 					aria-label="<?php esc_attr_e( 'My account', 'shop-co' ); ?>">
-					<?php echo ShopCo_Icons::user(); ?>
+					<?php echo shop_co_get_icon( 'user' ); ?>
 				</a>
 			</div>
 		</div>

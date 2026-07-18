@@ -12,7 +12,9 @@ export class TestimonialSlider {
 		}
 
 		sliders.forEach( ( slider ) => {
-			const swiper = slider.querySelector( '.testimonials-slider__swiper' );
+			const swiper = slider.querySelector(
+				'.testimonials-slider__swiper'
+			);
 
 			if ( ! swiper ) {
 				return;
@@ -44,8 +46,8 @@ export class TestimonialSlider {
 					},
 					1024: {
 						slidesPerView: 3,
-					}
-				}
+					},
+				},
 			} );
 		} );
 	}

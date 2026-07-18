@@ -1,22 +1,22 @@
-@use './../helpers' as *;
+@use "./../helpers" as *;
 
 .site-price {
-  --site-price-discount-font-size: #{fluid(12, 10)};
+	--site-price-discount-font-size: #{fluid(12, 10)};
 
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  column-gap: fluid(10, 5);
-  font-size: fluid(24, 20);
-  font-weight: 700;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	column-gap: fluid(10, 5);
+	font-size: fluid(24, 20);
+	font-weight: 700;
 
-  &__discount {
-    border-radius: var(--shop-co-border-radius-2);
-    background-color: var(--shop-co-color-red-opacity-10);
-    color: var(--shop-co-color-red);
-    padding: fluid(8, 5) fluid(14, 8);
-    font-size: var(--site-price-discount-font-size);
-    font-weight: 500;
-    line-height: 1;
-  }
+	&__discount {
+		border-radius: var(--shop-co-border-radius-2);
+		background-color: var(--shop-co-color-red-opacity-10);
+		color: var(--shop-co-color-red);
+		padding: fluid(8, 5) fluid(14, 8);
+		font-size: var(--site-price-discount-font-size);
+		font-weight: 500;
+		line-height: 1;
+	}
 }

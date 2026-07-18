@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+
 <ruleset name="Shop Co">
 	<description>WordPress coding standards for the Shop Co theme.</description>
 
@@ -29,6 +30,33 @@
 			<property name="prefixes" type="array">
 				<element value="shop_co"/>
 				<element value="SHOP_CO"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- WooCommerce template overrides use variables supplied by WooCommerce. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound">
+		<exclude-pattern>*/woocommerce/*</exclude-pattern>
+	</rule>
+
+	<!-- Existing WooCommerce hooks must retain their original names. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound">
+		<exclude-pattern>*/woocommerce/*</exclude-pattern>
+	</rule>
+
+	<!-- Reuse translations provided by WooCommerce. -->
+	<rule ref="WordPress.WP.I18n.TextDomainMismatch">
+		<exclude-pattern>*/woocommerce/*</exclude-pattern>
+	</rule>
+
+	<rule ref="Squiz.Commenting.InlineComment.InvalidEndChar">
+		<severity>0</severity>
+	</rule>
+
+	<rule ref="WordPress.Security.EscapeOutput">
+		<properties>
+			<property name="customAutoEscapedFunctions" type="array">
+				<element value="shop_co_get_icon"/>
 			</property>
 		</properties>
 	</rule>

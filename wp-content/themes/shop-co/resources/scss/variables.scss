@@ -1,18 +1,18 @@
-@use './helpers' as *;
+@use "./helpers" as *;
 
 :root {
 	// colors
 	--shop-co-color-black: #000;
-	--shop-co-color-black-opacity-10: rgba(0, 0, 0, .1);
-	--shop-co-color-black-opacity-80: rgba(0, 0, 0, .8);
+	--shop-co-color-black-opacity-10: rgba(0, 0, 0, 0.1);
+	--shop-co-color-black-opacity-80: rgba(0, 0, 0, 0.8);
 	--shop-co-color-white: #fff;
 	--shop-co-color-gray: #f2f0f1;
 	--shop-co-color-gray-1: #f0eeed;
 	--shop-co-color-gray-2: #f0f0f0;
-	--shop-co-color-red: #FF3333;
-	--shop-co-color-red-opacity-10: rgb(255, 51, 51, .1);
-	--shop-co-color-gold: #FFC633;
-	--shop-co-color-green: #01AB31;
+	--shop-co-color-red: #f33;
+	--shop-co-color-red-opacity-10: rgb(255, 51, 51, 0.1);
+	--shop-co-color-gold: #ffc633;
+	--shop-co-color-green: #01ab31;
 
 	// borders
 	--shop-co-border-radius: 20px;
@@ -20,19 +20,19 @@
 	--shop-co-border-radius-3: 40px;
 	--shop-co-border-radius-field: 26px;
 
-  // sizes
-  --shop-co-icon-size: 24px;
+	// sizes
+	--shop-co-icon-size: 24px;
 	--container-width: 1240px;
 	--container-padding-x: 16px;
 	--section-gap: #{fluid(80, 50)};
 
-  // typography
-  --font-base: satoshi, sans-serif;
-  --font-accent: montserrat, sans-serif;
+	// typography
+	--font-base: satoshi, sans-serif;
+	--font-accent: montserrat, sans-serif;
 	--font-size-base: #{fluid(16, 14)};
 
-	--transition-duration: .2s;
-	--transition-duration-longer: .2s;
+	--transition-duration: 0.2s;
+	--transition-duration-longer: 0.2s;
 
 	--z-index-header: 100;
 

@@ -4,12 +4,13 @@
  *
  * @package Shop_Co
  */
+
 ?>
 <form role="search" method="get" class="search-form site-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 	<label class="site-search-form__field">
 		<span class="screen-reader-text"><?php esc_html_e( 'Search for:', 'shop-co' ); ?></span>
 		<span class="site-search-form__icon" aria-hidden="true">
-			<?php echo ShopCo_Icons::search(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<?php echo shop_co_get_icon( 'search' ); ?>
 		</span>
 		<input
 			type="search"

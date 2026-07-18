@@ -59,7 +59,7 @@ export class ProductGallery {
 				speed: 300,
 				thumbs: {
 					swiper: thumbsSwiper,
-				}
+				},
 			} );
 
 			if (

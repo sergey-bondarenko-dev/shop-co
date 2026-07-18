@@ -1,64 +1,65 @@
-@use '../helpers' as *;
+@use "../helpers" as *;
 
 .woocommerce-product-attributes {
-  --site-product-attributes-label-color: var(--shop-co-color-black);
-  --site-product-attributes-value-color: var(--shop-co-color-black-opacity-80);
-  --site-product-attributes-border-color: var(--shop-co-color-black-opacity-10);
-  --site-product-attributes-background-color: var(--shop-co-color-gray-2);
+	--site-product-attributes-label-color: var(--shop-co-color-black);
+	--site-product-attributes-value-color: var(--shop-co-color-black-opacity-80);
+	--site-product-attributes-border-color: var(--shop-co-color-black-opacity-10);
+	--site-product-attributes-background-color: var(--shop-co-color-gray-2);
 
-  @include site-border;
+	@include site-border;
 
-  display: grid;
-  width: 100%;
-  margin-block: fluid(24, 18) 0;
-  border-collapse: separate;
-  border-spacing: 0;
-  overflow: hidden;
-  border-radius: var(--shop-co-border-radius);
-  background-color: var(--site-product-attributes-background-color);
+	display: grid;
+	width: 100%;
+	margin-block: fluid(24, 18) 0;
+	border-collapse: separate;
+	border-spacing: 0;
+	overflow: hidden;
+	border-radius: var(--shop-co-border-radius);
+	background-color: var(--site-product-attributes-background-color);
 
-  tbody,
-  tr,
-  th,
-  td {
-    display: block;
-  }
+	tbody,
+	tr,
+	th,
+	td {
+		display: block;
+	}
 
-  tr {
-    display: grid;
-    grid-template-columns: minmax(180px, 0.35fr) 1fr;
+	tr {
+		display: grid;
+		grid-template-columns: minmax(180px, 0.35fr) 1fr;
 
-    &:not(:last-child) {
-      border-bottom: 1px solid var(--site-product-attributes-border-color);
-    }
+		&:not(:last-child) {
+			border-bottom: 1px solid var(--site-product-attributes-border-color);
+		}
 
-    @include mobile {
-      grid-template-columns: 1fr;
-    }
-  }
+		@include mobile {
+			grid-template-columns: 1fr;
+		}
+	}
 
-  th,
-  td {
-    padding: fluid(18, 14) fluid(24, 16);
-    text-align: left;
-    vertical-align: top;
-  }
+	th,
+	td {
+		padding: fluid(18, 14) fluid(24, 16);
+		text-align: left;
+		vertical-align: top;
+	}
 
-  th {
-    font-weight: 700;
-    color: var(--site-product-attributes-label-color);
-    background-color: var(--shop-co-color-white);
-  }
+	th {
+		font-weight: 700;
+		color: var(--site-product-attributes-label-color);
+		background-color: var(--shop-co-color-white);
+	}
 
-  td {
-    color: var(--site-product-attributes-value-color);
+	td {
+		color: var(--site-product-attributes-value-color);
 
-    p {
-      margin: 0;
-    }
+		p {
+			margin: 0;
+		}
 
-    a {
-      @include site-link;
-    }
-  }
+		a {
+
+			@include site-link;
+		}
+	}
 }

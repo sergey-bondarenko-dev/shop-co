@@ -1,7 +1,7 @@
-@use './../helpers' as *;
+@use "./../helpers" as *;
 
 .products {
-  --products-columns: var(--products-desktop-columns, 4);
+	--products-columns: var(--products-desktop-columns, 4);
 
 	display: grid;
 	grid-template-columns: repeat(var(--products-columns), minmax(0, 1fr));
@@ -11,30 +11,32 @@
 		grid-template-columns: 1fr;
 	}
 
-  @include container-down {
+	@include container-down {
 		--products-columns: var(--products-container-columns, 4);
-  }
+	}
 
 	@include tablet {
 		--products-columns: var(--products-tablet-columns, 3);
 	}
 
-  @include mobile {
+	@include mobile {
 		--products-columns: var(--products-mobile-columns, 2);
 	}
 
-  @include mobile-xs {
+	@include mobile-xs {
 		--products-columns: var(--products-mobile-xs-columns, 1);
 	}
 }
 
 .products-section {
+
 	.section__body {
 		display: flex;
 		flex-direction: column;
 		gap: fluid(36, 24);
 
 		.site-button {
+
 			@include mobile-above {
 				align-self: center;
 			}

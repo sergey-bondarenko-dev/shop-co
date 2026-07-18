@@ -6,89 +6,105 @@ $mobile-s: 480px;
 $mobile-xs: 359px;
 
 @mixin laptop-above {
-    @media (width > $laptop) {
-        @content;
-    }
+
+	@media (width > $laptop) {
+		@content;
+	}
 }
 
 @mixin laptop {
-    @media (width <= $laptop) {
-        @content;
-    }
+
+	@media (width <= $laptop) {
+		@content;
+	}
 }
 
 @mixin container-above {
-    @media (width > $container) {
-        @content;
-    }
+
+	@media (width > $container) {
+		@content;
+	}
 }
 
 @mixin container-down {
-    @media (width <= $container) {
-        @content;
-    }
+
+	@media (width <= $container) {
+		@content;
+	}
 }
 
 @mixin tablet-above {
-    @media (width > $tablet) {
-        @content;
-    }
+
+	@media (width > $tablet) {
+		@content;
+	}
 }
 
 @mixin tablet {
-    @media (width <= $tablet) {
-        @content;
-    }
+
+	@media (width <= $tablet) {
+		@content;
+	}
 }
 
 @mixin mobile-above {
-    @media (width > $mobile) {
-        @content;
-    }
+
+	@media (width > $mobile) {
+		@content;
+	}
 }
 
 @mixin mobile {
-    @media (width <= $mobile) {
-        @content;
-    }
+
+	@media (width <= $mobile) {
+		@content;
+	}
 }
 
 @mixin mobile-s-above {
-    @media (width > $mobile-s) {
-        @content;
-    }
+
+	@media (width > $mobile-s) {
+		@content;
+	}
 }
 
 @mixin mobile-s {
-    @media (width <= $mobile-s) {
-        @content;
-    }
+
+	@media (width <= $mobile-s) {
+		@content;
+	}
 }
 
 @mixin mobile-xs-above {
-    @media (width > $mobile-xs) {
-        @content;
-    }
+
+	@media (width > $mobile-xs) {
+		@content;
+	}
 }
 
 @mixin mobile-xs {
-    @media (width <= $mobile-xs) {
-        @content;
-    }
+
+	@media (width <= $mobile-xs) {
+		@content;
+	}
 }
 
 @mixin hover($hasActiveOnMobile: true) {
-    @media (any-hover: hover) {
-        &:hover {
-            @content;
-        }
-    }
 
-    @if ($hasActiveOnMobile) {
-        @media (any-hover: none) {
-            &:active {
-                @content;
-            }
-        }
-    }
+	@media (any-hover: hover) {
+
+		&:hover {
+			@content;
+		}
+	}
+
+	@if ($hasActiveOnMobile) {
+
+		@media (any-hover: none) {
+
+			&:active {
+				@content;
+			}
+		}
+	}
 }

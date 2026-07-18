@@ -15,7 +15,7 @@ if ( ! $product->is_purchasable() ) {
 	return;
 }
 
-echo wc_get_stock_html( $product ); // WPCS: XSS ok.
+echo wp_kses_post( wc_get_stock_html( $product ) );
 
 if ( $product->is_in_stock() ) : ?>
 
@@ -27,11 +27,15 @@ if ( $product->is_in_stock() ) : ?>
 		<?php
 		do_action( 'woocommerce_before_add_to_cart_quantity' );
 
+		// phpcs:disable WordPress.Security.NonceVerification.Missing -- WooCommerce verifies add-to-cart requests when processing the form; this only restores the submitted quantity.
+		$shop_co_input_value = isset( $_POST['quantity'] ) ? wc_stock_amount( sanitize_text_field( wp_unslash( $_POST['quantity'] ) ) ) : $product->get_min_purchase_quantity();
+		// phpcs:enable WordPress.Security.NonceVerification.Missing
+
 		woocommerce_quantity_input(
 			array(
 				'min_value'   => $product->get_min_purchase_quantity(),
 				'max_value'   => $product->get_max_purchase_quantity(),
-				'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( wp_unslash( $_POST['quantity'] ) ) : $product->get_min_purchase_quantity(), // WPCS: CSRF ok, input var ok.
+				'input_value' => $shop_co_input_value,
 			)
 		);
 

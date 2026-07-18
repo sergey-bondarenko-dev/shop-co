@@ -1,125 +1,122 @@
-@use '../helpers' as *;
+@use "../helpers" as *;
 
 .site-variations {
-  display: flex;
-  flex-direction: column;
-  position: relative;
+	display: flex;
+	flex-direction: column;
+	position: relative;
 
-  &__native {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
+	&__native {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
 
-  &__row {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+	&__row {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 
-    legend {
-      font-size: inherit;
-    }
+		legend {
+			font-size: inherit;
+		}
 
-    input[type="radio"] {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      cursor: pointer;
-    }
-  }
+		input[type="radio"] {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+			cursor: pointer;
+		}
+	}
 
-  &__options {
-    display: flex;
-    gap: fluid(12, 8);
+	&__options {
+		display: flex;
+		gap: fluid(12, 8);
 
-    &--color {
-      gap: fluid(16, 12);
-    }
-  }
+		&--color {
+			gap: fluid(16, 12);
+		}
+	}
 
-  &__option {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: fluid(12, 10) fluid(24, 20);
-    background-color: var(--shop-co-color-gray-2);
-    border-radius: var(--shop-co-border-radius-2);
-    text-transform: capitalize;
+	&__option {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: fluid(12, 10) fluid(24, 20);
+		background-color: var(--shop-co-color-gray-2);
+		border-radius: var(--shop-co-border-radius-2);
+		text-transform: capitalize;
 
-    &:has(input:checked) {
-      background-color: var(--shop-co-color-black);
-      
-      span {
-        color: var(--shop-co-color-white);
-        opacity: 1;
-      }
-    }
+		&:has(input:checked) {
+			background-color: var(--shop-co-color-black);
 
-    &.is-disabled {
-      cursor: not-allowed;
-      opacity: 0.45;
-    }
+			span {
+				color: var(--shop-co-color-white);
+				opacity: 1;
+			}
+		}
 
-    &--color {
-      width: 40px;
-      height: 40px;
-      padding: 0;
-      background-color: var(--site-variation-color);
-      border: 1px solid var(--shop-co-color-black-opacity-10);
-      border-radius: 50%;
+		&.is-disabled {
+			cursor: not-allowed;
+			opacity: 0.45;
+		}
 
-      &::before {
-        content: "";
-        position: absolute;
-        inset: -4px;
-        border: 2px solid transparent;
-        border-radius: inherit;
-        transition: border-color var(--transition-duration);
-      }
+		&--color {
+			width: 40px;
+			height: 40px;
+			padding: 0;
+			background-color: var(--site-variation-color);
+			border: 1px solid var(--shop-co-color-black-opacity-10);
+			border-radius: 50%;
 
-      &:has(input:checked) {
-        background-color: var(--site-variation-color);
+			&::before {
+				content: "";
+				position: absolute;
+				inset: -4px;
+				border: 2px solid transparent;
+				border-radius: inherit;
+				transition: border-color var(--transition-duration);
+			}
 
-        &::before {
-          border-color: var(--shop-co-color-black);
-        }
-      }
-    }
-  }
+			&:has(input:checked) {
+				background-color: var(--site-variation-color);
 
-  &__swatch {
-    width: 100%;
-    height: 100%;
-    border-radius: inherit;
-    background-color: var(--site-variation-color);
-  }
+				&::before {
+					border-color: var(--shop-co-color-black);
+				}
+			}
+		}
+	}
 
-  .reset_variations {
-    width: fit-content;
-    margin-bottom: 24px;
-  }
+	&__swatch {
+		width: 100%;
+		height: 100%;
+		border-radius: inherit;
+		background-color: var(--site-variation-color);
+	}
 
-  hr {
-    margin-block: 24px;
+	.reset_variations {
+		padding: 6px 24px;
+		min-width: unset;
+		min-height: unset;
+		position: absolute;
+		visibility: visible;
+		top: 10px;
+		right: 0;
+		width: fit-content;
+		margin-bottom: 24px;
+	}
 
-    &:first-child {
-      margin-top: 0;
-    }
-  }
+	hr {
+		margin-block: 24px;
 
-  .reset_variations {
-    padding: 6px 24px;
-    min-width: unset;
-    min-height: unset;
-    position: absolute;
-    visibility: visible;
-    top: 10px;
-    right: 0;
-  }
+		&:first-child {
+			margin-top: 0;
+		}
+	}
 }

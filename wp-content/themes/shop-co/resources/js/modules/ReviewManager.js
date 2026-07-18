@@ -1,168 +1,186 @@
-import { assertHtmlElement, fetchHtml } from "../helpers";
+import { assertHtmlElement, fetchHtml } from '../helpers';
 
 export class ReviewManager {
-  initialized = false;
+	initialized = false;
 
-  constructor() {
-    this.rootElement = document.getElementById('comments');
-    this.commentListElement = document.getElementById('comment-list');
-    this.loadMoreCommentsButton = document.getElementById('load-more-comments');
-    this.loaderElement = document.getElementById('comments-loading');
-    this.sortingElement = document.getElementById('comments-sort');
+	constructor() {
+		this.rootElement = document.getElementById( 'comments' );
+		this.commentListElement = document.getElementById( 'comment-list' );
+		this.loadMoreCommentsButton =
+			document.getElementById( 'load-more-comments' );
+		this.loaderElement = document.getElementById( 'comments-loading' );
+		this.sortingElement = document.getElementById( 'comments-sort' );
 
-    this.validate();
+		this.validate();
 
-    this.options = JSON.parse(this.rootElement.dataset.options);
-  }
+		this.options = JSON.parse( this.rootElement.dataset.options );
+	}
 
-  validate() {
-    assertHtmlElement(this.rootElement, '#comments');
-    assertHtmlElement(this.commentListElement, '#comment-list');
-    assertHtmlElement(this.loadMoreCommentsButton, '#load-more-comments');
-    assertHtmlElement(this.loaderElement, '#comments-loading');
-    assertHtmlElement(this.sortingElement, '#comments-sort');
-  }
+	validate() {
+		assertHtmlElement( this.rootElement, '#comments' );
+		assertHtmlElement( this.commentListElement, '#comment-list' );
+		assertHtmlElement( this.loadMoreCommentsButton, '#load-more-comments' );
+		assertHtmlElement( this.loaderElement, '#comments-loading' );
+		assertHtmlElement( this.sortingElement, '#comments-sort' );
+	}
 
-  updateOptions(cb) {
-    this.options = cb(this.options);
-    this.rootElement.dataset.options = JSON.stringify(this.options);
-  }
+	updateOptions( cb ) {
+		this.options = cb( this.options );
+		this.rootElement.dataset.options = JSON.stringify( this.options );
+	}
 
-  getTotalCount() {
-    return this.options.totalCount;
-  }
+	getTotalCount() {
+		return this.options.totalCount;
+	}
 
-  getTotalPages() {
-    return this.options.totalPages;
-  }
+	getTotalPages() {
+		return this.options.totalPages;
+	}
 
-  getPerPage() {
-    return this.options.perPage;
-  }
+	getPerPage() {
+		return this.options.perPage;
+	}
 
-  getCurrentPage() {
-    return this.options.currentPage;
-  }
+	getCurrentPage() {
+		return this.options.currentPage;
+	}
 
-  getSorting() {
-    return this.sortingElement.value;
-  }
+	getSorting() {
+		return this.sortingElement.value;
+	}
 
-  getDefaultCommentsPage() {
-    return this.options.defaultCommentsPage;
-  }
+	getDefaultCommentsPage() {
+		return this.options.defaultCommentsPage;
+	}
 
-  getCurrentCommentsCount() {
-    return this.commentListElement.querySelectorAll('li').length;
-  }
+	getCurrentCommentsCount() {
+		return this.commentListElement.querySelectorAll( 'li' ).length;
+	}
 
-  getBaseCommentsUrl() {
-    const url = new URL(window.location.href);
+	getBaseCommentsUrl() {
+		const url = new URL( window.location.href );
 
-    url.pathname = url.pathname.replace(/\/comment-page-\d+\/?$/, '/');
-    url.searchParams.delete('reviews_order');
+		url.pathname = url.pathname.replace( /\/comment-page-\d+\/?$/, '/' );
+		url.searchParams.delete( 'reviews_order' );
 
-    return url;
-  }
+		return url;
+	}
 
-  init() {
-    if (this.initialized) {
-      return;
-    }
+	init() {
+		if ( this.initialized ) {
+			return;
+		}
 
-    this.initialized = true;
-    
-    this.loadMoreCommentsButton.hidden = !(this.getTotalCount() > this.getCurrentCommentsCount());
+		this.initialized = true;
 
-    this.rootElement.addEventListener('click', this.onClickHandle);
-    this.rootElement.addEventListener('change', this.onChangeHandle);
+		this.loadMoreCommentsButton.hidden = ! (
+			this.getTotalCount() > this.getCurrentCommentsCount()
+		);
 
-    if (this.getCurrentPage() > 1) {
-      const url = this.getBaseCommentsUrl();
+		this.rootElement.addEventListener( 'click', this.onClickHandle );
+		this.rootElement.addEventListener( 'change', this.onChangeHandle );
 
-      url.searchParams.set('reviews_order', this.getSorting());
-      url.hash = 'reviews';
-      window.history.replaceState({}, '', url.href);
+		if ( this.getCurrentPage() > 1 ) {
+			const url = this.getBaseCommentsUrl();
 
-      this.fetchComments(this.getSorting());
-    }
-  }
+			url.searchParams.set( 'reviews_order', this.getSorting() );
+			url.hash = 'reviews';
+			window.history.replaceState( {}, '', url.href );
 
-  onClickHandle = (event) => {
-    const closestButton = event.target.closest('button');
+			this.fetchComments( this.getSorting() );
+		}
+	}
 
-    if (closestButton && closestButton.id === this.loadMoreCommentsButton.id) {
-      this.loadMoreComments();
-    }
-  }
+	onClickHandle = ( event ) => {
+		const closestButton = event.target.closest( 'button' );
 
-  onChangeHandle = (event) => {
-    const closestSelect = event.target.closest('select');
+		if (
+			closestButton &&
+			closestButton.id === this.loadMoreCommentsButton.id
+		) {
+			this.loadMoreComments();
+		}
+	};
 
-    if (closestSelect && closestSelect.id === this.sortingElement.id) {
-      this.fetchComments(event.target.value);
-    }
-  }
+	onChangeHandle = ( event ) => {
+		const closestSelect = event.target.closest( 'select' );
 
-  setLoading(loading = true) {
-    this.loadMoreCommentsButton.disabled = loading;
-    this.loaderElement.ariaHidden = !loading;
-  }
+		if ( closestSelect && closestSelect.id === this.sortingElement.id ) {
+			this.fetchComments( event.target.value );
+		}
+	};
 
-  loadMoreComments() {
-    let currentPage = this.getCurrentPage();
-    currentPage++;
+	setLoading( loading = true ) {
+		this.loadMoreCommentsButton.disabled = loading;
+		this.loaderElement.ariaHidden = ! loading;
+	}
 
-    const url = this.getBaseCommentsUrl();
-    const pathname = url.pathname.endsWith('/') ? url.pathname.slice(0, -1) : url.pathname;
+	loadMoreComments() {
+		let currentPage = this.getCurrentPage();
+		currentPage++;
 
-    url.pathname = `${pathname}/comment-page-${currentPage}/`;
-    url.searchParams.set('reviews_order', this.getSorting());
+		const url = this.getBaseCommentsUrl();
+		const pathname = url.pathname.endsWith( '/' )
+			? url.pathname.slice( 0, -1 )
+			: url.pathname;
 
-    this.fetch(url.href, (dom) => {
-      const commentsElement = dom.getElementById('comments');
-      const reviewElements = commentsElement.querySelectorAll('li.review');
+		url.pathname = `${ pathname }/comment-page-${ currentPage }/`;
+		url.searchParams.set( 'reviews_order', this.getSorting() );
 
-      reviewElements.forEach((element) => {
-        if (this.commentListElement.querySelector('#' + element.id)) {
-          return;
-        }
+		this.fetch( url.href, ( dom ) => {
+			const commentsElement = dom.getElementById( 'comments' );
+			const reviewElements =
+				commentsElement.querySelectorAll( 'li.review' );
 
-        this.commentListElement.append(element);
-      });
+			reviewElements.forEach( ( element ) => {
+				if (
+					this.commentListElement.querySelector( '#' + element.id )
+				) {
+					return;
+				}
 
-      this.updateOptions((options) => ({ ...options, currentPage }) );
-      this.loadMoreCommentsButton.hidden = this.getCurrentPage() === this.getTotalPages();
-    });
-  }
+				this.commentListElement.append( element );
+			} );
 
-  fetchComments(sortingValue) {
-    const url = this.getBaseCommentsUrl();
-    url.searchParams.set('reviews_order', sortingValue);
+			this.updateOptions( ( options ) => ( {
+				...options,
+				currentPage,
+			} ) );
+			this.loadMoreCommentsButton.hidden =
+				this.getCurrentPage() === this.getTotalPages();
+		} );
+	}
 
-    this.fetch(url.href, (dom) => {
-      const root = dom.getElementById('comments');
-      const list = dom.getElementById('comment-list');
+	fetchComments( sortingValue ) {
+		const url = this.getBaseCommentsUrl();
+		url.searchParams.set( 'reviews_order', sortingValue );
 
-      this.commentListElement.innerHTML = list.innerHTML;
-      this.updateOptions(() => JSON.parse(root.dataset.options));
+		this.fetch( url.href, ( dom ) => {
+			const root = dom.getElementById( 'comments' );
+			const list = dom.getElementById( 'comment-list' );
 
-      this.loadMoreCommentsButton.hidden = !(this.getTotalCount() > this.getCurrentCommentsCount());
-    });
-  }
+			this.commentListElement.innerHTML = list.innerHTML;
+			this.updateOptions( () => JSON.parse( root.dataset.options ) );
 
-  fetch(url, onSuccess) {
-    this.setLoading(true);
+			this.loadMoreCommentsButton.hidden = ! (
+				this.getTotalCount() > this.getCurrentCommentsCount()
+			);
+		} );
+	}
 
-    fetchHtml(url)
-      .then((dom) => {
-        onSuccess(dom);
-      })
-      .catch((error) => {
-        alert( 'Error' )
-        console.error(error);
-      })
-      .finally(() => this.setLoading(false));
-  
-  }
+	fetch( url, onSuccess ) {
+		this.setLoading( true );
+
+		fetchHtml( url )
+			.then( ( dom ) => {
+				onSuccess( dom );
+			} )
+			.catch( ( error ) => {
+				// eslint-disable-next-line no-alert
+				alert( 'Error' );
+				// eslint-disable-next-line no-console
+				console.error( error );
+			} )
+			.finally( () => this.setLoading( false ) );
+	}
 }

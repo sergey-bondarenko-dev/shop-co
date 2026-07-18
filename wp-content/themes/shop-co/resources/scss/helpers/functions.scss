@@ -1,19 +1,19 @@
-@use 'constants' as *;
-@use 'sass:math';
+@use "constants" as *;
+@use "sass:math";
 
 @function fluid($max: 100, $min: 10) {
-    $maxViewportWidth: $container-desktop-width;
-    $minViewportWidth: $min-viewport-width;
+	$maxViewportWidth: $container-desktop-width;
+	$minViewportWidth: $min-viewport-width;
 
-    $maxSize: math.div($max, 16);
-    $minSize: math.div($min, 16);
-    $maxWidth: math.div($maxViewportWidth, 16);
-    $minWidth: math.div($minViewportWidth, 16);
+	$maxSize: math.div($max, 16);
+	$minSize: math.div($min, 16);
+	$maxWidth: math.div($maxViewportWidth, 16);
+	$minWidth: math.div($minViewportWidth, 16);
 
-    $slope: math.div(($maxSize - $minSize), ($maxWidth - $minWidth));
-    $yAxisIntersections: -$minWidth * $slope + $minSize;
+	$slope: math.div(($maxSize - $minSize), ($maxWidth - $minWidth));
+	$yAxisIntersections: -$minWidth * $slope + $minSize;
 
-    @return clamp(#{$minSize * 1rem},
-        #{$yAxisIntersections * 1rem} + #{$slope * 100vw},
-        #{$maxSize * 1rem});
+	@return clamp(#{$minSize * 1rem},
+	#{$yAxisIntersections * 1rem} + #{$slope * 100vw},
+	#{$maxSize * 1rem});
 }

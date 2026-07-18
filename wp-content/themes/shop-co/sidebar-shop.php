@@ -23,7 +23,7 @@ if ( ! ( is_shop() || is_product_taxonomy() ) || ! is_active_sidebar( 'shop-filt
 		<div class="d-flex align-items-center gap-3">
 			<p class="catalog-sidebar__title h5" id="catalog-filters-title"><?php esc_html_e( 'Filters', 'shop-co' ); ?></p>
 			<span class="icon opacity-60 hidden-mobile" aria-hidden="true">
-				<?php echo ShopCo_Icons::settings(); ?>
+				<?php echo shop_co_get_icon( 'settings' ); ?>
 			</span>
 		</div>
 		<button

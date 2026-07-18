@@ -31,7 +31,9 @@ export class ProductVariations {
 				}
 
 				select.value = radio.value;
-				select.dispatchEvent( new Event( 'change', { bubbles: true } ) );
+				select.dispatchEvent(
+					new Event( 'change', { bubbles: true } )
+				);
 			} );
 		} );
 
@@ -44,11 +46,13 @@ export class ProductVariations {
 		} );
 
 		if ( window.jQuery ) {
-			window.jQuery( form ).on( 'woocommerce_update_variation_values', () => {
-				selects.forEach( ( select ) => {
-					ProductVariations.syncRadiosFromSelect( form, select );
+			window
+				.jQuery( form )
+				.on( 'woocommerce_update_variation_values', () => {
+					selects.forEach( ( select ) => {
+						ProductVariations.syncRadiosFromSelect( form, select );
+					} );
 				} );
-			} );
 		}
 	}
 
@@ -70,10 +74,9 @@ export class ProductVariations {
 
 			radio.checked = radio.value === select.value;
 			radio.disabled = option ? option.disabled : true;
-			radio.closest( 'label' )?.classList.toggle(
-				'is-disabled',
-				radio.disabled
-			);
+			radio
+				.closest( 'label' )
+				?.classList.toggle( 'is-disabled', radio.disabled );
 		} );
 	}
 }

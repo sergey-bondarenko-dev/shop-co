@@ -8,6 +8,7 @@
 		"build": "wp-scripts build --webpack-src-dir=resources --output-path=build",
 		"lint:js": "wp-scripts lint-js resources/js webpack.config.js",
 		"lint:style": "wp-scripts lint-style resources/**/*.scss",
+		"lint:style-fix": "wp-scripts lint-style resources/**/*.scss --fix",
 		"format": "wp-scripts format resources webpack.config.js package.json"
 	},
 	"devDependencies": {
@@ -17,6 +18,7 @@
 	},
 	"dependencies": {
 		"@a1rth/css-normalize": "^1.2.4",
+		"bootstrap": "^5.3.8",
 		"fslightbox": "^3.7.5",
 		"nouislider": "^15.8.1",
 		"swiper": "^12.1.4"

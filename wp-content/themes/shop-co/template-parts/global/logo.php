@@ -11,18 +11,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$args = wp_parse_args(
+$shop_co_args = wp_parse_args(
 	$args,
 	array(
 		'class' => '',
 	)
 );
 
-$extra_classes = array_filter( array_map( 'sanitize_html_class', preg_split( '/\s+/', (string) $args['class'] ) ) );
-$class         = trim( 'site-logo ' . implode( ' ', $extra_classes ) );
+$shop_co_extra_classes = array_filter( array_map( 'sanitize_html_class', preg_split( '/\s+/', (string) $shop_co_args['class'] ) ) );
+$shop_co_class         = trim( 'site-logo ' . implode( ' ', $shop_co_extra_classes ) );
 ?>
 
-<div class="<?php echo esc_attr( $class ); ?>">
+<div class="<?php echo esc_attr( $shop_co_class ); ?>">
 	<?php if ( has_custom_logo() ) : ?>
 		<?php the_custom_logo(); ?>
 	<?php else : ?>

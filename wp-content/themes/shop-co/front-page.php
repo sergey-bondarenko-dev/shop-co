@@ -36,7 +36,7 @@ get_header();
 			<div class="hero__decor-inner">
 				<img 
 					class="hero__decor-image" 
-					src="<?php echo esc_url( ShopCo_Assets::asset( 'images/hero.png' ) ); ?>"
+					src="<?php echo esc_url( Shop_Co_Assets::asset( 'images/hero.png' ) ); ?>"
 					width="640"
 					height="960"
 					alt=""
@@ -45,7 +45,7 @@ get_header();
 				>
 				<img 
 					class="hero__decor-star hero__decor-star--big"
-					src="<?php echo esc_url( ShopCo_Assets::asset( '/icons/decor-star.svg' ) ); ?>"
+					src="<?php echo esc_url( Shop_Co_Assets::asset( '/icons/decor-star.svg' ) ); ?>"
 					alt=""
 					width="104"
 					height="104"
@@ -54,7 +54,7 @@ get_header();
 				>
 				<img 
 					class="hero__decor-star"
-					src="<?php echo esc_url( ShopCo_Assets::asset( '/icons/decor-star.svg' ) ); ?>"
+					src="<?php echo esc_url( Shop_Co_Assets::asset( '/icons/decor-star.svg' ) ); ?>"
 					alt=""
 					width="56"
 					height="56"
@@ -65,11 +65,11 @@ get_header();
 		</div>
 		<div class="hero__brands">
 			<div class="hero__brands-inner container">
-				<img src="<?php echo esc_url( ShopCo_Assets::asset( 'images/brands/1.svg' ) ); ?>" width="167" height="33" alt="">
-				<img src="<?php echo esc_url( ShopCo_Assets::asset( 'images/brands/2.svg' ) ); ?>" width="91" height="38" alt="">
-				<img src="<?php echo esc_url( ShopCo_Assets::asset( 'images/brands/3.svg' ) ); ?>" width="156" height="36" alt="">
-				<img src="<?php echo esc_url( ShopCo_Assets::asset( 'images/brands/4.svg' ) ); ?>" width="194" height="32" alt="">
-				<img src="<?php echo esc_url( ShopCo_Assets::asset( 'images/brands/5.svg' ) ); ?>" width="207" height="33" alt="">
+				<img src="<?php echo esc_url( Shop_Co_Assets::asset( 'images/brands/1.svg' ) ); ?>" width="167" height="33" alt="">
+				<img src="<?php echo esc_url( Shop_Co_Assets::asset( 'images/brands/2.svg' ) ); ?>" width="91" height="38" alt="">
+				<img src="<?php echo esc_url( Shop_Co_Assets::asset( 'images/brands/3.svg' ) ); ?>" width="156" height="36" alt="">
+				<img src="<?php echo esc_url( Shop_Co_Assets::asset( 'images/brands/4.svg' ) ); ?>" width="194" height="32" alt="">
+				<img src="<?php echo esc_url( Shop_Co_Assets::asset( 'images/brands/5.svg' ) ); ?>" width="207" height="33" alt="">
 			</div>
 		</div>
 	</div>

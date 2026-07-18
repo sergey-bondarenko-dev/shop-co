@@ -1,8 +1,14 @@
 <?php
+/**
+ * WooCommerce template functions.
+ *
+ * @package Shop_Co
+ */
 
 /**
  * Get newest published WooCommerce products.
  *
+ * @param int $limit Maximum number of products.
  * @return WC_Product[]
  */
 function shop_co_get_new_products( int $limit = 8 ): array {
@@ -19,6 +25,7 @@ function shop_co_get_new_products( int $limit = 8 ): array {
 /**
  * Get top-selling published WooCommerce products.
  *
+ * @param int $limit Maximum number of products.
  * @return WC_Product[]
  */
 function shop_co_get_top_selling_products( int $limit = 8 ): array {
@@ -26,6 +33,7 @@ function shop_co_get_top_selling_products( int $limit = 8 ): array {
 		array(
 			'status'   => 'publish',
 			'limit'    => $limit,
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Total sales determine the best-selling products.
 			'meta_key' => 'total_sales',
 			'orderby'  => 'meta_value_num',
 			'order'    => 'DESC',
@@ -36,6 +44,8 @@ function shop_co_get_top_selling_products( int $limit = 8 ): array {
 /**
  * Get products related to a product.
  *
+ * @param WC_Product $product Product object.
+ * @param int        $limit   Maximum number of products.
  * @return WC_Product[]
  */
 function shop_co_get_related_products( WC_Product $product, int $limit = 4 ): array {
@@ -55,6 +65,9 @@ function shop_co_get_related_products( WC_Product $product, int $limit = 4 ): ar
 	);
 }
 
+/**
+ * Open the product loop link using theme markup.
+ */
 function shop_co_template_loop_product_link_open() {
 	global $product;
 
@@ -62,11 +75,19 @@ function shop_co_template_loop_product_link_open() {
 		return;
 	}
 
-	$link = apply_filters( 'woocommerce_loop_product_link', get_the_permalink(), $product );
+	$link = apply_filters(
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce hook.
+		'woocommerce_loop_product_link',
+		get_the_permalink(),
+		$product
+	);
 
 	echo '<a href="' . esc_url( $link ) . '" class="site-product-card__link woocommerce-LoopProduct-link">';
 }
 
+/**
+ * Print the product loop thumbnail using theme markup.
+ */
 function shop_co_template_loop_product_thumbnail() {
 	$img = woocommerce_get_product_thumbnail(
 		'woocommerce_thumbnail',
@@ -74,17 +95,29 @@ function shop_co_template_loop_product_thumbnail() {
 			'class' => 'site-product-card__thumbnail',
 		),
 	);
-	echo "<span class='site-product-card__thumbnail-wrapper'>$img</span>";
-}
-
-function shop_co_template_loop_product_title() {
-	$classes = 'site-product-card__title woocommerce-loop-product__title h5';
-
-	echo '<h2 class="' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', $classes ) ) . '">' . get_the_title() . '</h2>';
+	echo '<span class="site-product-card__thumbnail-wrapper">' . wp_kses_post( $img ) . '</span>';
 }
 
 /**
- * @param WC_Product&WC_Product_Variable $product
+ * Print the product loop title using theme markup.
+ */
+function shop_co_template_loop_product_title() {
+	$classes = 'site-product-card__title woocommerce-loop-product__title h5';
+	$classes = apply_filters(
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce hook.
+		'woocommerce_product_loop_title_classes',
+		$classes
+	);
+
+	echo '<h2 class="' . esc_attr( $classes ) . '">' . esc_html( get_the_title() ) . '</h2>';
+}
+
+/**
+ * Print product price markup.
+ *
+ * @param WC_Product $product       Product object.
+ * @param bool       $show_discount Whether to show the discount percentage.
+ * @param string     $wrapper_class Additional wrapper CSS class.
  */
 function shop_co_template_price( WC_Product $product, bool $show_discount = true, string $wrapper_class = '' ): void {
 	if ( ! ( $product instanceof WC_Product ) ) {
@@ -151,6 +184,13 @@ function shop_co_template_price( WC_Product $product, bool $show_discount = true
 	<?php
 }
 
+/**
+ * Print product rating markup.
+ *
+ * @param float  $rating        Product rating.
+ * @param string $wrapper_class Additional wrapper CSS class.
+ * @param bool   $show_value    Whether to show the numeric rating.
+ */
 function shop_co_template_rating( float $rating, string $wrapper_class = '', bool $show_value = true ): void {
 	$rating = max( 0.0, min( 5.0, $rating ) );
 
@@ -165,7 +205,7 @@ function shop_co_template_rating( float $rating, string $wrapper_class = '', boo
 		)
 	);
 	$stars_count = (int) ceil( $rating );
-	$star_icon   = ShopCo_Assets::asset( 'icons/star.svg' );
+	$star_icon   = Shop_Co_Assets::asset( 'icons/star.svg' );
 	?>
 	<span class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 		<span class="site-rating__stars">
@@ -192,8 +232,14 @@ function shop_co_template_rating( float $rating, string $wrapper_class = '', boo
 	<?php
 }
 
+/**
+ * Customize WooCommerce breadcrumb markup.
+ *
+ * @param array $defaults Breadcrumb defaults.
+ * @return array Modified breadcrumb defaults.
+ */
 function shop_co_woocommerce_breadcrumb_defaults( array $defaults ): array {
-	$chevron_right_svg = ShopCo_Icons::chevron_right();
+	$chevron_right_svg = shop_co_get_icon( 'chevron_right' );
 
 	$defaults['delimiter']   = '<span class="breadcrumbs__separator opacity-60">' . $chevron_right_svg . '</span>';
 	$defaults['wrap_before'] = '<nav class="breadcrumbs woocommerce-breadcrumb" aria-label="Breadcrumbs">';
@@ -207,6 +253,9 @@ function shop_co_woocommerce_breadcrumb_defaults( array $defaults ): array {
 
 /**
  * Use the theme pagination labels in WooCommerce product archives.
+ *
+ * @param array $args Pagination arguments.
+ * @return array Modified pagination arguments.
  */
 function shop_co_woocommerce_pagination_args( array $args ): array {
 	$args['prev_text'] = shop_co_get_pagination_previous_text();
@@ -220,30 +269,34 @@ add_filter( 'woocommerce_pagination_args', 'shop_co_woocommerce_pagination_args'
 
 add_action( 'woocommerce_before_quantity_input_field', 'shop_co_woocommerce_before_quantity_input_field_action' );
 
+/**
+ * Print the decrement button before a quantity input.
+ */
 function shop_co_woocommerce_before_quantity_input_field_action(): void {
 	?>
-	<button type="button" class="quantity__button quantity__button--minus" aria-label="<?php esc_attr_e( 'Decrease quantity', 'woocommerce' ); ?>">
-		<?php echo ShopCo_Icons::minus(); ?>
+	<button type="button" class="quantity__button quantity__button--minus" aria-label="<?php esc_attr_e( 'Decrease quantity', 'shop-co' ); ?>">
+		<?php echo shop_co_get_icon( 'minus' ); ?>
 	</button>
 	<?php
 }
 
 add_action( 'woocommerce_after_quantity_input_field', 'shop_co_woocommerce_after_quantity_input_field_action' );
 
+/**
+ * Print the increment button after a quantity input.
+ */
 function shop_co_woocommerce_after_quantity_input_field_action(): void {
 	?>
-	<button type="button" class="quantity__button quantity__button--plus" aria-label="<?php esc_attr_e( 'Increase quantity', 'woocommerce' ); ?>">
-		<?php echo ShopCo_Icons::plus(); ?>
+	<button type="button" class="quantity__button quantity__button--plus" aria-label="<?php esc_attr_e( 'Increase quantity', 'shop-co' ); ?>">
+		<?php echo shop_co_get_icon( 'plus' ); ?>
 	</button>
 	<?php
 }
 
 /**
- * @param array{
- *  options: array<int, string>,
- *  attribute: string,
- *  product: WC_Product
- * } $args
+ * Print radio buttons for a variation attribute.
+ *
+ * @param array $args Variation attribute arguments.
  */
 function shop_co_wc_radio_buttons_variation_attribute_options( $args = array() ) {
 	$options   = $args['options'] ?? null;
@@ -264,8 +317,15 @@ function shop_co_wc_radio_buttons_variation_attribute_options( $args = array() )
 		<?php foreach ( $options as $option ) : ?>
 			<?php $id = sanitize_title( $field_name . '_' . $option ); ?>
 			<?php
-			$option_label = apply_filters( 'woocommerce_variation_option_name', $option, null, $attribute, $product );
-			$color_value  = $is_color_attribute ? shop_co_wc_get_variation_color_value( $option ) : '';
+			$option_label = apply_filters(
+				// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce hook.
+				'woocommerce_variation_option_name',
+				$option,
+				null,
+				$attribute,
+				$product
+			);
+			$color_value = $is_color_attribute ? shop_co_wc_get_variation_color_value( $option ) : '';
 			?>
 			<label
 				class="site-variations__option<?php echo $is_color_attribute ? ' site-variations__option--color' : ''; ?>"
@@ -320,6 +380,12 @@ function shop_co_wc_get_variation_colors(): array {
 	);
 }
 
+/**
+ * Return the display value for a variation color.
+ *
+ * @param string $option Variation color option.
+ * @return string CSS color value.
+ */
 function shop_co_wc_get_variation_color_value( string $option ): string {
 	$colors = shop_co_wc_get_variation_colors();
 
@@ -375,7 +441,7 @@ function shop_co_woocommerce_catalog_filters_button(): void {
 		data-bs-target="#catalog-filters-offcanvas"
 		aria-controls="catalog-filters-offcanvas"
 		aria-label="<?php esc_attr_e( 'Open catalog filters', 'shop-co' ); ?>">
-		<?php echo ShopCo_Icons::settings(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo shop_co_get_icon( 'settings' ); ?>
 	</button>
 	<?php
 }
@@ -423,6 +489,10 @@ function shop_co_woocommerce_product_faqs_tab() {
 
 	wc_get_template( 'single-product/tabs/faqs.php' );
 }
+
+/**
+ * Print review comment text using theme markup.
+ */
 function shop_co_woocommerce_review_display_comment_text() {
 	echo '<div class="testimonial-card__content opacity-60">';
 	comment_text();
@@ -431,6 +501,9 @@ function shop_co_woocommerce_review_display_comment_text() {
 
 /**
  * Apply the theme button component to the checkout submit button.
+ *
+ * @param string $button_html Checkout button markup.
+ * @return string Modified checkout button markup.
  */
 function shop_co_woocommerce_order_button_html( string $button_html ): string {
 	return str_replace( 'class="button alt', 'class="site-button button alt', $button_html );

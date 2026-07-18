@@ -1,37 +1,37 @@
-@use '../helpers' as *;
+@use "../helpers" as *;
 
 .site-close-button {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  color: currentColor;
-  background-color: transparent;
-  border: 0;
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	color: currentcolor;
+	background-color: transparent;
+	border: 0;
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    width: 17px;
-    height: 2px;
-    background-color: currentColor;
-    border-radius: 999px;
-    transition-duration: var(--transition-duration);
-  }
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		width: 17px;
+		height: 2px;
+		background-color: currentcolor;
+		border-radius: 999px;
+		transition-duration: var(--transition-duration);
+	}
 
-  &::before {
-    transform: rotate(45deg);
-  }
+	&::before {
+		transform: rotate(45deg);
+	}
 
-  &::after {
-    transform: rotate(-45deg);
-  }
+	&::after {
+		transform: rotate(-45deg);
+	}
 
-  @include hover {
-    cursor: pointer;
-  }
+	@include hover {
+		cursor: pointer;
+	}
 }

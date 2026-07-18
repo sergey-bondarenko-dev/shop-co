@@ -7,15 +7,22 @@
  * @version 9.6.0
  */
 
-
-
 defined( 'ABSPATH' ) || exit;
 
 global $product;
 
-/** @var array<string, array<int, string>> $attributes */
+/**
+ * Product attributes used to build variation controls.
+ *
+ * @var array<string, array<int, string>> $attributes Variation attributes.
+ */
 $attributes ??= array();
-/** @var array $available_variations */
+
+/**
+ * Variations available for the current product.
+ *
+ * @var array $available_variations Available product variations.
+ */
 $available_variations ??= array();
 
 $attribute_keys  = array_keys( $attributes );
@@ -23,7 +30,7 @@ $variations_json = wp_json_encode( $available_variations );
 $variations_attr = function_exists( 'wc_esc_json' ) ? wc_esc_json( $variations_json ) : _wp_specialchars( $variations_json, ENT_QUOTES, 'UTF-8', true );
 
 do_action( 'woocommerce_before_add_to_cart_form' ); ?>
-<form class="variations_form cart" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data' data-product_id="<?php echo absint( $product->get_id() ); ?>" data-product_variations="<?php echo $variations_attr; // WPCS: XSS ok. ?>">
+<form class="variations_form cart" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data' data-product_id="<?php echo absint( $product->get_id() ); ?>" data-product_variations="<?php echo esc_attr( $variations_attr ); ?>">
 	<?php do_action( 'woocommerce_before_variations_form' ); ?>
 
 	<?php if ( empty( $available_variations ) && false !== $available_variations ) : ?>
@@ -33,7 +40,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 			<hr class="site-border">
 			<?php foreach ( $attributes as $attribute_name => $options ) : ?>
 				<fieldset class="site-variations__row">
-					<legend class="opacity-60"><?php echo wc_attribute_label( $attribute_name ); // WPCS: XSS ok. ?></legend>
+					<legend class="opacity-60"><?php echo esc_html( wc_attribute_label( $attribute_name ) ); ?></legend>
 					<?php
 						shop_co_wc_radio_buttons_variation_attribute_options(
 							array(
@@ -52,7 +59,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 			<tbody>
 				<?php foreach ( $attributes as $attribute_name => $options ) : ?>
 					<tr>
-						<th class="label"><label for="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"><?php echo wc_attribute_label( $attribute_name ); // WPCS: XSS ok. ?></label></th>
+						<th class="label"><label for="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"><?php echo esc_html( wc_attribute_label( $attribute_name ) ); ?></label></th>
 						<td class="value">
 							<?php
 								wc_dropdown_variation_attribute_options(
