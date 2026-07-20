@@ -461,6 +461,7 @@
 			display: inline-flex;
 			align-items: center;
 			justify-content: center;
+			width: 100%;
 			min-width: fluid(180, 150);
 			min-height: 50px;
 			padding: 12px 24px;
@@ -601,12 +602,12 @@
 		}
 	}
 
-	.woocommerce > h2:has(+ .woocommerce-form-login) {
-		width: min(100%, 620px);
-		margin: 0 auto 16px;
+	.woocommerce h2 {
+		text-align: center;
 		font-family: var(--font-base);
 		font-size: fluid(28, 22);
 		font-weight: 700;
+		margin-bottom: 1rem;
 	}
 
 	:is(
@@ -619,6 +620,8 @@
 		padding: var(--shop-co-account-padding);
 		border: 1px solid var(--shop-co-color-black-opacity-10);
 		border-radius: var(--shop-co-border-radius);
+		max-width: 480px;
+		margin-inline: auto;
 
 		> p {
 			margin: 0;
@@ -626,12 +629,14 @@
 	}
 
 	.woocommerce-form-login__rememberme {
+		width: 100%;
 		display: inline-flex;
 		align-items: center;
 		gap: 8px;
 		margin-right: 14px;
 		font-size: 14px;
 		cursor: pointer;
+		margin: 0 0 1rem 0;
 
 		input {
 			width: 18px;
