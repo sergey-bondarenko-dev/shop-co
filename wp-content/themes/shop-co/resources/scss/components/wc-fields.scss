@@ -89,12 +89,12 @@
 			color: var(--shop-co-color-black);
 			line-height: var(--wc-field-height, 50px);
 		}
-	}
 
-	.select2-selection__arrow {
-		top: 50%;
-		right: calc(var(--wc-field-padding-x, 16px) - 4px);
-		translate: 0 -50%;
+		.select2-selection__arrow {
+			top: 50%;
+			right: calc(var(--wc-field-padding-x, 16px) - 4px);
+			translate: 0 -50%;
+		}
 	}
 
 	.select2-container--open .select2-selection--single {

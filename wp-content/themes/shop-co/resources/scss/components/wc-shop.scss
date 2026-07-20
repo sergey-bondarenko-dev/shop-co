@@ -357,4 +357,25 @@
 	.wpc-filters-range-inputs {
 		padding-inline: 4px;
 	}
+
+	.wpc-filters-main-wrap input.wpc-label-input+label:hover span.wpc-filter-label-wrapper {
+		color: inherit;
+		background-color: transparent;
+	}
+
+	.wpc-filters-main-wrap .wpc-filters-labels li.wpc-term-item input+label:hover a {
+		color: inherit;
+	}
+
+	.wpc-custom-selected-terms ul.wpc-filter-chips-list {
+		display: flex;
+		overflow-x: auto;
+		overflow-y: clip;
+		padding-left: 0;
+	}
+
+	.wpc-custom-selected-terms:not(.wpc-show-on-mobile) {
+		display: block;
+	}
 }
+

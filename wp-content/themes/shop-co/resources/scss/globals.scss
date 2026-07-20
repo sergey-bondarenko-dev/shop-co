@@ -110,3 +110,15 @@ ul:where([class]) {
 	margin-bottom: 0;
 	padding-left: 0;
 }
+
+@media (max-width: 500px) {
+	.modal {
+		--bs-modal-margin: .5rem;
+	}
+
+	.modal-dialog {
+		margin-right: var(--bs-modal-margin);
+		margin-left: var(--bs-modal-margin);
+	}
+}
+    

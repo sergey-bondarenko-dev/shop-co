@@ -10,6 +10,7 @@
 	background-color: var(--shop-co-color-gray-2);
 	overflow: hidden;
 	width: fluid(170, 110);
+	gap: 8px;
 
 	&:has(.input-text:user-invalid) {
 		border: 1px solid var(--shop-co-color-red);
@@ -28,7 +29,7 @@
 		padding: 0;
 
 		@include mobile-s {
-			--size: 14px;
+			--size: 18px;
 		}
 	}
 
@@ -39,7 +40,7 @@
 		appearance: none;
 		padding: 0;
 		text-align: center;
-		min-width: 24px;
+		min-width: 16px;
 		min-height: auto;
 		border-radius: 0;
 
