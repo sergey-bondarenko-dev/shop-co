@@ -15,10 +15,6 @@
 		}
 	}
 
-	a {
-		text-decoration: none;
-	}
-
 	&__list-item {
 
 		&.dropdown {
@@ -35,6 +31,11 @@
 	&__link {
 		color: inherit;
 		padding: 0;
+
+		&:active {
+			text-decoration: none;
+			scale: .96;
+		}
 	}
 
 	&__dropdown-toggle {

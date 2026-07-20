@@ -6,6 +6,14 @@
 		display: flex;
 		flex-direction: column;
 		row-gap: fluid(8, 4);
+
+		&:active {
+			text-decoration: none;
+
+			.site-product-card__title {
+				text-decoration: underline;
+			}
+		}
 	}
 
 	&__thumbnail-wrapper {
