@@ -11,9 +11,28 @@
  * @var array $args Template arguments.
  */
 
-$shop_co_title    = $args['title'] ?? '';
-$shop_co_products = $args['products'] ?? array();
-$shop_co_url      = $args['url'] ?? wc_get_page_permalink( 'shop' );
+$shop_co_title     = $args['title'] ?? '';
+$shop_co_products  = $args['products'] ?? array();
+$shop_co_url       = $args['url'] ?? wc_get_page_permalink( 'shop' );
+$shop_co_contained = ! empty( $args['contained'] );
+
+$shop_co_section_classes = array( 'section', 'products-section', 'overflow-hidden' );
+$shop_co_extra_classes   = preg_split( '/\s+/', (string) ( $args['class'] ?? '' ), -1, PREG_SPLIT_NO_EMPTY );
+
+if ( $shop_co_extra_classes ) {
+	$shop_co_section_classes = array_merge(
+		$shop_co_section_classes,
+		array_map( 'sanitize_html_class', $shop_co_extra_classes )
+	);
+}
+
+$shop_co_header_classes = array( 'section__header' );
+$shop_co_body_classes   = array( 'section__body' );
+
+if ( ! $shop_co_contained ) {
+	$shop_co_header_classes[] = 'container';
+	$shop_co_body_classes[]   = 'container';
+}
 
 $shop_co_products = array_filter(
 	$shop_co_products,
@@ -43,13 +62,15 @@ add_filter( 'post_class', $shop_co_add_slide_classes );
 
 ?>
 
-<section class="section products-section overflow-hidden">
-	<div class="section__header container">
-		<h2 class="section__title text-center">
-			<?php echo esc_html( $shop_co_title ); ?>
-		</h2>
+<section class="<?php echo esc_attr( implode( ' ', $shop_co_section_classes ) ); ?>">
+	<div class="<?php echo esc_attr( implode( ' ', $shop_co_header_classes ) ); ?>">
+		<?php if ( $shop_co_title ) : ?>
+			<h2 class="section__title text-center">
+				<?php echo esc_html( $shop_co_title ); ?>
+			</h2>
+		<?php endif; ?>
 	</div>
-	<div class="section__body container">
+	<div class="<?php echo esc_attr( implode( ' ', $shop_co_body_classes ) ); ?>">
 		<div class="products-slider">
 			<div class="products-slider__swiper swiper">
 				<ul class="products-slider__wrapper swiper-wrapper">

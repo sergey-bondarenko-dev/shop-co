@@ -139,3 +139,17 @@ function shop_co_catalog_collection_page_title( string $title ): string {
 	return $title;
 }
 add_filter( 'woocommerce_page_title', 'shop_co_catalog_collection_page_title' );
+
+/**
+ * Load enough related products to make the section useful as a slider.
+ *
+ * @param array<string, mixed> $args Related products query arguments.
+ * @return array<string, mixed>
+ */
+function shop_co_related_products_args( array $args ): array {
+	$args['posts_per_page'] = 8;
+	$args['columns']        = 4;
+
+	return $args;
+}
+add_filter( 'woocommerce_output_related_products_args', 'shop_co_related_products_args' );
