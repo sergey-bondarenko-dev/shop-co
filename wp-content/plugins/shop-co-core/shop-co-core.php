@@ -32,8 +32,11 @@ if ( is_readable( $shop_co_core_autoloader ) ) {
 
 	require __DIR__ . '/inc/class-shop-co-core-product-faqs.php';
 	require __DIR__ . '/inc/product-faq-functions.php';
+	require __DIR__ . '/inc/class-shop-co-core-home-hero.php';
+	require __DIR__ . '/inc/home-hero-functions.php';
 
 	Shop_Co_Core_Product_FAQs::init();
+	Shop_Co_Core_Home_Hero::init();
 } else {
 	add_action(
 		'admin_notices',
@@ -56,4 +59,3 @@ if ( is_readable( $shop_co_core_autoloader ) ) {
 		}
 	);
 }
-
