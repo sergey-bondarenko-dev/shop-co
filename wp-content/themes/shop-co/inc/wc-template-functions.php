@@ -14,12 +14,58 @@
 function shop_co_get_new_products( int $limit = 8 ): array {
 	return wc_get_products(
 		array(
-			'status'  => 'publish',
-			'limit'   => $limit,
-			'orderby' => 'date',
-			'order'   => 'DESC',
+			'status'       => 'publish',
+			'limit'        => $limit,
+			'orderby'      => 'date',
+			'order'        => 'DESC',
+			'date_created' => '>=' . shop_co_get_new_arrivals_cutoff_timestamp(),
 		)
 	);
+}
+
+/**
+ * Get the number of days products are considered new arrivals.
+ */
+function shop_co_get_new_arrivals_days(): int {
+	/**
+	 * Filter the new-arrivals period.
+	 *
+	 * @param int $days Number of days after publication.
+	 */
+	$days = (int) apply_filters( 'shop_co_new_arrivals_days', 30 );
+
+	return max( 1, $days );
+}
+
+/**
+ * Get the Unix timestamp after which products are considered new arrivals.
+ */
+function shop_co_get_new_arrivals_cutoff_timestamp(): int {
+	return time() - ( shop_co_get_new_arrivals_days() * DAY_IN_SECONDS );
+}
+
+/**
+ * Get a filtered WooCommerce catalog URL.
+ *
+ * @param string $collection Collection slug.
+ */
+function shop_co_get_catalog_collection_url( string $collection ): string {
+	if ( ! in_array( $collection, array( 'sale', 'new-arrivals' ), true ) ) {
+		return '';
+	}
+
+	$shop_url = wc_get_page_permalink( 'shop' );
+
+	return $shop_url ? add_query_arg( 'collection', $collection, $shop_url ) : '';
+}
+
+/**
+ * Get the brands index page URL.
+ */
+function shop_co_get_brands_page_url(): string {
+	$page = get_page_by_path( 'brands' );
+
+	return $page instanceof WP_Post ? get_permalink( $page ) : home_url( '/brands/' );
 }
 
 /**

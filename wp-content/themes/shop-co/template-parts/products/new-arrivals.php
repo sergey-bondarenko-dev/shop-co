@@ -22,5 +22,6 @@ shop_co_get_template_part(
 	array(
 		'title'    => __( 'NEW ARRIVALS', 'shop-co' ),
 		'products' => $shop_co_products,
+		'url'      => shop_co_get_catalog_collection_url( 'new-arrivals' ),
 	)
 );

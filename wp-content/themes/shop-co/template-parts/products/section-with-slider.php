@@ -13,6 +13,7 @@
 
 $shop_co_title    = $args['title'] ?? '';
 $shop_co_products = $args['products'] ?? array();
+$shop_co_url      = $args['url'] ?? wc_get_page_permalink( 'shop' );
 
 $shop_co_products = array_filter(
 	$shop_co_products,
@@ -64,9 +65,11 @@ add_filter( 'post_class', $shop_co_add_slide_classes );
 				</ul>
 			</div>
 		</div>
-		<a class="site-button site-border site-button--white" href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>">
-			<?php esc_html_e( 'View all', 'shop-co' ); ?>
-		</a>
+		<?php if ( $shop_co_url ) : ?>
+			<a class="site-button site-border site-button--white" href="<?php echo esc_url( $shop_co_url ); ?>">
+				<?php esc_html_e( 'View all', 'shop-co' ); ?>
+			</a>
+		<?php endif; ?>
 	</div>
 </section>
 

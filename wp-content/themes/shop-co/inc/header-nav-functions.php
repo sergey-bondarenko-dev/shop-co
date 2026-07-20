@@ -36,6 +36,9 @@ function shop_co_add_header_menu_shop_categories( array $items, stdClass $args )
 		return $items;
 	}
 
+	$shop_item->classes = array_unique( array_merge( (array) $shop_item->classes, array( 'menu-item-has-children' ) ) );
+	$shop_item->current = ! empty( $shop_item->current );
+
 	$categories = get_terms(
 		array(
 			'taxonomy'   => 'product_cat',
@@ -49,10 +52,6 @@ function shop_co_add_header_menu_shop_categories( array $items, stdClass $args )
 	if ( is_wp_error( $categories ) || empty( $categories ) ) {
 		return $items;
 	}
-
-	$shop_item->classes               = array_unique( array_merge( (array) $shop_item->classes, array( 'menu-item-has-children' ) ) );
-	$shop_item->current               = ! empty( $shop_item->current );
-	$shop_item->current_item_ancestor = ! empty( $shop_item->current_item_ancestor );
 
 	foreach ( $categories as $category ) {
 		$link = get_term_link( $category );
