@@ -1,8 +1,50 @@
 @use "./../helpers" as *;
 
 .products-slider {
+	--products-slider-gap: 8px;
+	--products-slider-slide-width: 100%;
+
+	@media (width >= 360px) {
+		--products-slider-gap: 16px;
+		--products-slider-slide-width: calc(58.8235% - 6.5882px);
+	}
+
+	@media (width >= 391px) {
+		--products-slider-slide-width: calc(50% - 8px);
+	}
+
+	@include mobile-above {
+		--products-slider-gap: 20px;
+		--products-slider-slide-width: calc(33.3333% - 13.3333px);
+	}
+
+	@include tablet-above {
+		--products-slider-slide-width: calc(25% - 15px);
+	}
 
 	& &__swiper {
 		overflow: visible;
+	}
+
+	& &__swiper:not(.swiper-initialized) {
+		overflow-x: auto;
+		overflow-y: hidden;
+		scroll-snap-type: x proximity;
+		scrollbar-width: none;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+
+		.products-slider__wrapper {
+			display: grid;
+			grid-auto-flow: column;
+			grid-auto-columns: var(--products-slider-slide-width);
+			gap: var(--products-slider-gap);
+		}
+
+		.products-slider__slide {
+			scroll-snap-align: start;
+		}
 	}
 }

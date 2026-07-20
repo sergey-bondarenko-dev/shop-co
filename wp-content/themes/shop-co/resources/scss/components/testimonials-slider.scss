@@ -1,6 +1,16 @@
 @use "./../helpers" as *;
 
 .testimonials-slider {
+	--testimonials-slider-gap: 15px;
+	--testimonials-slider-slide-width: 100%;
+
+	@include mobile-above {
+		--testimonials-slider-slide-width: calc(50% - 7.5px);
+	}
+
+	@include tablet-above {
+		--testimonials-slider-slide-width: calc(33.3333% - 10px);
+	}
 
 	& &__swiper {
 		overflow: visible;
@@ -34,5 +44,35 @@
 				filter: none;
 			}
 		}
+	}
+
+	& &__swiper:not(.swiper-initialized) {
+		overflow-x: auto;
+		overflow-y: hidden;
+		scroll-snap-type: x proximity;
+		scrollbar-width: none;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+
+		.testimonials-slider__wrapper {
+			display: grid;
+			grid-auto-flow: column;
+			grid-auto-columns: var(--testimonials-slider-slide-width);
+			gap: var(--testimonials-slider-gap);
+		}
+
+		.testimonials-slider__slide {
+			filter: none;
+			scroll-snap-align: start;
+		}
+	}
+}
+
+.section:has(.testimonials-slider__swiper:not(.swiper-initialized)) {
+
+	.slider-arrows {
+		visibility: hidden;
 	}
 }
