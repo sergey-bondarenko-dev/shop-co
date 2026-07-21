@@ -46,7 +46,9 @@
 	.comment-form-comment,
 	.form-submit,
 	.must-log-in,
-	.logged-in-as {
+	.logged-in-as,
+	.comment-notes,
+	.comment-form-cookies-consent {
 		grid-column: 1 / -1;
 	}
 
@@ -199,6 +201,20 @@
 		&.selected a.active ~ a::before {
 			background-color: var(--shop-co-color-black-opacity-10);
 		}
+	}
+
+	.comment-form-cookies-consent {
+		display: flex;
+		gap: 8px;
+
+		label {
+			margin-bottom: 0;
+		}
+	}
+
+	#wp-comment-cookies-consent {
+		min-height: auto;
+		width: auto;
 	}
 }
 

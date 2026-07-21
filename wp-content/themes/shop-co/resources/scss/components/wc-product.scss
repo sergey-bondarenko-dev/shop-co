@@ -1,7 +1,6 @@
 @use "../helpers" as *;
 
 .site-single-product {
-
 	&__body {
 		display: grid;
 		grid-template-columns: 1.05fr 1fr;
@@ -92,6 +91,10 @@
 		.stock.in-stock {
 			margin-bottom: 24px;
 		}
+	}
+
+	.woocommerce-tabs {
+		margin-bottom: var(--section-gap);
 	}
 }
 
