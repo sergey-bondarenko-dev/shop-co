@@ -18,11 +18,14 @@
 							<?php
 							// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Shop_Co_UI returns escaped markup.
 							echo Shop_Co_UI::field(
-								'mail',
-								'email',
-								'Enter your email address',
-								'',
-								'white',
+								array(
+									'icon'        => 'mail',
+									'type'        => 'email',
+									'placeholder' => 'Enter your email address',
+									'mode'        => 'white',
+									'name'        => 'email',
+									'required'    => true,
+								)
 							);
 							?>
 							<button type="submit" class="site-footer__banner-submit site-button site-button--white">

@@ -92,6 +92,7 @@
 						id="header-search"
 						name="s"
 						value="<?php echo esc_attr( get_search_query() ); ?>"
+						required
 						placeholder="<?php echo esc_attr_x( 'Search for products...', 'placeholder', 'shop-co' ); ?>"
 					/>
 					<input type="hidden" name="post_type" value="product">

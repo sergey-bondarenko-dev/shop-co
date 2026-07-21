@@ -108,14 +108,14 @@ defined( 'ABSPATH' ) || exit;
 			<?php
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Shop_Co_UI returns escaped markup.
 			echo Shop_Co_UI::field(
-				'promo',
-				'text',
-				esc_attr__( 'Add promo code', 'shop-co' ),
-				esc_attr__( 'Coupon code', 'woocommerce' ),
-				'',
-				'shopco-cart-coupon__field',
-				'coupon_code',
-				'coupon_code',
+				array(
+					'icon'        => 'promo',
+					'placeholder' => esc_attr__( 'Add promo code', 'shop-co' ),
+					'label'       => esc_attr__( 'Coupon code', 'woocommerce' ),
+					'classes'     => 'shopco-cart-coupon__field',
+					'id'          => 'coupon_code',
+					'name'        => 'coupon_code',
+				)
 			);
 			?>
 			<button type="submit" class="site-button site-button--small shopco-cart-coupon__button" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>">
