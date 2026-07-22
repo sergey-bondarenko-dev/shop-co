@@ -46,6 +46,12 @@
 			}
 		}
 
+		.site-field__input {
+			&:focus-visible {
+				outline-color: var(--shop-co-color-white);
+			}
+		}
+
 		&-title {
 			font-weight: 900;
 			font-size: fluid(40, 32);

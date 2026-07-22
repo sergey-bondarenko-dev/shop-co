@@ -81,13 +81,7 @@ add_action(
 	'woocommerce_archive_description',
 	function () { ?>
 	<div class="hidden-tablet">
-		<?php
-		woocommerce_catalog_ordering(
-			array(
-				'useLabel' => true,
-			)
-		);
-		?>
+		<?php shop_co_render_catalog_ordering( 'catalog-ordering-desktop' ); ?>
 	</div>
 	
 		<?php

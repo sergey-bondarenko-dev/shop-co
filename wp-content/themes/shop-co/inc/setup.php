@@ -93,6 +93,30 @@ function shop_co_widgets_init(): void {
 			'after_title'   => '</h2>',
 		)
 	);
+
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Catalog ordering — desktop', 'shop-co' ),
+			'id'            => 'catalog-ordering-desktop',
+			'description'   => esc_html__( 'Replace the default catalog ordering on desktop with a widget.', 'shop-co' ),
+			'before_widget' => '<div id="%1$s" class="catalog-ordering__widget widget %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
+
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Catalog ordering — mobile', 'shop-co' ),
+			'id'            => 'catalog-ordering-mobile',
+			'description'   => esc_html__( 'Replace the default catalog ordering in the mobile filters panel with a widget.', 'shop-co' ),
+			'before_widget' => '<div id="%1$s" class="catalog-ordering__widget widget %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
 }
 add_action( 'widgets_init', 'shop_co_widgets_init' );
 

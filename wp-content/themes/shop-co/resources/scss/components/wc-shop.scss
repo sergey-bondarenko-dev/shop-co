@@ -113,7 +113,12 @@
 			align-items: center;
 			gap: 12px;
 
-			.woocommerce-ordering {
+			.widget_wpc_sorting_widget {
+				margin-bottom: 0;
+			}
+
+			.woocommerce-ordering,
+			.catalog-ordering__widget form {
 				display: flex;
 				gap: 8px;
 
@@ -129,6 +134,8 @@
 					background-color: transparent;
 					border: none;
 				}
+
+				
 			}
 		}
 	}

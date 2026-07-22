@@ -65,9 +65,23 @@ add_filter( 'post_class', $shop_co_add_slide_classes );
 <section class="<?php echo esc_attr( implode( ' ', $shop_co_section_classes ) ); ?>">
 	<div class="<?php echo esc_attr( implode( ' ', $shop_co_header_classes ) ); ?>">
 		<?php if ( $shop_co_title ) : ?>
-			<h2 class="section__title text-center">
+			<h2 class="section__title">
 				<?php echo esc_html( $shop_co_title ); ?>
 			</h2>
+		<?php endif; ?>
+		<?php if ( count( $shop_co_products ) > 1 ) : ?>
+			<div class="section__extra">
+				<div class="slider-arrows">
+					<button class="slider-arrows__button products-slider__button--prev" type="button">
+						<?php echo shop_co_get_icon( 'arrow_left' ); ?>
+						<span class="screen-reader-text"><?php esc_html_e( 'Previous products', 'shop-co' ); ?></span>
+					</button>
+					<button class="slider-arrows__button products-slider__button--next" type="button">
+						<?php echo shop_co_get_icon( 'arrow_right' ); ?>
+						<span class="screen-reader-text"><?php esc_html_e( 'Next products', 'shop-co' ); ?></span>
+					</button>
+				</div>
+			</div>
 		<?php endif; ?>
 	</div>
 	<div class="<?php echo esc_attr( implode( ' ', $shop_co_body_classes ) ); ?>">

@@ -1,6 +1,7 @@
 import Swiper from 'swiper';
-import { Navigation, Thumbs, EffectFade } from 'swiper/modules';
+import { A11y, Navigation, Thumbs, EffectFade } from 'swiper/modules';
 import 'swiper/css';
+import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import 'swiper/css/effect-fade';
 import 'fslightbox';
@@ -26,7 +27,11 @@ export class ProductGallery {
 			}
 
 			const thumbsSwiper = new Swiper( thumbsElement, {
-				modules: [ Navigation ],
+				modules: [ A11y, Navigation ],
+				a11y: {
+					enabled: true,
+					scrollOnFocus: true,
+				},
 				direction: 'horizontal',
 				slidesPerView: 3,
 				spaceBetween: 14,
@@ -47,7 +52,11 @@ export class ProductGallery {
 			} );
 
 			const mainSwiper = new Swiper( mainElement, {
-				modules: [ Thumbs, EffectFade ],
+				modules: [ A11y, Navigation, Thumbs, EffectFade ],
+				a11y: {
+					enabled: true,
+					scrollOnFocus: true,
+				},
 				slidesPerView: 1,
 				spaceBetween: 0,
 				allowTouchMove: true,
@@ -55,6 +64,14 @@ export class ProductGallery {
 				effect: 'fade',
 				fadeEffect: {
 					crossFade: true,
+				},
+				navigation: {
+					prevEl: gallery.querySelector(
+						'.site-product-gallery__main-button--prev'
+					),
+					nextEl: gallery.querySelector(
+						'.site-product-gallery__main-button--next'
+					),
 				},
 				speed: 300,
 				thumbs: {

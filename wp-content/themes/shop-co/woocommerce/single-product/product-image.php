@@ -106,5 +106,17 @@ $wrapper_classes   = apply_filters(
 				</div>
 			<?php endif; ?>
 		</div>
+		<?php if ( count( $image_ids ) > 1 ) : ?>
+			<div class="site-product-gallery__main-nav slider-arrows">
+				<button class="site-product-gallery__main-button site-product-gallery__main-button--prev slider-arrows__button" type="button">
+					<?php echo shop_co_get_icon( 'arrow_left' ); ?>
+					<span class="screen-reader-text"><?php esc_html_e( 'Previous product image', 'woocommerce' ); ?></span>
+				</button>
+				<button class="site-product-gallery__main-button site-product-gallery__main-button--next slider-arrows__button" type="button">
+					<?php echo shop_co_get_icon( 'arrow_right' ); ?>
+					<span class="screen-reader-text"><?php esc_html_e( 'Next product image', 'woocommerce' ); ?></span>
+				</button>
+			</div>
+		<?php endif; ?>
 	</div>
 </div>

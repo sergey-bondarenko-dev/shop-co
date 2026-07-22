@@ -1,5 +1,5 @@
 import Swiper from 'swiper';
-import { Navigation } from 'swiper/modules';
+import { A11y, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -36,7 +36,11 @@ export class TestimonialSlider {
 					: false;
 
 			new Swiper( swiper, {
-				modules: [ Navigation ],
+				modules: [ A11y, Navigation ],
+				a11y: {
+					enabled: true,
+					scrollOnFocus: true,
+				},
 				slidesPerView: 1,
 				spaceBetween: 15,
 				navigation,

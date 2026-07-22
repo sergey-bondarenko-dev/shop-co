@@ -1,5 +1,7 @@
 import Swiper from 'swiper';
+import { A11y, Navigation } from 'swiper/modules';
 import 'swiper/css';
+import 'swiper/css/navigation';
 
 export class ProductSlider {
 	static init( selector ) {
@@ -16,12 +18,32 @@ export class ProductSlider {
 				return;
 			}
 
+			const section = slider.closest( '.products-section' );
+			const prevEl = section?.querySelector(
+				'.products-slider__button--prev'
+			);
+			const nextEl = section?.querySelector(
+				'.products-slider__button--next'
+			);
+			const navigation =
+				prevEl && nextEl
+					? {
+							prevEl,
+							nextEl,
+					  }
+					: false;
+
 			new Swiper( swiper, {
-				slidesPerView: 1,
+				modules: [ A11y, Navigation ],
+				a11y: {
+					enabled: true,
+					scrollOnFocus: true,
+				},
+				navigation,
+				slidesPerView: 1.2,
 				spaceBetween: 8,
 				breakpoints: {
 					360: {
-						slidesPerView: 1.7,
 						spaceBetween: 16,
 					},
 					391: {

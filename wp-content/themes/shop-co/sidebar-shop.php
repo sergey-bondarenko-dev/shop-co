@@ -36,13 +36,7 @@ if ( ! ( is_shop() || is_product_taxonomy() ) || ! is_active_sidebar( 'shop-filt
 	</div>
 	<div class="catalog-sidebar__body offcanvas-body">
 		<div class="catalog-sidebar__ordering visible-tablet">
-			<?php
-			woocommerce_catalog_ordering(
-				array(
-					'useLabel' => true,
-				)
-			);
-			?>
+			<?php shop_co_render_catalog_ordering( 'catalog-ordering-mobile' ); ?>
 		</div>
 		<?php dynamic_sidebar( 'shop-filters' ); ?>
 	</div>

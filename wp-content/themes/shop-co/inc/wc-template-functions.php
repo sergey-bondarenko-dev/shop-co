@@ -493,6 +493,30 @@ function shop_co_woocommerce_catalog_filters_button(): void {
 }
 
 /**
+ * Render a configurable catalog ordering widget with the WooCommerce control
+ * as a fallback.
+ *
+ * @param string $sidebar_id Catalog ordering widget area ID.
+ */
+function shop_co_render_catalog_ordering( string $sidebar_id ): void {
+	ob_start();
+
+	$widget_rendered = dynamic_sidebar( $sidebar_id );
+	$widget_html     = trim( (string) ob_get_clean() );
+
+	if ( $widget_rendered && '' !== $widget_html ) {
+		echo $widget_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Rendered by registered widgets.
+		return;
+	}
+
+	woocommerce_catalog_ordering(
+		array(
+			'useLabel' => true,
+		)
+	);
+}
+
+/**
  * Customize product detail tabs.
  *
  * @param array $tabs Product tabs.

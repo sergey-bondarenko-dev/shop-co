@@ -11,9 +11,14 @@ const PRODUCTS_SLIDER_SELECTOR = '.products-slider';
 const PRODUCT_GALLERY_SELECTOR = '.site-product-gallery';
 const PRODUCT_VARIATIONS_SELECTOR = '.variations_form';
 const ADS_BANNER_SELECTOR = '.ads-banner';
+const LOGIN_FORM_SELECTOR = '.woocommerce-form-login[novalidate]';
 const CART_UPDATE_DELAY = 400;
 
 let cartUpdateTimeoutId;
+
+document.querySelectorAll( LOGIN_FORM_SELECTOR ).forEach( ( form ) => {
+	form.removeAttribute( 'novalidate' );
+} );
 
 const isSingleProductPage =
 	document.body.classList.contains( 'single-product' );
