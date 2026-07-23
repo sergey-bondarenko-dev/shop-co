@@ -56,6 +56,7 @@
 			}
 
 			&:focus-visible {
+
 				@include focus-visible;
 				opacity: 1;
 			}

@@ -74,15 +74,15 @@ class Shop_Co_Core_Home_Hero {
 							array(
 								array(
 									'amount' => '200+',
-									'label' => esc_html__( 'International Brands', 'shop-co-core' ),
+									'label'  => esc_html__( 'International Brands', 'shop-co-core' ),
 								),
 								array(
 									'amount' => '2,000+',
-									'label' => esc_html__( 'High-Quality Products', 'shop-co-core' ),
+									'label'  => esc_html__( 'High-Quality Products', 'shop-co-core' ),
 								),
 								array(
 									'amount' => '30,000+',
-									'label' => esc_html__( 'Happy Customers', 'shop-co-core' ),
+									'label'  => esc_html__( 'Happy Customers', 'shop-co-core' ),
 								),
 							)
 						)

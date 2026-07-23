@@ -32,26 +32,46 @@ $shop_co_hero_benefits = ! empty( $shop_co_hero['benefits'] )
 	: array(
 		array(
 			'amount' => '200+',
-			'label' => __( 'International Brands', 'shop-co' ),
+			'label'  => __( 'International Brands', 'shop-co' ),
 		),
 		array(
 			'amount' => '2,000+',
-			'label' => __( 'High-Quality Products', 'shop-co' ),
+			'label'  => __( 'High-Quality Products', 'shop-co' ),
 		),
 		array(
 			'amount' => '30,000+',
-			'label' => __( 'Happy Customers', 'shop-co' ),
+			'label'  => __( 'Happy Customers', 'shop-co' ),
 		),
 	);
 
 $shop_co_hero_brands = ! empty( $shop_co_hero['brands'] )
 	? $shop_co_hero['brands']
 	: array(
-		array( 'src' => Shop_Co_Assets::asset( 'images/brands/1.svg' ), 'width' => 167, 'height' => 33 ),
-		array( 'src' => Shop_Co_Assets::asset( 'images/brands/2.svg' ), 'width' => 91, 'height' => 38 ),
-		array( 'src' => Shop_Co_Assets::asset( 'images/brands/3.svg' ), 'width' => 156, 'height' => 36 ),
-		array( 'src' => Shop_Co_Assets::asset( 'images/brands/4.svg' ), 'width' => 194, 'height' => 32 ),
-		array( 'src' => Shop_Co_Assets::asset( 'images/brands/5.svg' ), 'width' => 207, 'height' => 33 ),
+		array(
+			'src'    => Shop_Co_Assets::asset( 'images/brands/1.svg' ),
+			'width'  => 167,
+			'height' => 33,
+		),
+		array(
+			'src'    => Shop_Co_Assets::asset( 'images/brands/2.svg' ),
+			'width'  => 91,
+			'height' => 38,
+		),
+		array(
+			'src'    => Shop_Co_Assets::asset( 'images/brands/3.svg' ),
+			'width'  => 156,
+			'height' => 36,
+		),
+		array(
+			'src'    => Shop_Co_Assets::asset( 'images/brands/4.svg' ),
+			'width'  => 194,
+			'height' => 32,
+		),
+		array(
+			'src'    => Shop_Co_Assets::asset( 'images/brands/5.svg' ),
+			'width'  => 207,
+			'height' => 33,
+		),
 	);
 
 ?>

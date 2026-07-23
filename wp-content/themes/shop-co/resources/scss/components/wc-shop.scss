@@ -368,12 +368,12 @@
 		padding-inline: 4px;
 	}
 
-	.wpc-filters-main-wrap input.wpc-label-input+label:hover span.wpc-filter-label-wrapper {
+	.wpc-filters-main-wrap input.wpc-label-input + label:hover span.wpc-filter-label-wrapper {
 		color: inherit;
 		background-color: transparent;
 	}
 
-	.wpc-filters-main-wrap .wpc-filters-labels li.wpc-term-item input+label:hover a {
+	.wpc-filters-main-wrap .wpc-filters-labels li.wpc-term-item input + label:hover a {
 		color: inherit;
 	}
 
