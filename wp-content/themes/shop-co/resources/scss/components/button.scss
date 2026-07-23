@@ -41,10 +41,6 @@
 
 		background-color: var(--shop-co-color-white);
 		color: var(--shop-co-color-black);
-		
-		&:focus-visible {
-			outline-color: var(--shop-co-color-white);
-		}
 	}
 
 	&--gray {
