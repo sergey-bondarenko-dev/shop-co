@@ -3,10 +3,24 @@ WP_SERVICE ?= wordpress
 PROJECT_DIR ?= /var/www/project
 THEME_DIR ?= wp-content/themes/shop-co
 CORE_PLUGIN_DIR ?= wp-content/plugins/shop-co-core
-NPM ?= npm.cmd
 
+ifeq ($(OS),Windows_NT)
+NPM ?= npm.cmd
 SHELL := powershell.exe
 .SHELLFLAGS := -NoProfile -Command
+INIT_PROJECT = if (-not (Test-Path .env)) { Copy-Item .env.example .env }; New-Item -ItemType Directory -Force wp-content/themes, wp-content/plugins, wp-content/uploads | Out-Null
+REMOVE_THEME_BUILD = Remove-Item -Recurse -Force $(THEME_DIR)/build -ErrorAction SilentlyContinue
+EXPORT_DATABASE = $(DOCKER_COMPOSE) exec db sh -c 'mariadb-dump -u root -p"$$MARIADB_ROOT_PASSWORD" "$$MARIADB_DATABASE"' | Set-Content -Encoding UTF8 backup.sql
+IMPORT_DATABASE = Get-Content backup.sql | $(DOCKER_COMPOSE) exec -T db sh -c 'mariadb -u root -p"$$MARIADB_ROOT_PASSWORD" "$$MARIADB_DATABASE"'
+CLEAN_PROJECT = Remove-Item -Recurse -Force wp-content/cache, wp-content/upgrade -ErrorAction SilentlyContinue
+else
+NPM ?= npm
+INIT_PROJECT = test -f .env || cp .env.example .env; mkdir -p wp-content/themes wp-content/plugins wp-content/uploads
+REMOVE_THEME_BUILD = rm -rf $(THEME_DIR)/build
+EXPORT_DATABASE = $(DOCKER_COMPOSE) exec db sh -c 'mariadb-dump -u root -p"$$MARIADB_ROOT_PASSWORD" "$$MARIADB_DATABASE"' > backup.sql
+IMPORT_DATABASE = $(DOCKER_COMPOSE) exec -T db sh -c 'mariadb -u root -p"$$MARIADB_ROOT_PASSWORD" "$$MARIADB_DATABASE"' < backup.sql
+CLEAN_PROJECT = rm -rf wp-content/cache wp-content/upgrade
+endif
 
 .DEFAULT_GOAL := help
 
@@ -45,8 +59,7 @@ help:
 	@echo "  make clean      Remove generated local WordPress cache/upload dirs"
 
 init:
-	if (-not (Test-Path .env)) { Copy-Item .env.example .env }
-	New-Item -ItemType Directory -Force wp-content/themes, wp-content/plugins, wp-content/uploads | Out-Null
+	$(INIT_PROJECT)
 
 build:
 	$(DOCKER_COMPOSE) build
@@ -101,7 +114,7 @@ theme-install:
 	$(NPM) --prefix $(THEME_DIR) install
 
 theme-clean:
-	Remove-Item -Recurse -Force $(THEME_DIR)/build -ErrorAction SilentlyContinue
+	$(REMOVE_THEME_BUILD)
 
 theme-build: theme-clean
 	$(NPM) --prefix $(THEME_DIR) run build
@@ -122,13 +135,13 @@ db:
 	$(DOCKER_COMPOSE) exec db sh -c 'mariadb -u root -p"$$MARIADB_ROOT_PASSWORD" "$$MARIADB_DATABASE"'
 
 export-db:
-	$(DOCKER_COMPOSE) exec db sh -c 'mariadb-dump -u root -p"$$MARIADB_ROOT_PASSWORD" "$$MARIADB_DATABASE"' | Set-Content -Encoding UTF8 backup.sql
+	$(EXPORT_DATABASE)
 
 import-db:
-	Get-Content backup.sql | $(DOCKER_COMPOSE) exec -T db sh -c 'mariadb -u root -p"$$MARIADB_ROOT_PASSWORD" "$$MARIADB_DATABASE"'
+	$(IMPORT_DATABASE)
 
 reset:
 	$(DOCKER_COMPOSE) down -v --remove-orphans
 
 clean:
-	Remove-Item -Recurse -Force wp-content/cache, wp-content/upgrade -ErrorAction SilentlyContinue
+	$(CLEAN_PROJECT)
