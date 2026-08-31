@@ -14,6 +14,15 @@ The storefront is implemented as a custom classic WordPress theme rather than a 
 
 Site-specific content structures are separated into the `shop-co-core` plugin. Carbon Fields provides editable home-page hero content and product FAQs, while testimonials are managed through a dedicated custom post type.
 
+### Design attribution
+
+The original UI design is based on the
+[E-commerce Website Template — Freebie](https://www.figma.com/design/N3yMmyNjoFZhaIJBq41fkT/E-commerce-Website-Template--Freebie---Community-?node-id=39-1402&p=f&t=ZO1eV5vbSnkO7Y8e-0)
+by Hamza Naeem, licensed under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+The design was adapted and implemented as a custom WordPress/WooCommerce theme for this portfolio project.
+
 ### Key features
 
 - Responsive home page with editable hero content, new arrivals, top-selling products, categories, testimonials, and brand links.
@@ -46,6 +55,15 @@ Shop Co — адаптивный интернет-магазин одежды, �
 Витрина реализована в виде собственной классической темы WordPress без использования визуального конструктора страниц. В необходимых местах шаблоны и хуки WooCommerce расширены собственной разметкой, при этом товары, заказы, пользователи, цены, остатки, таксономии и checkout продолжают работать на штатной логике WooCommerce.
 
 Специфичные для проекта структуры данных вынесены в отдельный плагин `shop-co-core`. Carbon Fields используется для редактирования hero-секции главной страницы и FAQ товаров, а отзывы покупателей управляются через отдельный тип записей.
+
+### Атрибуция дизайна
+
+Исходный дизайн основан на шаблоне
+[E-commerce Website Template — Freebie](https://www.figma.com/design/N3yMmyNjoFZhaIJBq41fkT/E-commerce-Website-Template--Freebie---Community-?node-id=39-1402&p=f&t=ZO1eV5vbSnkO7Y8e-0)
+автора Hamza Naeem, распространяемом по лицензии
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+Макет был адаптирован и реализован в виде собственной темы WordPress/WooCommerce для этого портфолио-проекта.
 
 ### Основные возможности
 
